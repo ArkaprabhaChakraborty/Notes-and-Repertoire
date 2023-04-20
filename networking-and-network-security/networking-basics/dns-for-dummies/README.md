@@ -18,11 +18,7 @@ A domain name is a unique identifier for a "domain". Domain names are often used
 
 Quoting Wikipedia:
 
-{% code overflow="wrap" %}
-```
-The Domain Name System (DNS) is a hierarchical and distributed naming system for computers, services, and other resources in the Internet or other Internet Protocol (IP) networks. It associates various information with domain names assigned to each of the associated entities. Most prominently, it translates readily memorized domain names to the numerical IP addresses needed for locating and identifying computer services and devices with the underlying network protocols.
-```
-{% endcode %}
+> The Domain Name System (DNS) is a hierarchical and distributed naming system for computers, services, and other resources in the Internet or other Internet Protocol (IP) networks. It associates various information with domain names assigned to each of the associated entities. Most prominently, it translates readily memorised domain names to the numerical IP addresses needed for locating and identifying computer services and devices with the underlying network protocols.
 
 Basically, a DNS acts as a bridge between the website’s IP address and the domain name, translating "human-readable" URIs (Uniform Resource Identifier) into machine-readable IP addresses. This "magic" performed by the DNS is called "name resolution".
 

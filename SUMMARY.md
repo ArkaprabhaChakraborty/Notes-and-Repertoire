@@ -13,8 +13,11 @@
     * [Naming Conventions](networking-and-network-security/networking-basics/dns-for-dummies/naming-conventions.md)
     * [DNS Resource Records](networking-and-network-security/networking-basics/dns-for-dummies/dns-resource-records.md)
     * [Types of DNS servers](networking-and-network-security/networking-basics/dns-for-dummies/types-of-dns-servers/README.md)
-      * [Authoritative DNS servers](networking-and-network-security/networking-basics/dns-for-dummies/types-of-dns-servers/authoritative-dns-servers.md)
       * [DNS Recursor](networking-and-network-security/networking-basics/dns-for-dummies/types-of-dns-servers/dns-recursor.md)
+      * [DNS Root Server](networking-and-network-security/readme/dns-for-dummies/types-of-dns-servers/dns-root-server.md)
+      * [Top Level Domain Server](networking-and-network-security/readme/dns-for-dummies/types-of-dns-servers/top-level-domain-server.md)
+      * [Authoritative DNS servers](networking-and-network-security/networking-basics/dns-for-dummies/types-of-dns-servers/authoritative-dns-servers.md)
+    * [How DNS works?](networking-and-network-security/readme/dns-for-dummies/how-dns-works.md)
 
 ## Reverse Engineering 101
 
