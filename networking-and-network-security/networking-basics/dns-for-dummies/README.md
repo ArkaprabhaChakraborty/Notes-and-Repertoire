@@ -1,5 +1,8 @@
 ---
 description: A guide into DNS basics and how is it used in daily life
+cover: >-
+  https://www.hp.com/us-en/shop/app/assets/images/uploads/prod/how-to-resolve-dns-issues1603984926781453.jpg
+coverY: 0
 ---
 
 # DNS for dummies

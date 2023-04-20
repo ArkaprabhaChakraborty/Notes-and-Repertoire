@@ -17,4 +17,4 @@ Each label may contain from 1 to 63 [octets](https://en.wikipedia.org/wiki/Octet
 Let's discuss this using the example of two such domains:\
 `www.google.com and ftp.example.com`.
 
-<img src="../../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
