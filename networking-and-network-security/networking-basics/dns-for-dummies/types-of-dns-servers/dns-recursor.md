@@ -4,7 +4,7 @@ description: Also called a recursive DNS server
 
 # DNS Recursor
 
-DNS recursor is the first server that the browser hits after it has searched it's cache and the hosts file for resolving a domain name to its IP address. It's like a "librarian", who goes and "fetches" the particular book requested by the reader/user.
+**DNS recursor** is the first server that the browser hits after it has searched it's cache and the hosts file for resolving a domain name to its IP address. It's like a "librarian", who goes and "fetches" the particular book requested by the reader/user.
 
 A recursive resolver serves as an intermediary between a DNS nameserver and a client.&#x20;
 
