@@ -25,4 +25,4 @@ Quoting Wikipedia:
 
 Basically, a DNS acts as a bridge between the website’s IP address and the domain name, translating "human-readable" URIs (Uniform Resource Identifier) into machine-readable IP addresses. This "magic" performed by the DNS is called "name resolution".
 
-\
+#### DNS runs on TCP port 53&#x20;

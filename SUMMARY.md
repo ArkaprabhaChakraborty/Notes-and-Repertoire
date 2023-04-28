@@ -18,6 +18,9 @@
       * [Top Level Domain Server](networking-and-network-security/readme/dns-for-dummies/types-of-dns-servers/top-level-domain-server.md)
       * [Authoritative DNS servers](networking-and-network-security/networking-basics/dns-for-dummies/types-of-dns-servers/authoritative-dns-servers.md)
     * [How DNS works?](networking-and-network-security/readme/dns-for-dummies/how-dns-works.md)
+  * [NetBIOS](networking-and-network-security/readme/netbios.md)
+  * [SMB (Server Message Block)](networking-and-network-security/readme/smb-server-message-block/README.md)
+    * [Basics of SMB](networking-and-network-security/readme/smb-server-message-block/basics-of-smb.md)
 
 ## Reverse Engineering 101
 
