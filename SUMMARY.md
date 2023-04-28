@@ -18,7 +18,10 @@
       * [Top Level Domain Server](networking-and-network-security/readme/dns-for-dummies/types-of-dns-servers/top-level-domain-server.md)
       * [Authoritative DNS servers](networking-and-network-security/networking-basics/dns-for-dummies/types-of-dns-servers/authoritative-dns-servers.md)
     * [How DNS works?](networking-and-network-security/readme/dns-for-dummies/how-dns-works.md)
-  * [NetBIOS](networking-and-network-security/readme/netbios.md)
+  * [NetBIOS](networking-and-network-security/readme/netbios/README.md)
+    * [NetBIOS Name Service (NetBIOS-NS)](networking-and-network-security/readme/netbios/netbios-name-service-netbios-ns.md)
+    * [NetBIOS Datagram Distribution Services (NetBIOS-DGM)](networking-and-network-security/readme/netbios/netbios-datagram-distribution-services-netbios-dgm.md)
+    * [NetBIOS Session Service (NetBIOS-SSN)](networking-and-network-security/readme/netbios/netbios-session-service-netbios-ssn.md)
   * [SMB (Server Message Block)](networking-and-network-security/readme/smb-server-message-block/README.md)
     * [Basics of SMB](networking-and-network-security/readme/smb-server-message-block/basics-of-smb.md)
 
