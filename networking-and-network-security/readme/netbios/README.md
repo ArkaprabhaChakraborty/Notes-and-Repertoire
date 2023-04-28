@@ -24,7 +24,7 @@ NetBT can use both NTLM and Kerberos for Authentication.
 
 NetBIOS has three integral service components:
 
-1. NetBIOS Name Service (NetBIOS-NS)
-2. NetBIOS Datagram Distribution Service (NetBIOS-DGM)
-3. NetBIOS Session Service (NetBIOS-SSN)
+1. [NetBIOS Name Service (NetBIOS-NS)](netbios-name-service-netbios-ns.md)
+2. [NetBIOS Datagram Distribution Service (NetBIOS-DGM)](netbios-datagram-distribution-services-netbios-dgm.md)
+3. [NetBIOS Session Service (NetBIOS-SSN)](netbios-session-service-netbios-ssn.md)
 
