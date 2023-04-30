@@ -40,3 +40,7 @@
     * [X-Content-Type-Options](web-application-security/security-policies/security-headers/x-content-type-options.md)
     * [X-Frame-Options](web-application-security/security-policies/security-headers/x-frame-options.md)
     * [Referrer-Policy](web-application-security/security-policies/security-headers/referrer-policy.md)
+
+## Web 3 and Smart Contract Auditing
+
+* [Web 3 for dummies](web-3-and-smart-contract-auditing/web-3-for-dummies.md)
