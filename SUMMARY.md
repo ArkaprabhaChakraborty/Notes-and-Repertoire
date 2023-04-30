@@ -33,6 +33,7 @@
 ## Web Application Security
 
 * [Security Policies](web-application-security/security-policies/README.md)
+  * [Same Origin Policy](web-application-security/security-policies/same-origin-policy.md)
   * [Security Headers](web-application-security/security-policies/security-headers/README.md)
     * [CSP (Content Security Policy)](web-application-security/security-policies/security-headers/csp-content-security-policy.md)
     * [HSTS (Strict-Transport-Security Header)](web-application-security/security-policies/security-headers/hsts-strict-transport-security-header.md)
