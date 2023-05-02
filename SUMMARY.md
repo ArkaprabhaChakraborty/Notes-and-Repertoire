@@ -17,6 +17,7 @@
       * [DNS Root Server](networking-and-network-security/readme/dns-for-dummies/types-of-dns-servers/dns-root-server.md)
       * [Top Level Domain Server](networking-and-network-security/readme/dns-for-dummies/types-of-dns-servers/top-level-domain-server.md)
       * [Authoritative DNS servers](networking-and-network-security/networking-basics/dns-for-dummies/types-of-dns-servers/authoritative-dns-servers.md)
+      * [Other types of DNS servers](networking-and-network-security/readme/dns-for-dummies/types-of-dns-servers/other-types-of-dns-servers.md)
     * [How DNS works?](networking-and-network-security/readme/dns-for-dummies/how-dns-works.md)
   * [NetBIOS](networking-and-network-security/readme/netbios/README.md)
     * [NetBIOS Name Service (NetBIOS-NS)](networking-and-network-security/readme/netbios/netbios-name-service-netbios-ns.md)
