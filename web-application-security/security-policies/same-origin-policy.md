@@ -1,3 +1,7 @@
+---
+description: The browser-side defence we know little about....
+---
+
 # Same Origin Policy
 
 The Same Origin policy is a security mechanism which defines how a document, resource or script loaded from one origin interacts with another origin. It is a web browser security mechanism that prevents websites from "attacking" each other.
@@ -20,4 +24,16 @@ SOP actually helps in the separation of concerns. It helps isolate potentially m
 
 The same-origin policy prevents the above scenario from happening by blocking read access to resources loaded from a different origin.&#x20;
 
-But we do load images, iframes, videos, fonts, scripts, etc from CDNs or other different origins, right?  How does it work in that case?
+#### But we do load images, iframes, videos, fonts, scripts, etc from CDNs or other different origins, right?  How does it work in that case?&#x20;
+
+**Answer:** Browsers allow a few tags to embed resources from a different origin. SOP is decided on multiple factors as shown in the table below:
+
+| Resource | Allowed                                                                                                                                                                                                                                                          | Disallowed/Blocked                                                                                                                                                         |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| iframe   | Cross-origin embedding is usually permitted (depending on the [X-Frame-Options](security-headers/x-frame-options.md) directive).                                                                                                                                 | Cross-origin reading (such as using JavaScript to access a document in an iframe)                                                                                          |
+| CSS      | Cross-origin CSS can be embedded using a `<link>` element or an `@import` in a CSS file. The correct `Content-Type` header may be required.                                                                                                                      | <p>Read the style contents, like using:</p><pre class="language-js" data-overflow="wrap"><code class="lang-js">console.log(document.styleSheets[0].cssRules)
+</code></pre> |
+| forms    | <p>Cross-origin URLs can be used as the <code>action</code> attribute value of form elements. A web application can write form data to a cross-origin destination.<br><br>Credentialed cross-origin urlencoded HTML form and Multipart HTML form is allowed.</p> | Credentialed cross-origin JSON HTML form is not allowed. The browser defaults to The browser will fallback to application/x-www-form-urlencoded.                           |
+| images   | Embedding cross-origin images is permitted.                                                                                                                                                                                                                      | Reading cross-origin image data (such as retrieving binary data from a cross-origin image, modifying pixels, etc, using JavaScript) is blocked.                            |
+| scripts  | Cross-origin scripts can be embedded.                                                                                                                                                                                                                            | however, access to certain APIs (such as cross-origin fetch requests) might be blocked.                                                                                    |
+
