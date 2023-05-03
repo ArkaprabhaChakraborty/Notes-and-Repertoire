@@ -37,3 +37,6 @@ The same-origin policy prevents the above scenario from happening by blocking re
 | images   | Embedding cross-origin images is permitted.                                                                                                                                                                                                                      | Reading cross-origin image data (such as retrieving binary data from a cross-origin image, modifying pixels, etc, using JavaScript) is blocked.                            |
 | scripts  | Cross-origin scripts can be embedded.                                                                                                                                                                                                                            | however, access to certain APIs (such as cross-origin fetch requests) might be blocked.                                                                                    |
 
+### Deeper dive into what works and what doesn't
+
+While the above table gives a gist about what's allowed and what's not. Let's take a closer look at them to understand the security concerns further.
