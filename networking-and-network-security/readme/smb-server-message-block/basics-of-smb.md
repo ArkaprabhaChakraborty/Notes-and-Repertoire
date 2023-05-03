@@ -8,3 +8,10 @@ For systems running SMB using NetBIOS, ports 137,138,139 along with port 445 sho
 
 ### SMB Services
 
+As a client–server protocol, SMB requires a **server service (**_**LanmanServer**_**)** and a **client service (**_**LanmanWorkstation**_**)**. Every Windows computer, whether it is running a server OS (like Server 2016 or Server 2019) or a client OS (like Windows 10 or Windows 11), has both the _LanmanServer_ and _LanmanWorkstation_ services.
+
+To check for the status of the services we can use:
+
+```powershell
+Get-Service Lanman*
+```
