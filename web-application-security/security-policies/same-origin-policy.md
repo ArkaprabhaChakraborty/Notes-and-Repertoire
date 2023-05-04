@@ -39,4 +39,20 @@ The same-origin policy prevents the above scenario from happening by blocking re
 
 ### Deeper dive into what works and what doesn't
 
-While the above table gives a gist about what's allowed and what's not. Let's take a closer look at them to understand the security concerns further.
+While the above table gives a gist about what's allowed and what's not. Let's take a closer look at them to understand the security concerns further.&#x20;
+
+For this, we are going to take the help of two websites, say `www.website-a.com` and `www.website-b.com`
+
+#### Javascript Window Access
+
+Generally, a website has full control over the window that it's running on, but, there are many ways in which one website can control/handle another window.
+
+Some of the methods include:\
+&#x20;     1\. Using `window.open`.\
+&#x20;     2\. Creating an `iframe`.\
+&#x20;     3\. Using `window.opener` if the website is framed by another.
+
+
+
+
+
