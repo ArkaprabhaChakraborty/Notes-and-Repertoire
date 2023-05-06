@@ -37,13 +37,13 @@ The same-origin policy prevents the above scenario from happening by blocking re
 | images   | Embedding cross-origin images is permitted.                                                                                                                                                                                                                      | Reading cross-origin image data (such as retrieving binary data from a cross-origin image, modifying pixels, etc, using JavaScript) is blocked.                            |
 | scripts  | Cross-origin scripts can be embedded.                                                                                                                                                                                                                            | however, access to certain APIs (such as cross-origin fetch requests) might be blocked.                                                                                    |
 
-### Deeper dive into what works and what doesn't
+## Deeper dive into what works and what doesn't
 
 While the above table gives a gist about what's allowed and what's not. Let's take a closer look at them to understand the security concerns further.&#x20;
 
 For this, we are going to take the help of two websites, say `www.website-a.com` and `www.website-b.com`
 
-#### Javascript Window Access
+### Javascript Window Access
 
 Generally, a website has full control over the window that it's running on, but, there are many ways in which one website can control/handle another window.
 
@@ -51,9 +51,13 @@ Some of the methods include:\
 &#x20;  1\. Using `window.open`.\
 &#x20;  2\. Creating an `iframe`.\
 &#x20;  3\. Using `window.opener` if the website is framed by another.\
-&#x20;  4\. Using postMessage() method or event &#x20;
+&#x20;  4\. Using postMessage() method. &#x20;
 
+#### What's allowed?
 
+**Reading scripts from different sites is allowed** \
+To explain this, let's take a situation, where we have the HTML page on `www.website-a.com` and the javascript code is being served from `www.website-b.com`.  Website-a embeds the scripts using a script tag (PS: this is how CDNs work).\
+Now this is allowed by same-origin policy as **the "origin" of the script is the page it is executed in, not where it comes from** (Takes the quote "It's not where you are from, but, what you do that defines you" to another level :P).
 
 
 
