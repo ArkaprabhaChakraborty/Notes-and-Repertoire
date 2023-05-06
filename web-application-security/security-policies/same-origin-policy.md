@@ -48,9 +48,10 @@ For this, we are going to take the help of two websites, say `www.website-a.com`
 Generally, a website has full control over the window that it's running on, but, there are many ways in which one website can control/handle another window.
 
 Some of the methods include:\
-&#x20;     1\. Using `window.open`.\
-&#x20;     2\. Creating an `iframe`.\
-&#x20;     3\. Using `window.opener` if the website is framed by another.
+&#x20;  1\. Using `window.open`.\
+&#x20;  2\. Creating an `iframe`.\
+&#x20;  3\. Using `window.opener` if the website is framed by another.\
+&#x20;  4\. Using postMessage() method or event &#x20;
 
 
 
