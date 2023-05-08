@@ -1,11 +1,13 @@
 ---
-description: A guide into DNS basics and how is it used in daily life
+description: >-
+  A guide into DNS basics, how is it used in daily life and some evil tricks
+  with it
 cover: >-
   https://www.hp.com/us-en/shop/app/assets/images/uploads/prod/how-to-resolve-dns-issues1603984926781453.jpg
 coverY: 0
 ---
 
-# DNS for dummies
+# DNS
 
 DNS or domain name system is an important part of the web's infrastructure. It is made using three logical components, namely, a domain, a domain name and a "system".
 

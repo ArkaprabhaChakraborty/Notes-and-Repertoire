@@ -14,7 +14,7 @@ The 16th octet, called the NetBIOS Suffix, frequently designates the **type of r
 
 So overall the name is at minimum 15 octets long if the 16th octet is reserved.
 
-### **NetBIOS name service runs on UDP port 137.**
+### **NetBIOS name service runs on UDP port 137, but it can run on TCP port 137 as well.**
 
 NBT can implement a central repository or _Name Service_, that records all name registrations. An application wanting to register a name would therefore contact the name server (which has a known network address) and ask whether the name is already registered, using a "Name Query" packet.&#x20;
 
