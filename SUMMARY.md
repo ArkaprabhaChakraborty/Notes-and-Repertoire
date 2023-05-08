@@ -19,11 +19,12 @@
   * [NetBIOS Datagram Distribution Services (NetBIOS-DGM)](networking-and-network-security/netbios/netbios-datagram-distribution-services-netbios-dgm.md)
   * [NetBIOS Session Service (NetBIOS-SSN)](networking-and-network-security/netbios/netbios-session-service-netbios-ssn.md)
   * [NetBIOS Pentest](networking-and-network-security/netbios/netbios-pentest.md)
-* [MS-RPC (Remote Procedure Call)](networking-and-network-security/ms-rpc-remote-procedure-call.md)
+* [BGP(Border Gateway Protocol) and AS Numbers (Autonomous System Numbers)](networking-and-network-security/bgp-border-gateway-protocol-and-as-numbers-autonomous-system-numbers.md)
+* [MS-RPC (Remote Procedure Call)](networking-and-network-security/remote-procedure-call-rpc.md)
 * [SMB (Server Message Block)](networking-and-network-security/smb-server-message-block/README.md)
   * [Basics of SMB](networking-and-network-security/smb-server-message-block/basics-of-smb.md)
   * [SMB Pentesting](networking-and-network-security/smb-server-message-block/smb-pentesting.md)
-* [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rdp-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
+* [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rpc-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
 * [MS SQL](networking-and-network-security/ms-sql.md)
 
 ***
