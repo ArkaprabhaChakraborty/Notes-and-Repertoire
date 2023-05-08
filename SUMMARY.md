@@ -2,12 +2,7 @@
 
 ## Networking and Network Security
 
-* [Addressing Methods](README.md)
-  * [Unicast addressing](networking-and-network-security/addressing-methods/unicast-addressing.md)
-  * [Broadcast addressing](networking-and-network-security/addressing-methods/broadcast-addressing.md)
-  * [Multicast addressing](networking-and-network-security/addressing-methods/multicast-addressing.md)
-  * [Anycast addressing](networking-and-network-security/addressing-methods/anycast-addressing.md)
-* [DNS](networking-and-network-security/dns-for-dummies/README.md)
+* [DNS](README.md)
   * [Domain name space](networking-and-network-security/dns-for-dummies/domain-name-space.md)
   * [Naming Conventions](networking-and-network-security/dns-for-dummies/naming-conventions.md)
   * [DNS Resource Records](networking-and-network-security/dns-for-dummies/dns-resource-records.md)
@@ -24,10 +19,11 @@
   * [NetBIOS Datagram Distribution Services (NetBIOS-DGM)](networking-and-network-security/netbios/netbios-datagram-distribution-services-netbios-dgm.md)
   * [NetBIOS Session Service (NetBIOS-SSN)](networking-and-network-security/netbios/netbios-session-service-netbios-ssn.md)
   * [NetBIOS Pentest](networking-and-network-security/netbios/netbios-pentest.md)
-* [Remote Procedure Call (RPC)](networking-and-network-security/remote-procedure-call-rpc.md)
+* [MS-RPC (Remote Procedure Call)](networking-and-network-security/ms-rpc-remote-procedure-call.md)
 * [SMB (Server Message Block)](networking-and-network-security/smb-server-message-block/README.md)
   * [Basics of SMB](networking-and-network-security/smb-server-message-block/basics-of-smb.md)
-* [RPC (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rpc-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
+  * [SMB Pentesting](networking-and-network-security/smb-server-message-block/smb-pentesting.md)
+* [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rdp-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
 * [MS SQL](networking-and-network-security/ms-sql.md)
 
 ***

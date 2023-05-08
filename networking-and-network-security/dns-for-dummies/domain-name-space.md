@@ -18,7 +18,7 @@ Root Zone refers to the highest level of the [Domain Name System](https://icannw
 
 There are `13 root name server addresses` (limitation due to the unfragmented UDP packet size) which can be `accommodated` in one "name-resolution-query". Note that I said **ADDRESSES** and not servers.&#x20;
 
-The root zone is serviced by several servers (around 600+ servers) in different countries - each of the 13 addresses has several servers (also sometimes called root server clusters), which use [Anycast routing](../addressing-methods/anycast-addressing.md) to distribute requests based on load and proximity.&#x20;
+The root zone is serviced by several servers (around 600+ servers) in different countries - each of the 13 addresses has several servers (also sometimes called root server clusters), which use [Anycast routing](broken-reference) to distribute requests based on load and proximity.&#x20;
 
 <img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
