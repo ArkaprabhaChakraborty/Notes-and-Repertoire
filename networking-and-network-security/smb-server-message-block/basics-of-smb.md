@@ -6,6 +6,8 @@ Clients connect to servers using TCP/IP (actually NetBIOS over TCP/IP as specifi
 
 For systems running SMB using NetBIOS, ports 137,138,139 along with port 445 should be open. Otherwise, if just port 445 it's just using SMB over TCP/IP directly.
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>SMB Packet Structure</p></figcaption></figure>
+
 ### SMB Services
 
 As a client-server protocol, SMB requires a **server service (**_**LanmanServer**_**)** and a **client service (**_**LanmanWorkstation**_**)**. Every Windows computer, whether it is running a server OS (like Server 2016 or Server 2019) or a client OS (like Windows 10 or Windows 11), has both the _LanmanServer_ and _LanmanWorkstation_ services.
@@ -40,5 +42,5 @@ The registry key name for the LanmanServer is `HKEY_LOCAL_MACHINE\SYSTEM\Current
 
 The LanmanWorkstation is the client service, which makes sure that it can utilize SMB shares and shared printers from remote computers or servers.&#x20;
 
-The information about this service is stored in the following registry location: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation`_`.`_
+The information about this service is stored in the following registry location: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation`.
 
