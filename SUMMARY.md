@@ -27,9 +27,9 @@
 * [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rpc-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
 * [MS SQL](networking-and-network-security/ms-sql.md)
 
-***
+## Methodologies
 
-* [CVSS (Common Vulnerability Scoring System)](cvss-common-vulnerability-scoring-system.md)
+* [CVSS (Common Vulnerability Scoring System)](methodologies/cvss-common-vulnerability-scoring-system.md)
 
 ## Reverse Engineering 101
 
