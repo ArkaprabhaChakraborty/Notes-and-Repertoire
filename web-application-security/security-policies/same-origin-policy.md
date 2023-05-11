@@ -10,7 +10,7 @@ The Same Origin policy is a security mechanism which defines how a document, res
 
 The origin of a URI is defined as the combination of its protocol/schema, the hostname and the port.  An example of this is shown below:
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 **Two URLs have the **_**same origin**_** if the** [**protocol**](https://developer.mozilla.org/en-US/docs/Glossary/Protocol)**,** [**port**](https://developer.mozilla.org/en-US/docs/Glossary/Port) **(if specified), and** [**host**](https://developer.mozilla.org/en-US/docs/Glossary/Host) **are the same for both.**&#x20;
 
