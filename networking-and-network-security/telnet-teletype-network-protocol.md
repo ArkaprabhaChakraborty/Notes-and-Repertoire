@@ -21,3 +21,15 @@ The user connects to the server by using the Telnet protocol, which means enteri
 ```
 telnet [ip] [port]
 ```
+
+### Enumeration
+
+```
+nmap -sV 10.10.10.3 -p 23
+```
+
+### Exploiting Telnet
+
+Telnet, being a protocol, is in and of itself insecure for the reasons we talked about earlier. It lacks encryption, so sends all communication over plaintext, and for the most part, has poor access control.
+
+After connecting to a telnet session, we can run commands using `.RUN` prefix.
