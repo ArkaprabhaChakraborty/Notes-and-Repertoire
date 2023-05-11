@@ -4,7 +4,7 @@ description: The .com, .io, .org and others
 
 # Top Level Domain Server
 
-A top-level domain (TLD) is one of the [domains](../../../#what-is-a-domain-name) at the highest level in the hierarchical [Domain Name System](../../../#so-what-is-a-dns), after the root domain.
+A top-level domain (TLD) is one of the [domains](<../../../README (1).md#what-is-a-domain-name>) at the highest level in the hierarchical [Domain Name System](<../../../README (1).md#so-what-is-a-dns>), after the root domain.
 
 The top-level domain names are installed in the root zone of the namespace. For all domains in lower levels, it is the last part of the domain name, the last non-empty label of a fully qualified domain name. For example, in the domain name www.example.com, the top-level domain is .com.&#x20;
 

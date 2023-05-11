@@ -1,8 +1,10 @@
 # Table of contents
 
+* [1nf05EC N0TE5](README.md)
+
 ## Networking and Network Security
 
-* [DNS](README.md)
+* [DNS](<README (1).md>)
   * [Domain name space](networking-and-network-security/dns-for-dummies/domain-name-space.md)
   * [Naming Conventions](networking-and-network-security/dns-for-dummies/naming-conventions.md)
   * [DNS Resource Records](networking-and-network-security/dns-for-dummies/dns-resource-records.md)
