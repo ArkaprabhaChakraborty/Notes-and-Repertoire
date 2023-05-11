@@ -28,6 +28,7 @@
   * [SMB Pentesting](networking-and-network-security/smb-server-message-block/smb-pentesting.md)
 * [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rdp-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
 * [Telnet (Teletype Network Protocol)](networking-and-network-security/telnet-teletype-network-protocol.md)
+* [FTP (File Transfer Protocol)](networking-and-network-security/ftp-file-transfer-protocol.md)
 * [MS SQL](networking-and-network-security/ms-sql.md)
 
 ## Methodologies
