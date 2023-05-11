@@ -33,3 +33,6 @@ nmap -sV 10.10.10.3 -p 23
 Telnet, being a protocol, is in and of itself insecure for the reasons we talked about earlier. It lacks encryption, so sends all communication over plaintext, and for the most part, has poor access control.
 
 After connecting to a telnet session, we can run commands using `.RUN` prefix.
+
+To quit a telnet session, use `ctrl + ]` . To quit the telnet prompt use the keyword `quit`
+
