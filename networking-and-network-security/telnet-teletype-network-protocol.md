@@ -4,7 +4,7 @@ description: If you see it... Disable it
 
 # Telnet (Teletype Network Protocol)
 
-### Telnet iruns on **TCP port 23.**
+### Telnet runs on **TCP port 23.**
 
 Telnet is an application protocol which allows you, with the use of a telnet client, to connect to and execute commands on a remote machine that's hosting a telnet server.
 
