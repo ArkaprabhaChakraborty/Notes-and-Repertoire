@@ -17,9 +17,9 @@ FTP operates using a client-server protocol. The client initiates a connection w
 
 #### Password cracking with Hydra
 
-Let's say we have a user dale, whose password we wanna find on a particular ftp server. We use the sample command as shown below:
+Let's say we have a user Dale, whose password we wanna find on a particular ftp server. We use the sample command as shown below:
 
 ```awk
-hydra -t 4 -l dale -P /usr/share/wordlists/rockyou.txt -vV 10.10.10.6 ftp
+hydra -t 4 -l "dale" -P /usr/share/wordlists/rockyou.txt -vV 10.10.10.6 ftp
 ```
 
