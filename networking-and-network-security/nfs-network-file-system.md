@@ -21,6 +21,14 @@ These are used in determining access rights to the specified file. This is what 
 
 NFS uses RPC (Remote Procedure Calls) to communicate between the client and the server.
 
+### Services Necessary to run NFS
+
+Services to make an NFS file system work:
+
+* **nfs** – The nfs service will start the server and the RPC processes necessary for accepting shared systems.
+* **nfslock** – The nfslock service starts the RPC processes and allows NFC clients to lock files.
+* **portmap** – You can take port reservations from local services with this one. Portmap will respond to messages stating that certain ports are available for file access.
+
 #### The portmapper runs on port 111 (TCP and UDP).
 
 #### The NFS server runs on port 2049 (TCP and UDP).
