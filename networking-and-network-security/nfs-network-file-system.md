@@ -33,14 +33,20 @@ Required tools/dependencies/libs: `nfs-utils` or `nfs-common`.
 
 #### Show available shares
 
-```awk
+```bash
 showmount -e 10.10.75.141
 ```
 
 #### Mount available shares
 
-```awk
+```bash
 sudo mount -t nfs 10.10.75.141:home /tmp/mount/ -nolock
+```
+
+#### unmount NFS share
+
+```bash
+sudo umount -f -l /tmp/mount/
 ```
 
 ### Exploiting NFS
@@ -53,10 +59,38 @@ Remote root users are assigned a user “nfsnobody” when connected, which has 
 
 However, if this is turned off, it can allow the creation of SUID bit files, allowing a remote user root access to the connected system.
 
+To check if root squashing is disabled or not we can use the command:
+
+```bash
+cat /etc/exports
+```
+
+Sample output is shown below:
+
+```
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+/home           *(rw,no_root_squash)
+```
+
 #### What are files with the SUID bit set?&#x20;
 
 Essentially, this means that the file or files can be run with the permissions of the file(s) owner/group. If there is a case in which the file has SUID set as the root user or as the super-user, we can leverage this to get a shell with these privileges.
 
+#### For an NFS share with root squashing disabled, we can upload/copy a bash executable to gain access to the root shell.
 
+To set SUID to root for the bash executable, we can use&#x20;
+
+```bash
+sudo chmod +sx bash
+```
 
 \
