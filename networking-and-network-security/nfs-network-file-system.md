@@ -21,9 +21,42 @@ These are used in determining access rights to the specified file. This is what 
 
 NFS uses RPC (Remote Procedure Calls) to communicate between the client and the server.
 
-### The portmapper runs on port 111 (TCP and UDP).
+#### The portmapper runs on port 111 (TCP and UDP).
 
-### The NFS server runs on port 2049 (TCP and UDP).
+#### The NFS server runs on port 2049 (TCP and UDP).
 
-### The NFS Lock Manager runs on 3004 (TCP and UDP).
+#### The NFS Lock Manager runs on 3004 (TCP and UDP).
 
+### Enumeration of NFS
+
+Required tools/dependencies/libs: `nfs-utils` or `nfs-common`.
+
+#### Show available shares
+
+```awk
+showmount -e 10.10.75.141
+```
+
+#### Mount available shares
+
+```awk
+sudo mount -t nfs 10.10.75.141:home /tmp/mount/ -nolock
+```
+
+### Exploiting NFS
+
+#### Root squashing disabled
+
+By default, on NFS shares- Root Squashing is enabled and prevents anyone connecting to the NFS share from having root access to the NFS volume.&#x20;
+
+Remote root users are assigned a user “nfsnobody” when connected, which has the least local privileges.&#x20;
+
+However, if this is turned off, it can allow the creation of SUID bit files, allowing a remote user root access to the connected system.
+
+#### What are files with the SUID bit set?&#x20;
+
+Essentially, this means that the file or files can be run with the permissions of the file(s) owner/group. If there is a case in which the file has SUID set as the root user or as the super-user, we can leverage this to get a shell with these privileges.
+
+
+
+\
