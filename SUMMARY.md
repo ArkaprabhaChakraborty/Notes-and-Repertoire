@@ -29,7 +29,6 @@
 * [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rdp-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
 * [Telnet (Teletype Network Protocol)](networking-and-network-security/telnet-teletype-network-protocol.md)
 * [FTP (File Transfer Protocol)](networking-and-network-security/ftp-file-transfer-protocol.md)
-* [MS SQL](networking-and-network-security/ms-sql.md)
 * [NFS (Network File System)](networking-and-network-security/nfs-network-file-system.md)
 * [Mail Transfers](networking-and-network-security/mail-transfers.md)
 * [SSH (Secure Socket Shell)](networking-and-network-security/ssh-secure-socket-shell.md)
