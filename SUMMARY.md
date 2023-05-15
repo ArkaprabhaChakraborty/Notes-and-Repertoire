@@ -4,6 +4,7 @@
 
 ## Networking and Network Security
 
+* [Security Models](networking-and-network-security/security-models.md)
 * [DNS](networking-and-network-security/dns-for-dummies/README.md)
   * [Domain name space](networking-and-network-security/dns-for-dummies/domain-name-space.md)
   * [Naming Conventions](networking-and-network-security/dns-for-dummies/naming-conventions.md)
@@ -52,6 +53,7 @@
     * [X-Content-Type-Options](web-application-security/security-policies/security-headers/x-content-type-options.md)
     * [X-Frame-Options](web-application-security/security-policies/security-headers/x-frame-options.md)
     * [Referrer-Policy](web-application-security/security-policies/security-headers/referrer-policy.md)
+* [Authentication Bypass](web-application-security/authentication-bypass.md)
 
 ## Web 3 and Smart Contract Auditing
 
