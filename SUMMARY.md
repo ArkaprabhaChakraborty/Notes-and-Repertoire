@@ -4,6 +4,7 @@
 
 ## Networking and Network Security
 
+* [Security Models](networking-and-network-security/security-models.md)
 * [DNS](networking-and-network-security/dns-for-dummies/README.md)
   * [Domain name space](networking-and-network-security/dns-for-dummies/domain-name-space.md)
   * [Naming Conventions](networking-and-network-security/dns-for-dummies/naming-conventions.md)
@@ -29,7 +30,9 @@
 * [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rdp-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
 * [Telnet (Teletype Network Protocol)](networking-and-network-security/telnet-teletype-network-protocol.md)
 * [FTP (File Transfer Protocol)](networking-and-network-security/ftp-file-transfer-protocol.md)
-* [MS SQL](networking-and-network-security/ms-sql.md)
+* [NFS (Network File System)](networking-and-network-security/nfs-network-file-system.md)
+* [Mail Transfers](networking-and-network-security/mail-transfers.md)
+* [SSH (Secure Socket Shell)](networking-and-network-security/ssh-secure-socket-shell.md)
 
 ## Methodologies
 
@@ -50,6 +53,7 @@
     * [X-Content-Type-Options](web-application-security/security-policies/security-headers/x-content-type-options.md)
     * [X-Frame-Options](web-application-security/security-policies/security-headers/x-frame-options.md)
     * [Referrer-Policy](web-application-security/security-policies/security-headers/referrer-policy.md)
+* [Authentication Bypass](web-application-security/authentication-bypass.md)
 
 ## Web 3 and Smart Contract Auditing
 
