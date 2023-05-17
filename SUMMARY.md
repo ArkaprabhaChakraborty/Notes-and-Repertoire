@@ -33,6 +33,8 @@
 * [NFS (Network File System)](networking-and-network-security/nfs-network-file-system.md)
 * [Mail Transfers](networking-and-network-security/mail-transfers.md)
 * [SSH (Secure Socket Shell)](networking-and-network-security/ssh-secure-socket-shell.md)
+* [SQL servers](networking-and-network-security/sql-servers/README.md)
+  * [MS-SQL (Microsoft SQL Service)](networking-and-network-security/sql-servers/ms-sql-microsoft-sql-service.md)
 
 ## Methodologies
 
@@ -58,3 +60,7 @@
 ## Web 3 and Smart Contract Auditing
 
 * [Web 3 for dummies](web-3-and-smart-contract-auditing/web-3-for-dummies.md)
+
+## Group 1
+
+* [Archetype (HTB Starting Point 3x1)](group-1/archetype-htb-starting-point-3x1.md)
