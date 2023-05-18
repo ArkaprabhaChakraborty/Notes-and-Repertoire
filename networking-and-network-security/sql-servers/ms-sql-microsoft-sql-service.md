@@ -65,7 +65,12 @@ EXEC sp_configure 'xp_cmdshell', 1;
 ```
 
 * Run reconfigure again to allow the xp\_cmdshell method. Test if its working or not using the above diagnosis command.
-*
+
+
+
+
+
+
 
 
 
