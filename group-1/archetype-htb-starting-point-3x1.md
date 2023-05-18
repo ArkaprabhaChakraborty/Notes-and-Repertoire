@@ -242,5 +242,25 @@ impacket-mssqlclient ARCHETYPE/sql_svc@10.129.95.187 -windows-auth
 
 This helps us to connect to the database after providing the password at the password prompt.
 
+### Command injection via xp\_cmdshell
+
+Using the given options from mssqlclient:
+
+```
+SQL> help
+
+     lcd {path}                 - changes the current local directory to {path}
+     exit                       - terminates the server process (and this session)
+     enable_xp_cmdshell         - you know what it means
+     disable_xp_cmdshell        - you know what it means
+     xp_cmdshell {cmd}          - executes cmd using xp_cmdshell
+     sp_start_job {cmd}         - executes cmd using the sql server agent (blind)
+     ! {cmd}                    - executes a local shell cmd
+```
+
+We can enable xp\_cmdshell even though it is disabled by default.
+
+
+
 
 
