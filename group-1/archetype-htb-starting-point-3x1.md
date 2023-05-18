@@ -20,6 +20,7 @@ naabu -host 10.129.95.187 -p - -nmap-cli 'nmap -sV -sC nmap-output'
 
 Port scan results:
 
+{% code fullWidth="false" %}
 ```awk
 [INF] Current naabu version 2.1.6 (latest)
 [INF] Running CONNECT scan with non root privileges
@@ -162,6 +163,7 @@ Read data files from: /usr/bin/../share/nmap
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 82.41 seconds
 ```
+{% endcode %}
 
 ### List available SMB shares
 
