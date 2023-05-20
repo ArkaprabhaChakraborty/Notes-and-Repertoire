@@ -44,7 +44,41 @@ So we have an SSH service and a HTTP service (website).&#x20;
 
 ### Directory Brute Force
 
+```awk
+gobuster dir --url http://10.129.95.191/ -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt
+```
 
+```
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.129.95.191/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/05/21 03:54:46 Starting gobuster in directory enumeration mode
+===============================================================
+/.htaccess            (Status: 403) [Size: 278]
+/.htpasswd            (Status: 403) [Size: 278]
+/.hta                 (Status: 403) [Size: 278]
+/css                  (Status: 301) [Size: 312] [--> http://10.129.95.191/css/]
+/fonts                (Status: 301) [Size: 314] [--> http://10.129.95.191/fonts/]
+/images               (Status: 301) [Size: 315] [--> http://10.129.95.191/images/]
+/index.php            (Status: 200) [Size: 10932]
+/js                   (Status: 301) [Size: 311] [--> http://10.129.95.191/js/]
+/server-status        (Status: 403) [Size: 278]
+/themes               (Status: 301) [Size: 315] [--> http://10.129.95.191/themes/]
+/uploads              (Status: 301) [Size: 316] [--> http://10.129.95.191/uploads/]
+Progress: 4713 / 4714 (99.98%)
+===============================================================
+2023/05/21 03:57:11 Finished
+===============================================================
+```
 
 **Probable Approaches** \
 **SSH:** that we need to get access of, either, by getting the keys from the server or by uploading our forged keys.\
