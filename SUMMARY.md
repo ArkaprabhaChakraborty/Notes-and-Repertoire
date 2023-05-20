@@ -59,4 +59,5 @@
 
 ## Group 1
 
-* [Archetype (HTB Starting Point 3x1)](group-1/archetype-htb-starting-point-3x1.md)
+* [Archetype (HTB Starting Point 2x1)](group-1/archetype-htb-starting-point-2x1.md)
+* [Oopsie (HTB Starting Point 2x2)](group-1/oopsie-htb-starting-point-2x2.md)
