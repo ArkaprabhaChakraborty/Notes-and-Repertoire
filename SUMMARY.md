@@ -36,6 +36,10 @@
 * [SQL servers](networking-and-network-security/sql-servers/README.md)
   * [MS-SQL (Microsoft SQL Service)](networking-and-network-security/sql-servers/ms-sql-microsoft-sql-service.md)
 
+***
+
+* [Make your dumb netcat shell interactive and awesome](make-your-dumb-netcat-shell-interactive-and-awesome.md)
+
 ## Reverse Engineering 101
 
 * [x86-64 assembly tutorial](reverse-engineering-101/x86-64-assembly-tutorial/README.md)
