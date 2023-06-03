@@ -1,5 +1,19 @@
 # MS-SQL (Microsoft SQL Service)
 
+## What is MS SQL?
+
+MS SQL, also known as Microsoft SQL Server, is a relational database management system (RDBMS) developed by Microsoft.&#x20;
+
+### **Default MS-SQL System Tables**
+
+* **master Database**: Records all the system-level information for an instance of SQL Server.
+* **msdb Database**: Is used by SQL Server Agent for scheduling alerts and jobs.
+* **model Database**: Is used as the template for all databases created on the instance of SQL Server. Modifications made to the model database, such as database size, collation, recovery model, and other database options, are applied to any databases created afterwards.
+* **Resource Database**: Is a read-only database that contains system objects that are included with SQL Server. System objects are physically persisted in the Resource database, but they logically appear in the sys schema of every database.
+* **tempdb Database** : Is a work-space for holding temporary objects or intermediate result sets.
+
+### Runs on TCP port 1433 and UDP port 1434
+
 ## Enumeration
 
 ### Using Impacket&#x20;
