@@ -61,7 +61,15 @@
 
 * [Web 3 for dummies](web-3-and-smart-contract-auditing/web-3-for-dummies.md)
 
-## Group 1
+## HTB writeups
 
-* [Archetype (HTB Starting Point 2x1)](group-1/archetype-htb-starting-point-2x1.md)
-* [Oopsie (HTB Starting Point 2x2)](group-1/oopsie-htb-starting-point-2x2.md)
+* [Archetype (HTB Starting Point 2x1)](htb-writeups/archetype-htb-starting-point-2x1.md)
+* [Oopsie (HTB Starting Point 2x2)](htb-writeups/oopsie-htb-starting-point-2x2.md)
+
+## THM writeups
+
+* [Vulnuniversity](thm-writeups/vulnuniversity.md)
+
+## Linux Privilege Escalation
+
+* [Using files with SUID permission set](linux-privilege-escalation/using-files-with-suid-permission-set.md)
