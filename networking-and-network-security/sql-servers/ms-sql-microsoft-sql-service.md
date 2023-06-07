@@ -7,10 +7,10 @@ MS SQL, also known as Microsoft SQL Server, is a relational database management 
 ### **Default MS-SQL System Tables**
 
 * **master Database**: Records all the system-level information for an instance of SQL Server.
-* **msdb Database**: Is used by SQL Server Agent for scheduling alerts and jobs.
-* **model Database**: Is used as the template for all databases created on the instance of SQL Server. Modifications made to the model database, such as database size, collation, recovery model, and other database options, are applied to any databases created afterwards.
-* **Resource Database**: Is a read-only database that contains system objects that are included with SQL Server. System objects are physically persisted in the Resource database, but they logically appear in the sys schema of every database.
-* **tempdb Database** : Is a work-space for holding temporary objects or intermediate result sets.
+* **msdb Database**: used by SQL Server Agent for scheduling alerts and jobs.
+* **model Database**: used as the template for all databases created on the instance of SQL Server. Modifications made to the model database, such as database size, collation, recovery model, and other database options, are applied to any databases created afterwards.
+* **Resource Database**: a read-only database that contains system objects that are included with SQL Server. System objects are physically persisted in the Resource database, but they logically appear in the sys schema of every database.
+* **tempdb Database** : a work-space for holding temporary objects or intermediate result sets.
 
 ### Runs on TCP port 1433 and UDP port 1434
 
@@ -78,7 +78,7 @@ However, if we get the following ERROR, we don't have access to the command and 
 ```
 {% endcode %}
 
-Alternatively you can check it using the following query/command.
+Alternatively, you can check it using the following query/command.
 
 ```
 sp_configure;
@@ -246,9 +246,9 @@ xp_cmdshell                                     0             1              0  
 
 **Reconfiguration steps**
 
-#### One line command
+#### One line command (impacket-mssqlclient)
 
-The simple one liner in impacket-mssqlclient can do the honours for us.... :)
+The simple one-liner in impacket-mssqlclient can do the honours for us.... :)
 
 ```bash
 enable_xp_cmdshell
@@ -256,7 +256,7 @@ enable_xp_cmdshell
 
 #### Alternative
 
-1. If sp\_configure command is set to show advanced options we can just directly set the xp\_cmdshell option (aka directly skip to step 5). The best way to know this is to run the command in step 5.
+1. If the sp\_configure command is set to show advanced options we can just directly set the xp\_cmdshell option (aka directly skip to step 5). The best way to know this is to run the command in step 5.
 2. If we get the error shown below:
 
 ```awk
@@ -281,13 +281,13 @@ RECONFIGURE;
 sp_configure;
 ```
 
-5. Allow xp\_cmdshell using the command:
+5. Allow `xp_cmdshell()` using the command:
 
 ```sql
 EXEC sp_configure 'xp_cmdshell', 1;
 ```
 
-* Run reconfigure again to allow the xp\_cmdshell method. Test if its working or not using the above diagnosis command.
+* Run reconfigure again to allow the xp\_cmdshell method. Test if it's working or not using the above diagnosis command.
 
 We can use xp\_cmdshell after enabling it like follows:
 
@@ -295,7 +295,7 @@ We can use xp\_cmdshell after enabling it like follows:
 SQL> xp_cmdshell "whoami"
 ```
 
-A sample output is as follows:
+The sample output is as follows:
 
 ```
 output                                                                             
