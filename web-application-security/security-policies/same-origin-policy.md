@@ -37,21 +37,103 @@ While the above table gives a gist about what's allowed and what's not. Let's ta
 
 For this, we are going to take the help of two websites, say `www.website-a.com` and `www.website-b.com`
 
-### Javascript Window Access
+### Javascript Controls
 
-Generally, a website has full control over the window that it's running on, but, there are many ways in which one website can control/handle another window.
+#### Embedding scripts
+
+JavaScript with `<script src="…"></script>`can be embedded without any issue, however, access to certain APIs (such as cross-origin fetch requests) might be blocked. Error details for syntax errors are only available for same-origin scripts.
+
+#### What's allowed?
+
+#### **Reading scripts from different sites is allowed**
+
+To explain this, let's take a situation, where we have the HTML page on `www.website-a.com` and the javascript code is being served from `www.website-b.com`.  Website-a embeds the scripts using a script tag (PS: this is how CDNs work).\
+Now this is allowed by same-origin policy as **the "origin" of the script is the page it is executed in, not where it comes from** (Takes the quote "It's not where you are from, but, what you do that defines you" to another level :P).
+
+#### What's not allowed?
+
+
+
+#### Window Access
+
+Generally, a website has complete control over the window that it's running on, but, there are many ways in which one website can control/handle another window.
 
 Some of the methods include:\
 &#x20;  1\. Using `window.open`.\
 &#x20;  2\. Creating an `iframe`.\
 &#x20;  3\. Using `window.opener` if the website is framed by another.\
-&#x20;  4\. Using postMessage() method. &#x20;
+&#x20;  4\. Using `postMessage()` method. &#x20;
+
+#### Example snippet
+
+Let's take an example snippet to understand the concepts stated below in this blog.&#x20;
+
+```javascript
+var crossOriginFrame = document.createElement('iframe')
+crossOriginFrame.src = 'http://www.website-b.com'
+document.body.appendChild(crossOriginFrame)
+var contentWindow = crossOriginFrame.contentWindow
+```
+
+In the above script, we are creating a cross-origin frame within `http://www.website-a.com`. Now we will see what operations are allowed on the `contentWindow` we created. The **`contentWindow`** property returns the [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window) object of an [HTMLIFrameElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement). You can use this `Window` object to access the iframe's document and its internal DOM. This attribute is read-only, but its properties can be manipulated like the global `Window` object.
 
 #### What's allowed?
 
-**Reading scripts from different sites is allowed** \
-To explain this, let's take a situation, where we have the HTML page on `www.website-a.com` and the javascript code is being served from `www.website-b.com`.  Website-a embeds the scripts using a script tag (PS: this is how CDNs work).\
-Now this is allowed by same-origin policy as **the "origin" of the script is the page it is executed in, not where it comes from** (Takes the quote "It's not where you are from, but, what you do that defines you" to another level :P).
+**Reading the number of frames in a cross-origin window**
+
+For a window, we can know the number of frames it's embedding. So the following snippet is valid.
+
+```javascript
+console.log(contentWindow.frames.length);
+```
+
+#### Replacing/Write the source URI for the cross-origin frame
+
+It is absolutely possible to replace the source URI of a cross-origin iframe. The following snippet is actually valid. &#x20;
+
+```javascript
+contentWindow.location.replace('https://www.example.com')
+```
+
+#### What's not allowed?
+
+#### Reading/Writing cross-origin iframe content
+
+Cross-origin reading (such as using JavaScript to access a document in a "cross-origin" iframe) and writing (using JavaScript to modify a document in a "cross-origin" iframe) aren't allowed.&#x20;
+
+So the following snippets:&#x20;
+
+```javascript
+console.log(contentWindow.document.body.innerHTML);
+```
+
+```javascript
+contentWindow.document.body.innerHTML = "<h1>Writing from website-a</h1>";
+```
+
+Throws the error:
+
+{% code overflow="wrap" %}
+```
+Uncaught DOMException: Blocked a frame with origin "http://www.website-a.com" from accessing a cross-origin frame.
+```
+{% endcode %}
+
+#### Reading the source URI of a cross-origin iframe
+
+Yes! **`READING THE SOURCE URI ISN'T ALLOWED BUT WRITING/MODIFYING IT IS ALLOWED`**.&#x20;
+
+```javascript
+console.log(contentWindow.location.href) // Reading the source URI
+```
+
+Throws the error:
+
+{% code overflow="wrap" %}
+```
+Uncaught DOMException: Blocked a frame with origin "http://www.website-a.com" from accessing a cross-origin frame.
+```
+{% endcode %}
 
 
 

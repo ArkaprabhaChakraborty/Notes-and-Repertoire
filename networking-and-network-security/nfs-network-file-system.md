@@ -51,7 +51,7 @@ showmount -e 10.10.75.141
 sudo mount -t nfs 10.10.75.141:home /tmp/mount/ -nolock
 ```
 
-#### unmount NFS share
+#### Un-mount NFS share
 
 ```bash
 sudo umount -f -l /tmp/mount/
