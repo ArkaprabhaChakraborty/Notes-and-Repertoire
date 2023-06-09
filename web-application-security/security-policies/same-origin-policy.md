@@ -75,7 +75,9 @@ document.body.appendChild(crossOriginFrame)
 var contentWindow = crossOriginFrame.contentWindow
 ```
 
-In the above script, we are creating a cross-origin frame within `http://www.website-a.com`. Now we will see what operations are allowed on the `contentWindow` we created. The **`contentWindow`** property returns the [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window) object of an [HTMLIFrameElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement). You can use this `Window` object to access the iframe's document and its internal DOM. This attribute is read-only, but its properties can be manipulated like the global `Window` object.
+In the above script, we are creating a cross-origin frame within `http://www.website-a.com`. Now we will see what operations are allowed on the `contentWindow` we created.&#x20;
+
+The **`contentWindow`** property returns the [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window) object of an [HTMLIFrameElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement). You can use this `Window` object to access the iframe's document and its internal DOM. This attribute is read-only, but its properties can be manipulated like the global `Window` object.
 
 #### What's allowed?
 
@@ -134,6 +136,12 @@ Throws the error:
 Uncaught DOMException: Blocked a frame with origin "http://www.website-a.com" from accessing a cross-origin frame.
 ```
 {% endcode %}
+
+#### Reading localStorage or sessionStorage via ContentWindow object of a cross-origin iframe <a href="#not-allowed-read-localstorage-or-sessionstorage" id="not-allowed-read-localstorage-or-sessionstorage"></a>
+
+[`Window.localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) returns a reference to the local storage object used to store data that may only be accessed by the origin that created it. This is a read-only attribute.
+
+[`Window.sessionStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) returns a reference to the session storage object used to store data that may only be accessed by the origin that created it.
 
 
 
