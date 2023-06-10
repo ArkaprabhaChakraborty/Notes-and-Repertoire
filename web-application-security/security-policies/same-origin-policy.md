@@ -43,7 +43,11 @@ For this, we are going to take the help of two websites, say `www.website-a.com`
 
 JavaScript with `<script src="…"></script>`can be embedded without any issue, however, access to certain APIs (such as cross-origin fetch requests) might be blocked. Error details for syntax errors are only available for same-origin scripts.
 
+In general, embedding any resource (image, style, script, etc.) is allowed cross-origin, but JavaScript cannot directly access the resource.
+
 #### What's allowed?
+
+#### REading the script source - There is no way to do it anyway though
 
 #### **Reading scripts from different sites is allowed**
 
@@ -97,6 +101,28 @@ It is absolutely possible to replace the source URI of a cross-origin iframe. Th
 contentWindow.location.replace('https://www.example.com')
 ```
 
+#### Sending messages to the window via `postMessage()`
+
+The [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) method allows cross-origin windows to communicate with each other. So let's say the iframe that we are loading (from website-b into website-a) has some way to parse the message sent to it, as shown in the snippet below:
+
+```javascript
+window.addEventListener(
+  'message',
+  (event) => {
+    document.write('Got message: ' + event.data + 'from website-a')
+  },
+  false
+)
+```
+
+Now when the script in `website-a` sends a message in the way shown below, the message simply gets reflected in the iframe, but, it's actually parsed and displayed by `website-b` behind the scenes.
+
+```javascript
+contentWindow.postMessage('hello', 'http://www.website-b.com')
+```
+
+<figure><img src="../../.gitbook/assets/iframe.png" alt=""><figcaption><p>An example of how it would look after being rendered</p></figcaption></figure>
+
 #### What's not allowed?
 
 #### Reading/Writing cross-origin iframe content
@@ -142,6 +168,13 @@ Uncaught DOMException: Blocked a frame with origin "http://www.website-a.com" fr
 [`Window.localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) returns a reference to the local storage object used to store data that may only be accessed by the origin that created it. This is a read-only attribute.
 
 [`Window.sessionStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) returns a reference to the session storage object used to store data that may only be accessed by the origin that created it.
+
+A cross-origin iframe window isn't allowed "read" access to the local storage and session storage objects. So the following snippets (similar ones too) are blocked by SOP:
+
+```javascript
+console.log(contentWindow.localStorage);
+console.log(contentWindow.sessionStorage);
+```
 
 
 
