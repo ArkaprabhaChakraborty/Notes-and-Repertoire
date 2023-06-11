@@ -37,9 +37,21 @@ While the above table gives a gist about what's allowed and what's not. Let's ta
 
 For this, we are going to take the help of two websites, say `www.website-a.com` and `www.website-b.com`
 
-### Javascript Controls
+## Resource Embedding
 
-#### Embedding scripts
+### Loading styles
+
+Stylesheets can be loaded using the `<link>` tag. But a cross-site stylesheet content access and modification using javascript is a bit restricted.
+
+### Embedding images
+
+Simple image loading with the `<image>` tag is allowed but the modification of image pixels etc isn't allowed.
+
+Similarly, we can create a canvas for an image from literally any website, but, reading pixels from that canvas isn't allowed.&#x20;
+
+## Javascript Controls
+
+### Embedding scripts
 
 JavaScript with `<script src="…"></script>`can be embedded without any issue, however, access to certain APIs (such as cross-origin fetch requests) might be blocked. Error details for syntax errors are only available for same-origin scripts.
 
@@ -47,18 +59,22 @@ In general, embedding any resource (image, style, script, etc.) is allowed cross
 
 #### What's allowed?
 
-#### REading the script source - There is no way to do it anyway though
-
-#### **Reading scripts from different sites is allowed**
+**Reading scripts from different sites is allowed**
 
 To explain this, let's take a situation, where we have the HTML page on `www.website-a.com` and the javascript code is being served from `www.website-b.com`.  Website-a embeds the scripts using a script tag (PS: this is how CDNs work).\
 Now this is allowed by same-origin policy as **the "origin" of the script is the page it is executed in, not where it comes from** (Takes the quote "It's not where you are from, but, what you do that defines you" to another level :P).
 
+#### Usage of data and functions provided by the embedded script
+
+Let's say the script from the `website-b` has some variable x. We can actually `console.log()` it and see its value, even when it's not being served from `website-a`. This is how [JSONP](https://en.wikipedia.org/wiki/JSONP) works but it's not used anymore.
+
+This has a direct security impact of making the website prone to XSSI (Cross-Site Script Inclusion) attacks if the website serves dynamic JavaScript files with authenticated user data in them.
+
 #### What's not allowed?
 
+#### Reading the script source - There is no way to do it anyway though
 
-
-#### Window Access
+### Window Access
 
 Generally, a website has complete control over the window that it's running on, but, there are many ways in which one website can control/handle another window.
 
@@ -100,6 +116,23 @@ It is absolutely possible to replace the source URI of a cross-origin iframe. Th
 ```javascript
 contentWindow.location.replace('https://www.example.com')
 ```
+
+This has a direct security impact as the websites that you "frame" on your website can get a window handle to it via the [window.opener](https://developer.mozilla.org/en-US/docs/Web/API/Window/opener) property. This means that if you load a malicious website in an iframe on your website, the frame can change the URI of your site into, e.g., a phishing page.
+
+This can be stopped by using the `sandbox` property.  The `sandbox` attribute enables an extra set of restrictions for the content in the iframe.
+
+When the `sandbox` attribute is present, and it will:
+
+* treat the content as being from a unique origin
+* block form submission
+* block script execution
+* disable APIs
+* prevent links from targeting other browsing contexts
+* prevent content from using plugins (through `<embed>`, `<object>`, `<applet>`, or other)
+* prevent the content to navigate its top-level browsing context
+* block automatically triggered features (such as automatically playing a video or automatically focusing a form control)
+
+The value of the `sandbox` attribute can either be empty (then all restrictions are applied) or a space-separated list of pre-defined values that will REMOVE the particular restrictions.
 
 #### Sending messages to the window via `postMessage()`
 
@@ -175,6 +208,4 @@ A cross-origin iframe window isn't allowed "read" access to the local storage an
 console.log(contentWindow.localStorage);
 console.log(contentWindow.sessionStorage);
 ```
-
-
 
