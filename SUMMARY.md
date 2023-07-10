@@ -38,6 +38,9 @@
 
 ***
 
+* [LDAP (Lightweight Directory Access Protocol)](ldap-lightweight-directory-access-protocol/README.md)
+  * [LDAP Working](ldap-lightweight-directory-access-protocol/ldap-working.md)
+  * [LDAP Exploitation](ldap-lightweight-directory-access-protocol/ldap-exploitation.md)
 * [Make your dumb netcat shell interactive and awesome](make-your-dumb-netcat-shell-interactive-and-awesome.md)
 
 ## Reverse Engineering 101
@@ -72,4 +75,9 @@
 
 ## Linux Privilege Escalation
 
+* [Permissions in Linux](linux-privilege-escalation/permissions-in-linux.md)
 * [Using files with SUID permission set](linux-privilege-escalation/using-files-with-suid-permission-set.md)
+
+## windows privilege escalation
+
+* [Page 1](windows-privilege-escalation/page-1.md)
