@@ -12,6 +12,13 @@ User accounts are configured in `/etc/passwd` file.
 
 User password hashes are stored in `/etc/shadow` file.
 
+Each user account has three user id, namely:
+
+* `Real user id`: It's the one stored in the `/etc/passwd` file. The real user id is actually used less often to check for a user's identity.
+* `Effective user id`: as the name suggests, it's the **user id effective while "running" the process**. Usually the effective user id is **same as the real user id** and is mostly **used** by a process, **when it's being executed as a different user**.\
+  Whenever a process is being executed as a different user, it's effective user id is set to that user's real id.
+* `Saved user id`: This last one
+
 The root user account is a special type of account with a UID `0` and has access to all resources of the machine. The system grants this user access to every files.
 
 ## Groups
@@ -42,15 +49,35 @@ Directory permissions are a bit complex.&#x20;
 
 ## Special permissions
 
-#### Set user id (SUID) bit
+#### Set user id (SUID or setuid) bit
 
 When this is set, files will get executed with the privileges of the owner of the file.
 
-#### Set group id (SGID) bit
+#### Set group id (SGID or setgid) bit
 
 When this is set, files will get executed with the privileges of the file group. When this is set on a directory, the files created within that directory will inherit the group and it's id of the directory itself.
 
 ## Viewing permissions
+
+The `ls -l` command gives the permissions of a file/directory. For eg:
+
+```
+ls -l Tools
+```
+
+A sample output is as follows:
+
+```
+total 52804
+-rwxr-xr-x  1 fvalkyrie fvalkyrie     1163 Apr 30 22:35 axiom_config.sh
+drwxr-xr-x  4 fvalkyrie fvalkyrie     4096 Apr 30 22:31 brutespray
+```
+
+The first 10 characters display the permissions set on that particular file/directory.&#x20;
+
+#### How to know if it's a file or a directory?
+
+The first character in the 10 character string says if the listed content is a file or a directory. For a file `-` is used and for a directory `d` is used.
 
 
 
