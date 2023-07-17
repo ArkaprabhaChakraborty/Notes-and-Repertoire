@@ -8,16 +8,16 @@ Permissions in Linux are just relationships between users, groups, files and dir
 
 ## Users
 
-User accounts are configured in `/etc/passwd` file.
+User accounts are configured in `/etc/passwd` file. An entry in the `/etc/passwd` file stores the **username, real user identifier and the user's preferred shell**. &#x20;
 
 User password hashes are stored in `/etc/shadow` file.
 
-Each user account has three user id, namely:
+Linux uses three types of user identifiers, namely:
 
-* `Real user id`: It's the one stored in the `/etc/passwd` file. The real user id is actually used less often to check for a user's identity.
-* `Effective user id`: as the name suggests, it's the **user id effective while "running" the process**. Usually the effective user id is **same as the real user id** and is mostly **used** by a process, **when it's being executed as a different user**.\
+* `Real user id(RUID)`: It's the one stored in the `/etc/passwd` file. The real user id is actually used less often to check for a user's identity.
+* `Effective user id(EUID)`: as the name suggests, it's the **user id effective while "running" the process**. Usually the effective user id is **same as the real user id** and is mostly **used** by a process, **when it's being executed as a different user**.\
   Whenever a process is being executed as a different user, it's effective user id is set to that user's real id.
-* `Saved user id`: This last one
+* `Saved user id`: This last one  acts like a container to store the EUID for a process when it's switching from it's set EUID to the RUID of the user that invoked the process for some unprivileged tasks.
 
 The root user account is a special type of account with a UID `0` and has access to all resources of the machine. The system grants this user access to every files.
 
