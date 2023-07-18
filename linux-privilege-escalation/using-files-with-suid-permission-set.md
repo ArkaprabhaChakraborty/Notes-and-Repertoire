@@ -2,7 +2,7 @@
 
 ## What is SUID?
 
-Set owner User ID&#x20;
+Set owner User ID, also known as Set user ID or setuid is a special flag in linux permission set.
 
 ## Find files with SUID set
 

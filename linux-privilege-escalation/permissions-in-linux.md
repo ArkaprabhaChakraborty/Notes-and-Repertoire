@@ -110,4 +110,6 @@ For the next 9 characters, the first 3 belong to the owner of the file/directory
 
 Each of these triplets have bits/flags/characters in the order of read(`r`), write(`w`) and execute(`x`). If either of the permissions aren't set, it is represented by a `-`.&#x20;
 
+The **setuid** or **setgid** for a particular file is "set" when any of the permissions for anyone (owner, group or others) is set to `s` instead of `-` or the actual character.
+
 <img src="../.gitbook/assets/file.excalidraw (1).svg" alt="Breakdown of the output from the ls -l command" class="gitbook-drawing">
