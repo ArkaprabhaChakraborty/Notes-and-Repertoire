@@ -30,9 +30,17 @@ nmap -sV 10.10.10.3 -p 23
 
 ### Exploiting Telnet
 
-Telnet, being a protocol, is in and of itself insecure for the reasons we talked about earlier. It lacks encryption, so sends all communication over plaintext, and for the most part, has poor access control.
+Telnet, being a protocol, is in and of itself insecure for the reasons we talked about earlier. It lacks encryption, so sends all communication over plain text, and for the most part, has poor access control.
 
 After connecting to a telnet session, we can run commands using `.RUN` prefix.
 
-To quit a telnet session, use `ctrl + ]` . To quit the telnet prompt use the keyword `quit`
+To quit a telnet session, use `ctrl + ]` . To quit the telnet prompt use the keyword `quit`.
+
+#### Nmap scripts for telnet
+
+```
+nmap -n -sV -Pn --script "*telnet*" -p 23 {IP}
+```
+
+#### &#x20;
 
