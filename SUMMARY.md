@@ -42,7 +42,6 @@
 * [LDAP (Lightweight Directory Access Protocol)](ldap-lightweight-directory-access-protocol/README.md)
   * [LDAP Working](ldap-lightweight-directory-access-protocol/ldap-working.md)
   * [LDAP Exploitation](ldap-lightweight-directory-access-protocol/ldap-exploitation.md)
-* [Netcat basics](netcat-basics.md)
 * [Make your dumb netcat shell interactive and awesome](make-your-dumb-netcat-shell-interactive-and-awesome.md)
 
 ## Reverse Engineering 101
