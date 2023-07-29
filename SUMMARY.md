@@ -5,6 +5,7 @@
 ## Networking and Network Security
 
 * [Security Models](networking-and-network-security/security-models.md)
+* [Naming/Name Service and Directory Service](networking-and-network-security/naming-name-service-and-directory-service.md)
 * [DNS](networking-and-network-security/dns-for-dummies/README.md)
   * [Domain name space](networking-and-network-security/dns-for-dummies/domain-name-space.md)
   * [Naming Conventions](networking-and-network-security/dns-for-dummies/naming-conventions.md)
@@ -41,6 +42,7 @@
 * [LDAP (Lightweight Directory Access Protocol)](ldap-lightweight-directory-access-protocol/README.md)
   * [LDAP Working](ldap-lightweight-directory-access-protocol/ldap-working.md)
   * [LDAP Exploitation](ldap-lightweight-directory-access-protocol/ldap-exploitation.md)
+* [Netcat basics](netcat-basics.md)
 * [Make your dumb netcat shell interactive and awesome](make-your-dumb-netcat-shell-interactive-and-awesome.md)
 
 ## Reverse Engineering 101
