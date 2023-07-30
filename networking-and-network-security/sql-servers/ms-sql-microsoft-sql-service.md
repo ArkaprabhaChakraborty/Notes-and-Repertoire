@@ -47,27 +47,22 @@ Once we have access to the SQL database we can check if we can use the xp\_cmdsh
 Successful execution would produce an output similar to this:
 
 ```
-output                                                                                                                                                                                                                                                            
+output                                                            
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+-----------------------------------------------------------------------------
 
-NULL                                                                                                                                                                                                                                                              
+NULL  
+                                                                       
+User accounts for \\ARCHETYPE                                                
 
-User accounts for \\ARCHETYPE                                                                                                                                                                                                                                     
+NULL                                                                           
+------------------------------------------------------------------------------ 
 
-NULL                                                                                                                                                                                                                                                              
+Administrator            DefaultAccount           Guest                        
 
--------------------------------------------------------------------------------                                                                                                                                                                                   
+sql_svc                  WDAGUtilityAccount                                      
 
-Administrator            DefaultAccount           Guest                                                                                                                                                                                                           
-
-sql_svc                  WDAGUtilityAccount                                                                                                                                                                                                                       
-
-The command completed successfully.                                                                                                                                                                                                                               
-
-NULL                                                                                                                                                                                                                                                              
-
-NULL                                                                                                                                                                                            
+The command completed successfully.   
 ```
 
 However, if we get the following ERROR, we don't have access to the command and we need to reconfigure the service:
