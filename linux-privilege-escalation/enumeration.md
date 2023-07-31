@@ -405,6 +405,14 @@ netstat -anop
 
 The `find` command can be used to find some fascinating files.
 
+#### Find development tools or languages of help
+
+```bash
+find / -name perl*
+find / -name python*
+find / -name gcc*
+```
+
 #### Find a simple file in current directory
 
 ```bash
@@ -441,13 +449,32 @@ find / -perm a=x 2>/dev/null
 find /home -user frank 2>/dev/null
 ```
 
+#### Find files modified by time index and size
 
+```bash
+find / -mtime 10             # find files that were modified in the last 10 days
+find / -atime 10             # find files that were accessed in the last 10 day
+find / -cmin -60             # find files changed within the last hour (60 minutes)
+find / -amin -60             # find files accesses within the last hour (60 minutes)
+find / -size 50M             # find files with a 50 MB size
+```
 
+#### Find world writable folders
 
+```bash
+find / -writable -type d 2>/dev/null
+find / -perm -222 -type d 2>/dev/null
+find / -perm -o w -type d 2>/dev/null
+```
 
+#### Find world executable folders
 
+```bash
+find / -perm -o x -type d 2>/dev/null
+```
 
+#### Find Files with SUID set&#x20;
 
-
-
-
+```bash
+find / -perm -u=s -type f 2>/dev/null
+```
