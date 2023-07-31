@@ -246,6 +246,17 @@ karen
 sshd
 ```
 
+Another approach is to grep for `home` in the results.
+
+```
+cat /etc/passwd | grep home
+```
+
+```
+matt:x:1000:1000:matt,,,:/home/matt:/bin/bash
+karen:x:1001:1001::/home/karen:
+```
+
 ### Dumping Session history
 
 The history command can be useful for finding secret keys and useful credentials within the shell session.
@@ -302,9 +313,104 @@ default via 10.10.0.1 dev eth0
 169.254.0.0/16 dev eth0  scope link  metric 1000 
 ```
 
+### Looking into existing communications
 
+Using the `netstat` command we can have information about the existing communications.&#x20;
 
+```bash
+netstat -a
+```
 
+```
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 *:ssh                   *:*                     LISTEN     
+tcp        0      0 localhost:ipp           *:*                     LISTEN     
+tcp        0      1 ip-10-10-81-154.e:37517 ubuntu-mirror-2.ps:http SYN_SEN
+```
+
+```bash
+netstat -at     # t is for TCP. Can be used with u to show UDP connections
+```
+
+```
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 *:ssh                   *:*                     LISTEN     
+tcp        0      0 localhost:ipp           *:*                     LISTEN   
+```
+
+To find all the listening ports we can use `-l` which list ports in “listening” mode. These ports are open and ready to accept incoming connections. This can be used with the `t` option to list only ports that are listening using the TCP protocol.
+
+```bash
+netstat -l    # lists all listening processes
+```
+
+```
+netstat -l
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 *:ssh                   *:*                     LISTEN     
+tcp        0      0 localhost:ipp           *:*                     LISTEN     
+tcp6       0      0 [::]:ssh                [::]:*                  LISTEN     
+tcp6       0      0 ip6-localhost:ipp       [::]:*                  LISTEN
+Active UNIX domain sockets (only servers)
+Proto RefCnt Flags       Type       State         I-Node   Path
+unix  2      [ ACC ]     STREAM     LISTENING     10074    /tmp/.X11-unix/X0
+unix  2      [ ACC ]     STREAM     LISTENING     10513    /var/run/cups/cups.sock
+unix  2      [ ACC ]     STREAM     LISTENING     10073    @/tmp/.X11-unix/X0
+unix  2      [ ACC ]     STREAM     LISTENING     11311    /run/user/112/puls
+```
+
+To get the network usage statistics we can use the `-s` flag with `-t` or `-u`
+
+```bash
+netstat -st
+```
+
+```
+Tcp:
+    97 active connections openings
+    3 passive connection openings
+    52 failed connection attempts
+    0 connection resets received
+    1 connections established
+    538 segments received
+    469 segments send out
+    70 segments retransmited
+    0 bad segments received.
+    52 resets sent
+UdpLite:
+TcpExt:
+    2 TCP sockets finished time wait in fast timer
+    5 delayed acks sent
+    Quick ack mode was activated 1 times
+    17 packet headers predicted
+    82 acknowledgments not containing data payload received
+    142 predicted acknowledgments
+    13 other TCP timeouts
+    1 DSACKs sent for old packets
+    TCPRcvCoalesce: 3
+```
+
+To know about the interface statistics, like `eth0` or `tun0`, we can use the `-i` flag.
+
+```bash
+netstat -i
+```
+
+```bash
+Kernel Interface table
+Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+eth0       9001 0       683      0      0 0           699      0      0      0 BMRU
+lo        65536 0       125      0      0 0           125      0      0      0 LRU
+```
+
+The super command used by most is `-ano` which means `-a` Display all sockets `-n` Do not resolve names `-o` Display timers and `-p` to show the PID.
+
+```bash
+netstat -anop
+```
 
 
 
