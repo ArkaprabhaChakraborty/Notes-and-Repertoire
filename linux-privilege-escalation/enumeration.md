@@ -123,20 +123,9 @@ USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root         1  0.0  0.2  33644  2800 ?        Ss   14:31   0:01 /sbin/init
 root         2  0.0  0.0      0     0 ?        S    14:31   0:00 [kthreadd]
 root         3  0.0  0.0      0     0 ?        S    14:31   0:00 [ksoftirqd/0]
-root         5  0.0  0.0      0     0 ?        S<   14:31   0:00 [kworker/0:0H]
-root         6  0.0  0.0      0     0 ?        S    14:31   0:00 [kworker/u30:0]
-root         7  0.0  0.0      0     0 ?        S    14:31   0:00 [rcu_sched]
-root         8  0.0  0.0      0     0 ?        R    14:31   0:00 [rcuos/0]
-root         9  0.0  0.0      0     0 ?        S    14:31   0:00 [rcuos/1]
 root       918  0.0  0.7 361536  7604 ?        Ssl  14:31   0:00 NetworkManager
-root       920  0.0  0.0  20016   968 tty6     Ss+  14:31   0:00 /sbin/getty -8 38400 tty6
 kernoops   953  0.0  0.0  37144  1008 ?        Ss   14:31   0:00 /usr/sbin/kerneloops
 root       974  0.0  0.2  61364  3028 ?        Ss   14:31   0:00 /usr/sbin/sshd -D
-root      1011  0.0  0.0   4368   700 ?        Ss   14:31   0:00 acpid -c /etc/acpi/events -s /var/run/acpid.socket
-root      1012  0.0  0.0  23656  1012 ?        Ss   14:31   0:00 cron
-root      1082  0.0  0.0  20016   964 tty1     Ss+  14:31   0:00 /sbin/getty -8 38400 tty1
-root      1087  0.0  0.3  75352  3396 ?        Ss   14:31   0:00 /usr/sbin/cups-browsed
-root      1106  0.0  0.5 295864  5816 ?        Sl   14:31   0:00 /usr/lib/policykit-1/polkitd --no-debug
 whoopsie  1107  0.0  0.5 371672  5312 ?        Ssl  14:31   0:00 whoopsie
 ```
 
@@ -411,6 +400,54 @@ The super command used by most is `-ano` which means `-a` Display all sockets `-
 ```bash
 netstat -anop
 ```
+
+### Using the Find command&#x20;
+
+The `find` command can be used to find some fascinating files.
+
+#### Find a simple file in current directory
+
+```bash
+find . -name flag*.txt 2>/dev/null
+```
+
+#### Search the entire target for a file&#x20;
+
+```bash
+find / -name flag*.txt 2>/dev/null
+```
+
+#### Find a directory in the target
+
+```bash
+find / -type d -name config 2>/dev/null
+```
+
+#### Find files that are readable, writable, and executable by all users
+
+```bash
+find / -type f -perm 0777 2>/dev/null
+```
+
+#### Find executables
+
+```bash
+find / -perm a=x 2>/dev/null
+```
+
+#### Find all files under /home directory for a particular user
+
+```bash
+find /home -user frank 2>/dev/null
+```
+
+
+
+
+
+
+
+
 
 
 
