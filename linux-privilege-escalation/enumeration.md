@@ -61,6 +61,22 @@ cat /etc/issue
 Ubuntu 14.04 LTS \n \l
 ```
 
+### List of available shells by command-line
+
+The /etc/shells file contains the available shells in the target.
+
+```bash
+cat /etc/shells
+```
+
+```
+# /etc/shells: valid login shells
+/bin/sh
+/bin/dash
+/bin/bash
+/bin/rbash
+```
+
 ### Using the ps command
 
 The `ps` command is an effective way to see the running processes on a Linux system.&#x20;
@@ -237,13 +253,43 @@ sshd
 
 Another approach is to grep for `home` in the results.
 
-```
+```bash
 cat /etc/passwd | grep home
 ```
 
 ```
 matt:x:1000:1000:matt,,,:/home/matt:/bin/bash
 karen:x:1001:1001::/home/karen:
+```
+
+#### Understanding /etc/passwd format
+
+The /etc/passwd file contains one entry per line for each user (user account) of the system. All fields are separated by a colon : symbol. Total of seven fields as follows. Generally, /etc/passwd file entry looks as follows:
+
+```
+ test:x:0:0:root:/root:/bin/bash
+```
+
+\[as divided by colon (:)]
+
+1. **Username**: It is used when user logs in. It should be between 1 and 32 characters in length.
+2. **Password**: An `x` character indicates that encrypted password is stored in `/etc/shadow` file. Please note that you need to use the passwd command to compute the hash of a password typed at the CLI or to store/update the hash of the password in `/etc/shadow` file, in this case, the password hash is stored as an **`x`**.
+3. **User ID (UID)**: Each user must be assigned a user ID (UID). UID 0 (zero) is reserved for root and UIDs 1-99 are reserved for other predefined accounts. Further UID 100-999 are reserved by system for administrative and system accounts/groups.
+4. **Group ID (GID)**: The primary group ID (stored in `/etc/group` file)
+5. **User ID Info**: The comment field. It allow you to add extra information about the users such as user’s full name, phone number etc. This field use by finger command.
+6. **Home directory**: The absolute path to the directory the user will be in when they log in. If this directory does not exists then users directory becomes `/` .
+7. **Command/shell**: The absolute path of a command or shell (`/bin/bash`). Typically, this is a shell. Please note that it does not have to be a shell.
+
+#### Find users belonging to root group
+
+```bash
+cat /etc/passwd | grep ":*:0"
+```
+
+```
+root:x:0:0:root:/root:/bin/bash
+user7:x:1006:0:user7,,,:/home/user7:/bin/bash
+new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash
 ```
 
 ### Dumping Session history
@@ -478,3 +524,52 @@ find / -perm -o x -type d 2>/dev/null
 ```bash
 find / -perm -u=s -type f 2>/dev/null
 ```
+
+### Find all scheduled scripts using crontab
+
+Cron jobs are typically located in the spool directories. They are stored in tables called **crontabs**. The cron jobs or schedules scripts can be viewed by using the `crontab` command.&#x20;
+
+```bash
+crontab -l
+```
+
+But sometimes the above command may be disabled for a user.&#x20;
+
+In such situations we can find them in **`/var/spool/cron/crontabs`.** The tables contain the cron jobs for all users, except the root user.&#x20;
+
+```bash
+cat /var/spool/cron/crontabs
+```
+
+We can dump the contents of the `/etc/crontab` file which stores the root user cron job details (also known as system wide crontabs).
+
+```bash
+cat /etc/crontab
+```
+
+```bash
+# /etc/crontab: system-wide crontab
+# Unlike any other crontab you don't have to run the `crontab'
+# command to install the new version when you edit this file
+# and files in /etc/cron.d. These files also have username fields,
+# that none of the other crontabs do.
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user  command
+*/5  *    * * * root    /home/user4/Desktop/autoscript.sh
+17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+#
+```
+
+### Automatic scripts
+
+#### LinPEAS
+
+
+
+#### LinEnum

