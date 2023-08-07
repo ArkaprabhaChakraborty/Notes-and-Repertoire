@@ -25,6 +25,7 @@
 * [SSH (Secure Socket Shell)](networking-and-network-security/ssh-secure-socket-shell.md)
 * [SQL servers](networking-and-network-security/sql-servers/README.md)
   * [MS-SQL (Microsoft SQL Service)](networking-and-network-security/sql-servers/ms-sql-microsoft-sql-service.md)
+  * [MySQL](networking-and-network-security/sql-servers/mysql.md)
 
 ***
 
