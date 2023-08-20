@@ -112,4 +112,4 @@ Each of these triplets have bits/flags/characters in the order of read(`r`), wri
 
 The **setuid** or **setgid** for a particular file is "set" when any of the permissions for anyone (owner, group or others) is set to `s` instead of `-` or the actual character.
 
-<img src="../.gitbook/assets/file.excalidraw (1).svg" alt="Breakdown of the output from the ls -l command" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (1) (1).svg" alt="Breakdown of the output from the ls -l command" class="gitbook-drawing">

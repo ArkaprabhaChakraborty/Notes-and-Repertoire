@@ -18,7 +18,7 @@ There are `13 root name server addresses` (limitation due to the unfragmented UD
 
 The domain name consists of the labels of each node in the domain name space concatenated together using the  `.` symbol.  The hierarchy of domains go from right to left, each label to the left specifies a subdivision, or [subdomain](https://en.wikipedia.org/wiki/Subdomain) of the domain to the right.&#x20;
 
-<img src="../../.gitbook/assets/file.excalidraw.svg" alt="A breakdown of a Fully Qualified Domain Name " class="gitbook-drawing">
+<img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="A breakdown of a Fully Qualified Domain Name " class="gitbook-drawing">
 
 ## Resource Records
 

@@ -5,6 +5,7 @@
 ## Networking and Network Security
 
 * [Security Models](networking-and-network-security/security-models.md)
+* [Host Discovery](networking-and-network-security/host-discovery.md)
 * [Naming/Name Service and Directory Service](networking-and-network-security/naming-name-service-and-directory-service.md)
 * [DNS](networking-and-network-security/dns-for-dummies/README.md)
   * [DNS Basics](networking-and-network-security/dns-for-dummies/dns-basics.md)
