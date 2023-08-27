@@ -96,11 +96,78 @@ hping3 -S 192.168.1.1 -a 192.168.1.254 -p 22 --flood
 
 ## Using Nmap
 
+The `-sn` flag turns on Host discovery for Nmap. &#x20;
 
+### ARP Ping Scan
 
+More efficient and accurate than other host discovery techniques. Useful for system discovery, where one may need to scan large address spaces.
 
+If we get a ARP response - Host is active, else Host is inactive.
 
+```bash
+nmap -sn -PR <Target IP Address> 
+```
 
+### UDP Ping Scan
 
+Detects systems behind firewalls with strict TCP filtering. UDP response - Host is active.
 
+```bash
+nmap -sn -PU <Target IP Address> 
+```
 
+### ICMP ECHO Ping Scan&#x20;
+
+ICMP ECHO reply - Host is active. Useful for locating active devices or determining if the ICMP message passes through a firewall.&#x20;
+
+Does not work on Windows-based networks.
+
+```bash
+nmap -sn -PE <Target IP Address>
+```
+
+```
+# For ICMP ECHO Ping Sweep use <Target IP Address Range>
+```
+
+### ICMP Timestamp Ping Scan&#x20;
+
+Determines whether the target host is live, specifically when the administrators block ICMP ECHO pings. Timestamp reply to each timestamp request. Response from the destination host is conditional, and it may or may not respond with the time value depending on its configuration by the administrator at the target’s end.
+
+```bash
+nmap –sn –PP <Target IP Address>
+```
+
+### ICMP Address Mask Ping Scan
+
+Send an ICMP address mask query to the target host to acquire information related to the subnet mask.
+
+```bash
+nmap –sn –PM <Target IP Address>
+```
+
+Address mask response from the destination host is conditional, and it may or may not respond with the appropriate subnet value depending on its configuration by the administrator at the target’s end.
+
+### TCP SYN Ping Scan
+
+Logs are not recorded at the system or network level, enabling the attacker to leave no traces for detection.
+
+```
+nmap –sn –PS <Target IP Address>
+```
+
+### TCP ACK Ping Scan
+
+Maximizes the chances of bypassing the firewall. Firewalls are mostly configured to block the SYN ping packets, as they are the most common pinging technique.
+
+```
+nmap –sn –PA <Target IP Address>
+```
+
+### IP Protocol Ping Scan
+
+Sends different packets using different IP protocols in the hope of receiving a response indicating that a host is online.
+
+```
+nmap –sn –PO <Target IP Address>
+```
