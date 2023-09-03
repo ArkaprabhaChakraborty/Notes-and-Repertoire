@@ -30,36 +30,32 @@ boot   etc   initrd.img.old  lost+found  opt   run   srv   usr  vmlinuz.old
 cdrom  home  lib             media       proc  sbin  sys   var
 ```
 
+Now set the terminal type in host/target terminal (aka your reverse shell):&#x20;
+
+```
+export TERM=xterm
+```
+
 Next you need to background the shell with `Ctrl + Z`.
-
-Now you need some info on our terminal so we use:
-
-```bash
-echo $TERM
-```
-
-It should give you your terminal type like shown below:
-
-```bash
-xterm-256color
-```
 
 Now run:
 
 ```bash
-stty raw -echo
+stty raw -echo; fg
 ```
 
-Now, type **`fg`** to foreground our shell running in the background. You won't be able to see those letters on the screen as you type, but hit _Enter_ afterwards, and the Netcat command will appear automatically.&#x20;
+The **`fg`** is to foreground our shell running in the background.&#x20;
 
-Now type reset. The screen would look awkward while doing this:
+You won't be able to see those letters on the screen as you type, but hit _`Enter`_ afterwards, and the Netcat command will appear automatically.&#x20;
+
+Now type `reset`. The screen would look awkward while doing this:
 
 ```
 ~# nc -lvp 1234
                reset
 ```
 
-Next in the prompt `terminal type?` set the type you obtained before.
+Next in the prompt `terminal type?` set the type you obtained before. Generally it will be `xterm`.
 
 Now just set the rows and columns using:&#x20;
 
