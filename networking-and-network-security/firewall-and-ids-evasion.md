@@ -130,21 +130,39 @@ nmap --badsum 10.10.10.11
 
 A proxy server is an application that can serve as an intermediary for connecting with other computers.&#x20;
 
-A proxy server is used:&#x20;
+### Proxy with Nmap
 
-* &#x20;As a firewall and to protect the local network from external attacks.&#x20;
-* As an IP address multiplexer that allows several computers to connect to the Internet when you have only one IP address (NAT/PAT).&#x20;
-* To anonymize web surfing (to some extent).&#x20;
-* To extract unwanted content, such as ads or “unsuitable” material (using specialised proxy servers). ▪ To provide some protection against hacking attacks.&#x20;
-* To save bandwidth.&#x20;
+For proxying with Nmap we can use `--proxies` flag. This option takes a list of proxies as argument, expressed as URLs in the format `proto://host:port`.&#x20;
+
+Use commas to separate node URLs in a chain. No authentication is supported yet. Valid protocols are `HTTP` and `SOCKS4`.
+
+```
+nmap -sS -Pn --proxies PROXY_URL -F MACHINE_IP
+```
+
+Proxies can be chained in Nmap as follows:
+
+```
+nmap -sS -Pn --proxies PROXY_URL_1, PROXY_URL_2 -F MACHINE_IP
+```
+
+This means the final source would be PROXY\_URL\_2 before hitting the target. The target would respond back to PROXY\_URL\_2 which needs to be relayed back using a HTTP or a SOCKS4 proxy.
+
+**Disadvantage:** It is implemented within the nsock library and thus has no effect on the ping, port scanning and OS discovery phases of a scan. Only NSE and version scan benefit from this option so far—other features may disclose your true address. SSL connections are not yet supported, nor is proxy-side DNS resolution (host names are always resolved by Nmap).
 
 ### Proxy chaining with proxychains
 
+Proxychains can be used for proxying Nmap traffic and performing scans with little restrictions. Proxychains allows TCP and DNS tunnelling through proxies.
 
+```
+proxychains nmap -Pn -n -sT <target IP>
+```
 
-
+The above flags are the best way to the scans so that we don't leak out our actual source IP.
 
 ## Anonymizers
+
+An anonymizer removes all identity information from the user’s computer while the user surfs the Internet Anonymizers make activity on the Internet untraceable Anonymizers allow you to bypass Internet censors
 
 ## Creating Custom Packets
 
