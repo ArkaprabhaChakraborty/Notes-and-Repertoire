@@ -32,6 +32,41 @@ Before DNS the name resolution was done using hosts file by the Operating System
 
 The most interesting DNS records for us would be the AXFR, MX, AAAA, DHCID, DNSKEY and TXT records.
 
+Common DNS records include
+
+* **`A`**
+  * Points a domain to an IPv4 address, such as `11.22.33.44`.
+* **`AAAA`**
+  * Points a domain to an IPv6 address, such as `FE80::0202:B3FF:FE1E:8329`.
+* **`MX`**
+  * Mail eXchange records are used to direct emails sent to domain
+  * See also [MX records | Whois, GeoIpLocation and DNS interrogation](https://github.com/undergroundwires/CEH-in-bullet-points/blob/master/chapters/02-footprinting/whois-geoiplocation-and-dns-interrogation.md#mx-records)
+* **`NS`**
+  * Used to delegate a domain or subdomain to a set of name servers
+* **`SOA`**
+  * Contains data to control the zone transfer.
+  * Includes serial number, timestamps, mail address of zone responsible..
+  *   E.g.
+
+      ```
+        $TTL 86400
+        @   IN  SOA     ns.icann.org. noc.dns.icann.org. (
+                2020080302  ;Serial
+                7200        ;Refresh
+                3600        ;Retry
+                1209600     ;Expire
+                3600        ;Minimum TTL
+        )
+      ```
+* **`CNAME`**
+  * Link a subdomain to a domain's existing A or AAAA record
+  * E.g. `www.cloudarchitecture.io` to `cloudarchitecture.io`
+* **`PTR`**
+  * Opposite of `A`, points an IP to domain
+  * Commonly used for spam verification for e-mail programs
+* **`HINFO`**
+  * System information including CPU and OS type.
+
 ## Types of DNS servers
 
 A fundamental component of DNS are DNS servers or name servers. There are four types of DNS servers.
