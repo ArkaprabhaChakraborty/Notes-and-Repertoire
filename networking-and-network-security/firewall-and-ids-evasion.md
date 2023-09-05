@@ -158,7 +158,7 @@ Proxychains can be used for proxying Nmap traffic and performing scans with litt
 proxychains nmap -Pn -n -sT <target IP>
 ```
 
-The above flags are the best way to the scans so that we don't leak out our actual source IP.
+The above flags are the best way to the scans so that we don't leak out our actual source IP. Refer [here](https://marcosvalle.github.io/pentest/2017/10/17/nmap-anon.html).
 
 ## Anonymizers
 
