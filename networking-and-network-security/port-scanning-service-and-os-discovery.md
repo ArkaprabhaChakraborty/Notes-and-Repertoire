@@ -6,6 +6,35 @@ description: Find out what services are running on a particular target host.
 
 Discovery of open ports and services can be performed via various port scanning techniques. Administrators often use port scanning techniques to verify the security policies of their networks, whereas attackers use them to identify open ports and running services on a host with the intent of compromising the network.
 
+At the risk of oversimplification, we can classify ports in two states:
+
+1. Open port indicates that there is some service listening on that port.
+2. Closed port indicates that there is no service listening on that port.
+
+However, in practical situations, we need to consider the impact of firewalls. For instance, a port might be open, but a firewall might be blocking the packets.&#x20;
+
+## Nmap port states
+
+Nmap considers the following six states:
+
+1. **Open**: indicates that a service is listening on the specified port.
+2. **Closed**: indicates that no service is listening on the specified port, although the port is accessible. By accessible, we mean that it is reachable and is not blocked by a firewall or other security appliances/programs.
+3. **Filtered**: means that Nmap cannot determine if the port is open or closed because the port is not accessible. This state is usually due to a firewall preventing Nmap from reaching that port. Nmap’s packets may be blocked from reaching the port; alternatively, the responses are blocked from reaching Nmap’s host.
+4. **Unfiltered**: means that Nmap cannot determine if the port is open or closed, although the port is accessible. This state is encountered when using an ACK scan `-sA`.
+5. **Open|Filtered**: This means that Nmap cannot determine whether the port is open or filtered.
+6. **Closed|Filtered**: This means that Nmap cannot decide whether a port is closed or filtered.
+
+| Option                  | Purpose                                  |
+| ----------------------- | ---------------------------------------- |
+| `-p-`                   | all ports                                |
+| `-p1-1023`              | scan ports 1 to 1023                     |
+| `-F`                    | 100 most common ports                    |
+| `-r`                    | scan ports in consecutive order          |
+| `-T<0-5>`               | -T0 being the slowest and T5 the fastest |
+| `--max-rate 50`         | rate <= 50 packets/sec                   |
+| `--min-rate 15`         | rate >= 15 packets/sec                   |
+| `--min-parallelism 100` | at least 100 probes in parallel          |
+
 ### Service Version Discovery: the -`sV` option is used to detect service versions.
 
 ## TCP Connect/Full-Open Scan
