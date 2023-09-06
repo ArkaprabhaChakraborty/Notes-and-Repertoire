@@ -35,6 +35,8 @@ Nmap considers the following six states:
 | `--min-rate 15`         | rate >= 15 packets/sec                   |
 | `--min-parallelism 100` | at least 100 probes in parallel          |
 
+You might consider adding `--reason` if you want Nmap to provide more details regarding its reasoning and conclusions.
+
 ### Service Version Discovery: the -`sV` option is used to detect service versions.
 
 ## TCP Connect/Full-Open Scan
@@ -57,7 +59,7 @@ nmap –sS –v <Target IP Address>
 
 ## Inverse TCP Flag Scan
 
-Sends in a probe packet (FIN/URG/PSH/NULL). If no response is received port is open. If RST packet response is received port is closed. Avoids many IDS and logging systems; highly stealthy.
+Sends in a probe packet (FIN/URG/PSH/NULL). If no response is received port is open. If **RST** packet **response is received port is closed**. Avoids many IDS and logging systems; highly stealthy.
 
 Disadvantage: Not effective against Microsoft Windows hosts, in particular.
 
