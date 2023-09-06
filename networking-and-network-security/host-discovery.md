@@ -164,6 +164,8 @@ nmap –sn –PS <Target IP Address>
 
 Maximizes the chances of bypassing the firewall. Firewalls are mostly configured to block the SYN ping packets, as they are the most common pinging technique.
 
+**Requires sudo/administrator privileges**
+
 ```
 nmap –sn –PA <Target IP Address>
 ```
