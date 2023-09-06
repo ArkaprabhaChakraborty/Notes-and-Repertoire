@@ -102,11 +102,15 @@ The `-sn` flag turns on Host discovery for Nmap. &#x20;
 
 More efficient and accurate than other host discovery techniques. Useful for system discovery, where one may need to scan large address spaces.
 
+On an Ethernet (802.3) and WiFi (802.11), you need to know the MAC address of any system before you can communicate with it. The MAC address is necessary for the link-layer header; the header contains the source MAC address and the destination MAC address among other fields. To get the MAC address, the OS sends an ARP query. A host that replies to ARP queries is up. The ARP query only works if the target is on the same subnet as yourself, i.e., on the same Ethernet/WiFi.
+
 If we get a ARP response - Host is active, else Host is inactive.
 
 ```bash
 nmap -sn -PR <Target IP Address> 
 ```
+
+ARP scan is possible only if you are on the same subnet as the target systems.
 
 ### UDP Ping Scan
 
