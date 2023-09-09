@@ -46,6 +46,8 @@ nmap -g 80 10.10.10.10
 
 The `-D` flag causes a decoy scan to be performed, which makes it appear to the remote host that the host(s) you specify as decoys are scanning the target network too. Thus their IDS might report 5–10 port scans from unique IP addresses, but they won't know which IP was scanning them and which were innocent decoys.
 
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption><p>IP Decoy Scan Methodology</p></figcaption></figure>
+
 To Perform Decoy Scan and Generate Random non-reserved IP:
 
 ```
@@ -71,6 +73,8 @@ When a scan delay is in effect, the delay is enforced between each batch of spoo
 IP spoofing refers to changing the source IP addresses so that the attack appears to be coming from someone else. When the victim replies to the address, it goes back to the spoofed address rather than the attacker’s real address. Attackers modify the address information in the IP packet header and the source address bits field in order to bypass the IDS or firewall.
 
 **Note: You will not be able to complete the three-way handshake and open a successful TCP connection with spoofed IP addresses. This is why you need to PIVOT on that IP using a SOCKS proxy or any other methods of proxy.**&#x20;
+
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption><p>Spoofed IP Scan Methodology</p></figcaption></figure>
 
 #### Using Hping3
 

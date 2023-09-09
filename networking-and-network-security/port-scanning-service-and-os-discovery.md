@@ -69,6 +69,10 @@ nmap –(-sF, -sN, -sX) –v <Target IP Address>
 
 The `-sF` flag is used for FIN scan and `-sN` is for NULL scan.
 
+<figure><img src="../.gitbook/assets/FIN (2).jpg" alt=""><figcaption><p>FIN Scan Methodology</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/imgonline-com-ua-twotoone-evax56XPQBvWtD8.jpg" alt=""><figcaption><p>NULL scan methodology</p></figcaption></figure>
+
 ## Xmas Scan
 
 Avoids IDS and the TCP three-way handshake. Sends a probe packet (FIN + URG + PSH).  No response - Port is open. RST packet response - Port is closed. Works only when systems are compliant with the RFC 793–based TCP/IP implementation and the Unix platform only.&#x20;
@@ -77,11 +81,25 @@ Avoids IDS and the TCP three-way handshake. Sends a probe packet (FIN + URG + PS
 nmap –sX –v <Target IP Address>
 ```
 
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption><p>Xmas  Scan Methodology</p></figcaption></figure>
+
 ## ACK Scanning
 
 Can evade IDS in most cases Helps in checking the filtering systems of target networks.  But it can be extremely slow and can exploit only older OSes with vulnerable BSD-derived TCP/IP stacks.
 
-<table data-header-hidden><thead><tr><th width="142">Type</th><th width="165">Command</th><th width="150">Request</th><th width="237">Response</th></tr></thead><tbody><tr><td>ACK Flag Probe Scan</td><td><code>nmap -sA -V &#x3C;Target IP></code></td><td>ACK probe packets</td><td>No response Port is filtered (stateful firewall is present) RST packet response Port is not filtered (no firewall is present)</td></tr><tr><td>TTL-Based ACK Flag Probe Scan</td><td><code>nmap -sA -ttl 100 -v &#x3C;Target IP></code></td><td>ACK probe packets (several thousands) to different TCP ports</td><td>RST packet response Port is open (TTL value on a port &#x3C; 64) RST packet response - Port is closed (TTL value on a port > 64)</td></tr><tr><td>Window-Based ACK Flag Probe Scan</td><td><code>nmap -sA -sW &#x3C;Target IP></code></td><td>ACK probe packets (several thousands) to different TCP ports</td><td>RST packet response Port is open (WINDOW value on a port is non-zero) ICMP unreachable error response - Port is filtered RST packet response Port is closed (WINDOW value on a port is zero)</td></tr></tbody></table>
+<table data-header-hidden><thead><tr><th width="129">Type</th><th width="175">Command</th><th width="120">Request</th><th width="349">Response</th></tr></thead><tbody><tr><td>ACK Flag Probe Scan</td><td><code>nmap -sA -V &#x3C;Target IP></code></td><td>ACK probe packets</td><td><ul><li>No response Port is filtered (stateful firewall is present).</li><li>RST packet response Port is not filtered (no firewall is present)</li></ul></td></tr><tr><td>TTL-Based ACK Flag Probe Scan</td><td><code>nmap -sA -ttl 100 -v &#x3C;Target IP></code></td><td>ACK probe packets (several thousands) to different TCP ports</td><td><ul><li>RST packet response Port is <strong>open</strong> (<strong>TTL value on a port &#x3C; 64)</strong>. </li><li>RST packet response - Port is <strong>closed</strong> (<strong>TTL value on a port > 64</strong>)</li></ul></td></tr><tr><td>Window-Based ACK Flag Probe Scan</td><td><code>nmap -sA -sW &#x3C;Target IP></code></td><td>ACK probe packets (several thousands) to different TCP ports</td><td><ul><li><strong>RST</strong> packet response -Port is <strong>open</strong> (<strong>WINDOW value on a port is non-zero</strong>). </li><li><strong>ICMP unreachable</strong> error response - Port is <strong>filtered</strong>. </li><li><strong>RST</strong> packet response Port is <strong>closed</strong> (<strong>WINDOW value on a port is zero</strong>).</li></ul></td></tr></tbody></table>
+
+## TCP Maimon Scan
+
+Uriel Maimon first described this scan in 1996. In this scan, the FIN and ACK bits are set. The target should send an RST packet as a response. However, certain BSD-derived systems drop the packet if it is an open port exposing the open ports. This scan won’t work on most targets encountered in modern networks.
+
+To select this scan type, use the `-sM` option.
+
+```
+sudo nmap -sM 10.10.252.27
+```
+
+
 
 ## UDP Scan
 
