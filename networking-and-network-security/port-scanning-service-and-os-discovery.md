@@ -37,7 +37,11 @@ Nmap considers the following six states:
 
 You might consider adding `--reason` if you want Nmap to provide more details regarding its reasoning and conclusions.
 
-### Service Version Discovery: the -`sV` option is used to detect service versions.
+### Service Version Discovery: the `-sV` option is used to detect service versions.
+
+You can control the intensity with --version-intensity LEVEL where the level ranges between 0, the lightest, and 9, the most complete. -sV --version-light has an intensity of 2, while -sV --version-all has an intensity of 9.
+
+It is important to note that using `-sV` will force Nmap to proceed with the TCP 3-way handshake and establish the connection. The connection establishment is necessary because Nmap cannot discover the version without establishing a connection fully and communicating with the listening service. In other words, stealth SYN scan `-sS` is not possible when `-sV` option is chosen.
 
 ## TCP Connect/Full-Open Scan
 
