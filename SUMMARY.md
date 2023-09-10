@@ -80,3 +80,8 @@
 ## windows privilege escalation
 
 * [Page 1](windows-privilege-escalation/page-1.md)
+
+## Android application security testing
+
+* [Setting it Up](android-application-security-testing/setting-it-up/README.md)
+  * [Installing Android SDK and emulator](android-application-security-testing/setting-it-up/installing-android-sdk-and-emulator.md)
