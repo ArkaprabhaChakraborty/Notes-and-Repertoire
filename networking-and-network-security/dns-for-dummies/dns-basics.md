@@ -20,6 +20,8 @@ The domain name consists of the labels of each node in the domain name space con
 
 <img src="../../.gitbook/assets/file.excalidraw (4).svg" alt="A breakdown of a Fully Qualified Domain Name " class="gitbook-drawing">
 
+The maximum length of a DNS name is 255 octets. This is spelled out in [RFC 1035](http://tools.ietf.org/html/rfc1035) [section 2.3.4](http://www.freesoft.org/CIE/RFC/1035/9.htm). he readable maximum length of an ASCII DNS name is 253 characters.
+
 ## Resource Records
 
 DNS uses a special database called a DNS Zone database. Each such databases have a collection of "Resource Records" (also called RRs or zone files) to respond to "name resolution" queries from a user/client.
@@ -38,6 +40,9 @@ Common DNS records include
   * Points a domain to an IPv4 address, such as `11.22.33.44`.
 * **`AAAA`**
   * Points a domain to an IPv6 address, such as `FE80::0202:B3FF:FE1E:8329`.
+* **`CNAME`**
+  * Link a subdomain to a domain's existing A or AAAA record. A Canonical Name (CNAME) record is a type of [resource record](https://en.wikipedia.org/wiki/Resource\_record) in the [Domain Name System](https://en.wikipedia.org/wiki/Domain\_Name\_System) (DNS) that maps one domain name (an alias) to another (the [canonical](https://en.wikipedia.org/wiki/Canonical\_form) name).
+  * E.g. `www.cloudarchitecture.io` to `cloudarchitecture.io`
 * **`MX`**
   * Mail eXchange records are used to direct emails sent to domain
   * See also [MX records | Whois, GeoIpLocation and DNS interrogation](https://github.com/undergroundwires/CEH-in-bullet-points/blob/master/chapters/02-footprinting/whois-geoiplocation-and-dns-interrogation.md#mx-records)
@@ -58,9 +63,6 @@ Common DNS records include
                 3600        ;Minimum TTL
         )
       ```
-* **`CNAME`**
-  * Link a subdomain to a domain's existing A or AAAA record
-  * E.g. `www.cloudarchitecture.io` to `cloudarchitecture.io`
 * **`PTR`**
   * Opposite of `A`, points an IP to domain
   * Commonly used for spam verification for e-mail programs
