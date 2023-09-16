@@ -155,3 +155,11 @@ After getting the answer, the recursive DNS server sends that information back t
 Now that we know what DNS is, components of domain name, what name servers are, their types, what are zone resource records, etc, let's now see how DNS works.
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>This is how DNS works</p></figcaption></figure>
+
+## DNS Security Mechanisms
+
+**Domain Keys Identified Mail (DKIM)** provides a cryptographic authentication mechanism. This can replace or supplement SPF. To configure DKIM, the organization uploads a public key as a TXT record in the DNS server.&#x20;
+
+**Sender Policy Framework (SPF)** uses a DNS record published by an organization hosting an email service. The SPF record identifies the hosts authorized to send email from that domain, and there must be only one per domain. SPF does not provide a cryptographic authentication mechanism like DKIM does, though.&#x20;
+
+The **Domain-Based Message Authentication, Reporting, and Conformance (DMARC)** framework ensures that SPF and DKIM are being utilized effectively. DMARC relies on DKMI for the cryptographic authentication mechanism.

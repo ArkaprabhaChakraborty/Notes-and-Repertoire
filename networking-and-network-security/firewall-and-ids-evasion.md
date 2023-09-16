@@ -164,6 +164,18 @@ proxychains nmap -Pn -n -sT <target IP>
 
 The above flags are the best way to the scans so that we don't leak out our actual source IP. Refer [here](https://marcosvalle.github.io/pentest/2017/10/17/nmap-anon.html).
 
+ProxyChains is a tool that allows a penetration tester to pivot to a new subnet, but it must be combined with the modification of the penetration tester’s routing tables on their machine.&#x20;
+
+For example, assume that the exploited client machine is located in the 192.168.5.0/24 subnet, but you need to access a server in the 10.0.0.0/24 subnet. You would then need to `route add 10.0.0.0 255.255.255.0 1` (1 is the ID of your Meterpreter session). Then, you can run “proxychains ” to target the new subnet.&#x20;
+
+For example:
+
+```
+proxychains nmap -sT -Pn -p 21,23,25,80,443 10.0.0.5
+```
+
+would perform an nmap scan of the targeted server in the new subnet by chaining the connections together using a proxy on the localhost.
+
 ## Anonymizers
 
 An anonymizer removes all identity information from the user’s computer while the user surfs the Internet Anonymizers make activity on the Internet untraceable Anonymizers allow you to bypass Internet censors
