@@ -36,6 +36,7 @@
 * [LDAP (Lightweight Directory Access Protocol)](ldap-lightweight-directory-access-protocol/README.md)
   * [LDAP Working](ldap-lightweight-directory-access-protocol/ldap-working.md)
   * [LDAP Exploitation](ldap-lightweight-directory-access-protocol/ldap-exploitation.md)
+* [SLP (Service Location Protocol)](slp-service-location-protocol.md)
 * [SMTP](smtp.md)
 * [SNMP](snmp.md)
 * [NTP](ntp.md)
