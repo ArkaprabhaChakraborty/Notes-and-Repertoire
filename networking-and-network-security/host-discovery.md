@@ -140,6 +140,10 @@ nmap -sn -PE <Target IP Address>
 # For ICMP ECHO Ping Sweep use <Target IP Address Range>
 ```
 
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>ICMP ECHO Ping Scan (Requires sudo) </p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>Without sudo defaults to TCP pingscan</p></figcaption></figure>
+
 ### ICMP Timestamp Ping Scan&#x20;
 
 Determines whether the target host is live, specifically when the administrators block ICMP ECHO pings. Timestamp reply to each timestamp request. Response from the destination host is conditional, and it may or may not respond with the time value depending on its configuration by the administrator at the target’s end.
@@ -162,9 +166,10 @@ Address mask response from the destination host is conditional, and it may or ma
 
 Logs are not recorded at the system or network level, enabling the attacker to leave no traces for detection.
 
-```
-nmap –sn –PS <Target IP Address>
-```
+<pre><code><strong>nmap –sn –PS &#x3C;Target IP Address>
+</strong></code></pre>
+
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>TCP SYN Ping scan on a IP range (10.10.1.2-23)</p></figcaption></figure>
 
 ### TCP ACK Ping Scan
 

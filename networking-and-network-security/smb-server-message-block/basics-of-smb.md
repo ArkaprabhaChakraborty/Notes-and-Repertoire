@@ -6,7 +6,7 @@ Clients connect to servers using TCP/IP (actually NetBIOS over TCP/IP as specifi
 
 For systems running SMB using NetBIOS, ports 137,138,139 along with port 445 should be open. Otherwise, if just port 445 it's just using SMB over TCP/IP directly.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>SMB Packet Structure</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>SMB Packet Structure</p></figcaption></figure>
 
 ### SMB Services
 

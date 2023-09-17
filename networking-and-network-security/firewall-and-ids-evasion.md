@@ -74,7 +74,7 @@ IP spoofing refers to changing the source IP addresses so that the attack appear
 
 **Note: You will not be able to complete the three-way handshake and open a successful TCP connection with spoofed IP addresses. This is why you need to PIVOT on that IP using a SOCKS proxy or any other methods of proxy.**&#x20;
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption><p>Spoofed IP Scan Methodology</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>Spoofed IP Scan Methodology</p></figcaption></figure>
 
 #### Using Hping3
 
