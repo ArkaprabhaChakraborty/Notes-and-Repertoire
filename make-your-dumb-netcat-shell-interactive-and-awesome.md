@@ -20,6 +20,10 @@ If python exists, then you can run:
 python3 -c 'import pty;pty.spawn("/bin/bash")'
 ```
 
+```python
+python -c 'import pty;pty.spawn("/bin/bash")'
+```
+
 Now you should have a better shell like the one below:
 
 ```
