@@ -41,6 +41,7 @@
 * [SNMP](snmp.md)
 * [NTP](ntp.md)
 * [Make your dumb netcat shell interactive and awesome](make-your-dumb-netcat-shell-interactive-and-awesome.md)
+* [File Transfer Primers](file-transfer-primers.md)
 
 ## Reverse Engineering 101
 
@@ -67,6 +68,7 @@
 
 * [Archetype (HTB Starting Point 2x1)](htb-writeups/archetype-htb-starting-point-2x1.md)
 * [Oopsie (HTB Starting Point 2x2)](htb-writeups/oopsie-htb-starting-point-2x2.md)
+* [Lame](htb-writeups/lame.md)
 
 ## THM writeups
 
