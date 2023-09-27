@@ -69,6 +69,7 @@
 * [Archetype (HTB Starting Point 2x1)](htb-writeups/archetype-htb-starting-point-2x1.md)
 * [Oopsie (HTB Starting Point 2x2)](htb-writeups/oopsie-htb-starting-point-2x2.md)
 * [Lame](htb-writeups/lame.md)
+* [Jerry](htb-writeups/jerry.md)
 
 ## THM writeups
 
