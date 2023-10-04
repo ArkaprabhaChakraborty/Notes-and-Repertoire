@@ -505,7 +505,7 @@ find / -amin -60             # find files accesses within the last hour (60 minu
 find / -size 50M             # find files with a 50 MB size
 ```
 
-#### Find world writable folders
+#### Find world-writable folders
 
 ```bash
 find / -writable -type d 2>/dev/null
@@ -535,13 +535,13 @@ crontab -l
 
 But sometimes the above command may be disabled for a user.&#x20;
 
-In such situations we can find them in **`/var/spool/cron/crontabs`.** The tables contain the cron jobs for all users, except the root user.&#x20;
+In such situations, we can find them in **`/var/spool/cron/crontabs`.** The tables contain the cron jobs for all users, except the root user.&#x20;
 
 ```bash
 cat /var/spool/cron/crontabs
 ```
 
-We can dump the contents of the `/etc/crontab` file which stores the root user cron job details (also known as system wide crontabs).
+We can dump the contents of the `/etc/crontab` file which stores the root user cron job details (also known as system-wide crontabs).
 
 ```bash
 cat /etc/crontab
@@ -598,12 +598,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 8. Check for limited access to system resources:
    * Containers are typically isolated and have limited access to system resources. You can check resource limitations using tools like `ulimit` or `cat /proc/<PID>/cgroup`.
 
-### Automatic scripts
+### Automatic Enumeration Scripts
 
-
-
-#### LinPEAS
-
-
-
-#### LinEnum
+* LinPEAS
+* LinEnum
+* LinuxExploitSuggestor2
