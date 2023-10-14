@@ -20,11 +20,13 @@
 * [SMB (Server Message Block)](networking-and-network-security/smb-server-message-block/README.md)
   * [Basics of SMB](networking-and-network-security/smb-server-message-block/basics-of-smb.md)
   * [SMB Pentesting](networking-and-network-security/smb-server-message-block/smb-pentesting.md)
+* [LDAP (Lightweight Directory Access Protocol)](networking-and-network-security/ldap-lightweight-directory-access-protocol/README.md)
+  * [LDAP Working](networking-and-network-security/ldap-lightweight-directory-access-protocol/ldap-working.md)
+  * [LDAP Exploitation](networking-and-network-security/ldap-lightweight-directory-access-protocol/ldap-exploitation.md)
 * [RDP (Remote Desktop Protocol) and VNC (Virtual Network Computing)](networking-and-network-security/rdp-remote-desktop-protocol-and-vnc-virtual-network-computing.md)
 * [Telnet (Teletype Network Protocol)](networking-and-network-security/telnet-teletype-network-protocol.md)
 * [FTP (File Transfer Protocol)](networking-and-network-security/ftp-file-transfer-protocol.md)
 * [NFS (Network File System)](networking-and-network-security/nfs-network-file-system.md)
-* [Mail Transfers](networking-and-network-security/mail-transfers.md)
 * [SSH (Secure Socket Shell)](networking-and-network-security/ssh-secure-socket-shell/README.md)
   * [Port Forwarding Primer](networking-and-network-security/ssh-secure-socket-shell/port-forwarding-primer.md)
 * [SQL servers](networking-and-network-security/sql-servers/README.md)
@@ -33,11 +35,8 @@
 
 ***
 
-* [LDAP (Lightweight Directory Access Protocol)](ldap-lightweight-directory-access-protocol/README.md)
-  * [LDAP Working](ldap-lightweight-directory-access-protocol/ldap-working.md)
-  * [LDAP Exploitation](ldap-lightweight-directory-access-protocol/ldap-exploitation.md)
-* [SLP (Service Location Protocol)](slp-service-location-protocol.md)
 * [SMTP](smtp.md)
+* [SLP (Service Location Protocol)](slp-service-location-protocol.md)
 * [SNMP](snmp/README.md)
   * [SNMP Basics](snmp/snmp-basics.md)
   * [SNMP Pentest](snmp/snmp-pentest.md)
