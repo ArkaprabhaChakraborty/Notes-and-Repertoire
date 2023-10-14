@@ -1,8 +1,8 @@
 ---
-description: Various Techniques for Scanning Beyond IDS and Firewall
+description: Various common techniques for scanning beyond IDS and firewalls
 ---
 
-# Firewall and IDS Evasion
+# Port Scanning - Common Firewall and IDS Evasion
 
 Intrusion detection systems (IDS) and firewalls are security mechanisms intended to prevent an attacker from accessing a network.
 
