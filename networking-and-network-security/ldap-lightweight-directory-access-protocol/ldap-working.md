@@ -106,8 +106,6 @@ An LDAP [uniform resource identifier (URI)](https://en.wikipedia.org/wiki/Unifor
 ldap://host:port/DN?attributes?scope?filter?extensions
 ```
 
-Most of the components described below are optional.
-
 * The `host` is the [FQDN](https://en.wikipedia.org/wiki/Fully\_qualified\_domain\_name) or IP address of the LDAP server to search.
 * The `port` is the [network port](https://en.wikipedia.org/wiki/Network\_port) (default port 389) of the LDAP server.
 * The `DN` is the distinguished name to use as the search base.
@@ -116,5 +114,5 @@ Most of the components described below are optional.
 * The `filter` is a search filter. For example, `(objectClass=*)` as defined in RFC 4515.
 * The `extensions` are extensions to the LDAP URL format.
 
-
+Most of the components described above are optional.
 
