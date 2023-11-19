@@ -20,6 +20,11 @@ The following are some pieces of information an attacker can obtain by querying 
 
 NTP enumeration commands such as `ntpdate`, `ntptrace`, `ntpdc`, and `ntpq` are used to query an NTP server for valuable information.
 
+* **ntpdate**: This command collects the number of time samples from a number of time sources
+* **ntptrace**: This command determines from where the NTP server gets time and follows the chain of NTP servers back to its prime time source
+* **ntpdc**: This command queries the ntpd daemon about its current state and requests changes in that state
+* **ntpq**: This command monitors NTP daemon ntpd operations and determine performance
+
 ### Using ntpdate
 
 The `ntpdate` command collects the number of time samples from several time sources. Its syntax is as follows:
