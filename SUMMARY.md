@@ -93,3 +93,4 @@
 
 * [Setting it Up](android-application-security-testing/setting-it-up/README.md)
   * [Installing Android SDK and emulator](android-application-security-testing/setting-it-up/installing-android-sdk-and-emulator.md)
+  * [Setting up Frida-Server on Android Device](android-application-security-testing/setting-it-up/setting-up-frida-server-on-android-device.md)
