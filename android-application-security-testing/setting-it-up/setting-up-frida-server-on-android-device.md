@@ -61,12 +61,14 @@ adb shell "su -c chmod 755 /data/local/tmp/frida-server"   # Change the filename
 Start  Frida Server using the command:
 
 ```
-adb shell "su -c /data/local/tmp/frida-server &"      # Change the filename
+adb shell "su -c /data/local/tmp/frida-server -D &"      # Change the filename
 ```
+
+The flag `-D` is used to run the server in background (Daemon mode).
 
 ### Check Installation
 
-The adb terminal will be stuck. Now to check if Frida server is running run the following on a separate terminal.
+Now to check if Frida server is running run the following on a separate terminal.
 
 ```
 frida-ps -U
