@@ -61,21 +61,6 @@
     * [Referrer-Policy](web-application-security/security-policies/security-headers/referrer-policy.md)
 * [Authentication Bypass](web-application-security/authentication-bypass.md)
 
-## Web 3 and Smart Contract Auditing
-
-* [Web 3 for dummies](web-3-and-smart-contract-auditing/web-3-for-dummies.md)
-
-## HTB writeups
-
-* [Archetype (HTB Starting Point 2x1)](htb-writeups/archetype-htb-starting-point-2x1.md)
-* [Oopsie (HTB Starting Point 2x2)](htb-writeups/oopsie-htb-starting-point-2x2.md)
-* [Lame](htb-writeups/lame.md)
-* [Jerry](htb-writeups/jerry.md)
-
-## THM writeups
-
-* [Vulnuniversity](thm-writeups/vulnuniversity.md)
-
 ## Linux Privilege Escalation
 
 * [Permissions in Linux](linux-privilege-escalation/permissions-in-linux.md)
@@ -94,3 +79,14 @@
 * [Setting it Up](android-application-security-testing/setting-it-up/README.md)
   * [Installing Android SDK and emulator](android-application-security-testing/setting-it-up/installing-android-sdk-and-emulator.md)
   * [Setting up Frida-Server on Android Device](android-application-security-testing/setting-it-up/setting-up-frida-server-on-android-device.md)
+
+## HTB writeups
+
+* [Archetype (HTB Starting Point 2x1)](htb-writeups/archetype-htb-starting-point-2x1.md)
+* [Oopsie (HTB Starting Point 2x2)](htb-writeups/oopsie-htb-starting-point-2x2.md)
+* [Lame](htb-writeups/lame.md)
+* [Jerry](htb-writeups/jerry.md)
+
+## THM writeups
+
+* [Vulnuniversity](thm-writeups/vulnuniversity.md)

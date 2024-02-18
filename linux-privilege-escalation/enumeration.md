@@ -601,5 +601,18 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 ### Automatic Enumeration Scripts
 
 * LinPEAS
+
+LinPEAS is a part of the PEASS project ([https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS))
+
+```
+chmod +x linpeas.sh       #The /tmp directory is the best choice as it doesn't restrict execution
+./linpeas.sh 
+```
+
 * LinEnum
 * LinuxExploitSuggestor2
+* enum4linux
+
+```
+enum4linux -A <IP_ADDR>
+```
