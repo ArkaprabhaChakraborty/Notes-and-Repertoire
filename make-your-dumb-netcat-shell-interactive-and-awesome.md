@@ -50,19 +50,19 @@ stty raw -echo; fg
 
 The **`fg`** is to foreground our shell running in the background.&#x20;
 
-You won't be able to see those letters on the screen as you type, but hit _`Enter`_ afterwards, and the Netcat command will appear automatically.&#x20;
+You won't be able to see those letters on the screen as you type, but hit _`Enter`_ afterwards, and the shell will appear automatically.&#x20;
 
-Now type `reset`. The screen would look awkward while doing this:
+Now just set the rows and columns using:&#x20;
+
+Next in the prompt `terminal type?` set the type you obtained before. Generally it will be `xterm`.
+
+```bash
+stty rows 56 columns 213
+```
+
+Note that if the shell dies, any input in your own terminal will not be visible (as a result of having disabled terminal echo). To fix this, type reset and press enter.
 
 ```
 ~# nc -lvp 1234
                reset
-```
-
-Next in the prompt `terminal type?` set the type you obtained before. Generally it will be `xterm`.
-
-Now just set the rows and columns using:&#x20;
-
-```bash
-stty rows 56 columns 213
 ```
