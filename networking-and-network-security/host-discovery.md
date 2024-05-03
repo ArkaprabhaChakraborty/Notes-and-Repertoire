@@ -6,12 +6,24 @@ description: A primer on host discovery and the beginning steps of reconnaissanc
 
 Host discovery is considered as the primary task in the network scanning process.  Host discovery provides an accurate status of the systems in the network, which enables an attacker to avoid scanning every port on every system in a list of IP addresses to identify whether the target host is up.
 
-### Finding all IPs in a subnet using netdiscover
+### Finding all IPs in a subnet&#x20;
+
+#### Using netdiscover
 
 If you have an IP of 198.162.56.113 and you want to find the other IPs present in the subnet, you can use:
 
 ```
 netdiscover -r 198.162.56.0/24
+```
+
+#### Using nmap
+
+```
+nmap 198.162.56.0/24
+```
+
+```
+nmap -A 192.189.19.0/24
 ```
 
 ## Using Hping

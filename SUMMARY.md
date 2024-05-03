@@ -72,7 +72,9 @@
 
 ## windows privilege escalation
 
+* [Windows Basics](windows-privilege-escalation/windows-basics.md)
 * [PsTools Primer](windows-privilege-escalation/pstools-primer.md)
+* [Persistence Techniques](windows-privilege-escalation/persistence-techniques.md)
 
 ## Android application security testing
 
