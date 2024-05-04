@@ -92,3 +92,7 @@
 ## THM writeups
 
 * [Vulnuniversity](thm-writeups/vulnuniversity.md)
+
+## Preparation Notes
+
+* [CEH Practical Prep Notes](preparation-notes/ceh-practical-prep-notes.md)
