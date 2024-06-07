@@ -4,6 +4,8 @@ NFS stands for "Network File System" and allows a system to share directories an
 
 By using NFS, users and programs can access files on remote systems almost as if they were local files. It does this by mounting all, or a portion of a file system on a server. The portion of the file system that is mounted can be accessed by clients with whatever privileges are assigned to each file.
 
+The NFS system is generally implemented on the computer network, where the centralization of data is required for critical resources.
+
 ### How does it work?
 
 To access data stored on another machine (i.e. a server) the server would implement NFS daemon processes to make data available to clients. The server administrator determines what to make available and ensures it can recognize validated clients.
@@ -37,7 +39,15 @@ Services to make an NFS file system work:
 
 ### Enumeration of NFS
 
+NFS enumeration enables attackers to identify the exported directories, list of clients connected to the NFS server along with their IP addresses, and the shared data associated with the IP addresses.
+
 Required tools/dependencies/libs: `nfs-utils` or `nfs-common`.
+
+#### Find the NFS process and ports allocated to it
+
+```
+rpcinfo -p <Target IP Address>
+```
 
 #### Show available shares
 
@@ -51,7 +61,7 @@ showmount -e 10.10.75.141
 sudo mount -t nfs 10.10.75.141:home /tmp/mount/ -nolock
 ```
 
-#### unmount NFS share
+#### Un-mount NFS share
 
 ```bash
 sudo umount -f -l /tmp/mount/
@@ -88,6 +98,8 @@ Sample output is shown below:
 #
 /home           *(rw,no_root_squash)
 ```
+
+The `/etc/exports` location on the NFS server contains a list of clients allowed to share files on the server.&#x20;
 
 #### What are files with the SUID bit set?&#x20;
 

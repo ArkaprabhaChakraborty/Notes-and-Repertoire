@@ -30,9 +30,59 @@ nmap -sV 10.10.10.3 -p 23
 
 ### Exploiting Telnet
 
-Telnet, being a protocol, is in and of itself insecure for the reasons we talked about earlier. It lacks encryption, so sends all communication over plaintext, and for the most part, has poor access control.
+Telnet, being a protocol, is in and of itself insecure for the reasons we talked about earlier. It lacks encryption, so sends all communication over plain text, and for the most part, has poor access control.
 
 After connecting to a telnet session, we can run commands using `.RUN` prefix.
 
-To quit a telnet session, use `ctrl + ]` . To quit the telnet prompt use the keyword `quit`
+To quit a telnet session, use `Ctrl + ]` . To quit the telnet prompt use the keyword `quit`.
 
+#### Nmap scripts for telnet
+
+```
+nmap -n -sV -Pn --script "*telnet*" -p 23 {IP} 
+```
+
+#### Banner Grabbing with Telnet
+
+Telnet can be used for active reconnaissance. We can use telnet for banner grabbing purposes.
+
+```
+telnet 10.10.143.75 80
+```
+
+After this we get the prompt like shown below:
+
+```
+Trying 10.10.143.75...
+Connected to 10.10.143.75.
+Escape character is '^]'.
+```
+
+We can use:
+
+```
+GET / HTTP/1.1
+host: telnet
+```
+
+A sample response is as follows:
+
+```
+HTTP/1.1 408 Request Timeout
+Date: Sat, 29 Jul 2023 13:49:10 GMT
+Server: Apache/2.4.10 (Debian)
+Content-Length: 303
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>408 Request Timeout</title>
+</head><body>
+<h1>Request Timeout</h1>
+<p>Server timeout waiting for the HTTP request from the client.</p>
+<hr>
+<address>Apache/2.4.10 (Debian) Server at debra2.thm.local Port 80</address>
+</body></html>
+Connection closed by foreign host.
+```
