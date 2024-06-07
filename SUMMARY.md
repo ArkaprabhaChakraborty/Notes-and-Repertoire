@@ -32,6 +32,7 @@
 * [SQL servers](networking-and-network-security/sql-servers/README.md)
   * [MS-SQL (Microsoft SQL Service)](networking-and-network-security/sql-servers/ms-sql-microsoft-sql-service.md)
   * [MySQL](networking-and-network-security/sql-servers/mysql.md)
+* [Hydra Cheat Sheet](networking-and-network-security/hydra-cheat-sheet.md)
 
 ***
 
