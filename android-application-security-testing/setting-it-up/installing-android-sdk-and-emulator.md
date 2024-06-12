@@ -211,7 +211,7 @@ This happens because of emulator configuration. To change this go to `/home/.and
 
 ```
 image.sysdir.1=android-sdk/system-images/android-27/google_apis/x86/ #OLD
-image.sysdir.1=android-sdk/system-images/android-27/google_apis/x86/ #NEW
+image.sysdir.1=system-images/android-27/google_apis/x86/ #NEW
 ```
 
 this should fix your startup configuration.
