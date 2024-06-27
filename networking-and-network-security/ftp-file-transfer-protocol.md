@@ -13,6 +13,16 @@ A typical FTP session operates using two channels:
 
 FTP operates using a client-server protocol. The client initiates a connection with the server, the server validates whatever login credentials are provided and then opens the session. While the session is open, the client may execute FTP commands on the server.
 
+FTP servers and FTP clients use the FTP protocol. There are various FTP server software that you can select from if you want to host your FTP file server. Examples of FTP server software include:
+
+* [vsftpd](https://security.appspot.com/vsftpd.html)
+* [ProFTPD](http://www.proftpd.org/)
+* [uFTP](https://www.uftpserver.com/)
+
+For FTP clients, in addition to the console FTP client commonly found on Linux systems, you can use an FTP client with GUI such as [FileZilla](https://filezilla-project.org/). Some web browsers also support FTP protocol.
+
+Because FTP sends the login credentials along with the commands and files in cleartext, FTP traffic can be an easy target for attackers.
+
 ### Enumerating FTP
 
 ```
