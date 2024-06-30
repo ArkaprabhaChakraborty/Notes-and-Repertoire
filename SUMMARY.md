@@ -33,17 +33,19 @@
   * [MS-SQL (Microsoft SQL Service)](networking-and-network-security/sql-servers/ms-sql-microsoft-sql-service.md)
   * [MySQL](networking-and-network-security/sql-servers/mysql.md)
 * [Hydra Cheat Sheet](networking-and-network-security/hydra-cheat-sheet.md)
+* [SMTP](networking-and-network-security/smtp.md)
+* [SLP (Service Location Protocol)](networking-and-network-security/slp-service-location-protocol.md)
+* [SNMP](networking-and-network-security/snmp/README.md)
+  * [SNMP Basics](networking-and-network-security/snmp/snmp-basics.md)
+  * [SNMP Pentest](networking-and-network-security/snmp/snmp-pentest.md)
+* [NTP](networking-and-network-security/ntp.md)
+* [File Transfer Primers](networking-and-network-security/file-transfer-primers.md)
 
 ***
 
-* [SMTP](smtp.md)
-* [SLP (Service Location Protocol)](slp-service-location-protocol.md)
-* [SNMP](snmp/README.md)
-  * [SNMP Basics](snmp/snmp-basics.md)
-  * [SNMP Pentest](snmp/snmp-pentest.md)
-* [NTP](ntp.md)
 * [Make your dumb netcat shell interactive and awesome](make-your-dumb-netcat-shell-interactive-and-awesome.md)
-* [File Transfer Primers](file-transfer-primers.md)
+* [Metasploit Primer](metasploit-primer/README.md)
+  * [Page](metasploit-primer/page.md)
 
 ## Reverse Engineering 101
 
