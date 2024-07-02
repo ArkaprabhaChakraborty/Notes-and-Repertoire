@@ -204,11 +204,19 @@ post/
 
 ## Msfconsole cheat sheet
 
-Msfconsole is managed by context; this means that unless set as a global variable, all parameter settings will be lost if you change the module you have decided to use.
+Msfconsole is managed by context; unless set as a global variable, all parameter settings will be lost if you change the module you have decided to use.
 
-<table><thead><tr><th width="177">Command</th><th>Usage</th></tr></thead><tbody><tr><td>use</td><td>Use a module</td></tr><tr><td>help &#x3C;command></td><td>the help command can be used on its own or for a specific command</td></tr><tr><td></td><td></td></tr></tbody></table>
+<table><thead><tr><th width="241">Command</th><th>Usage</th></tr></thead><tbody><tr><td><code>use</code></td><td>Use a module</td></tr><tr><td><code>help &#x3C;command></code></td><td>The help command can be used on its own or for a specific command</td></tr><tr><td><code>search type:&#x3C;module type> &#x3C;keyword></code></td><td>Search for a particular module by a keyword.</td></tr><tr><td><code>show options</code></td><td>Command will list all available parameters</td></tr><tr><td><code>set</code> </td><td>Set parameters</td></tr><tr><td><code>unset</code></td><td>Unset parameters. use <code>unset all</code> to unset all.</td></tr><tr><td><code>setg</code></td><td>Sets globally. Unset with unsetg.</td></tr><tr><td><code>exploit/run</code></td><td>Execute the exploit</td></tr><tr><td><code>check</code></td><td>Check if the target system is vulnerable without exploiting it.</td></tr><tr><td><code>sessions</code></td><td>The command can be used from the msfconsole prompt or any context to see the existing sessions.</td></tr><tr><td><code>sessions -i &#x3C;n></code></td><td>Command followed by the desired session number.</td></tr><tr><td><code>back</code></td><td>Command to leave the exploit context</td></tr><tr><td><code>background</code></td><td>Meterpreter command to background the session prompt and go back to the msfconsole prompt.</td></tr><tr><td><code>db_status</code></td><td>Get Status of Metasploit Database</td></tr><tr><td><code>workspace</code></td><td>List all workspaces stored in database</td></tr><tr><td><code>workspace -a &#x3C;new></code></td><td>Add a new workspace</td></tr><tr><td><code>workspace -d &#x3C;existing></code></td><td>Delete an existing workspace</td></tr><tr><td><code>workspace &#x3C;name></code></td><td>Navigate between workspaces</td></tr><tr><td> <code>workspace -h</code></td><td> List available options for the <code>workspace</code> command. </td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table>
 
+## Working with Metasploit Database
 
+Metasploit has a database function to simplify project management and avoid confusion when setting up parameter values.&#x20;
+
+You will first need to start the PostgreSQL database, which Metasploit will use with the following command:&#x20;
+
+`systemctl start postgresql`
+
+Then you will need to initialize the Metasploit Database using the `msfdb init` command.
 
 
 
