@@ -45,7 +45,8 @@
 
 * [Make your dumb netcat shell interactive and awesome](make-your-dumb-netcat-shell-interactive-and-awesome.md)
 * [Metasploit Primer](metasploit-primer/README.md)
-  * [Page](metasploit-primer/page.md)
+  * [Important Terminologies](metasploit-primer/important-terminologies.md)
+  * [Working with Metasploit Database](metasploit-primer/working-with-metasploit-database.md)
 
 ## Reverse Engineering 101
 
