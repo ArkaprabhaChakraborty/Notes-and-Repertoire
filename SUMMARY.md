@@ -40,6 +40,7 @@
   * [SNMP Pentest](networking-and-network-security/snmp/snmp-pentest.md)
 * [NTP](networking-and-network-security/ntp.md)
 * [File Transfer Primers](networking-and-network-security/file-transfer-primers.md)
+* [Regex 101](networking-and-network-security/regex-101.md)
 
 ***
 
