@@ -73,6 +73,7 @@
 * [Using Kernel Exploits](linux-privilege-escalation/using-kernel-exploits.md)
 * [Using Service Exploits](linux-privilege-escalation/using-service-exploits.md)
 * [Exploiting Weak File Permissions](linux-privilege-escalation/exploiting-weak-file-permissions.md)
+* [Exploiting Sudo](linux-privilege-escalation/exploiting-sudo.md)
 * [Using files with SUID permission set](linux-privilege-escalation/using-files-with-suid-permission-set.md)
 
 ## windows privilege escalation

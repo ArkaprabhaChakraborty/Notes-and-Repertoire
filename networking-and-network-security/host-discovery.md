@@ -160,9 +160,9 @@ nmap -sn -PE <Target IP Address>
 # For ICMP ECHO Ping Sweep use <Target IP Address Range>
 ```
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>ICMP ECHO Ping Scan (Requires sudo) </p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>ICMP ECHO Ping Scan (Requires sudo) </p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>Without sudo defaults to TCP pingscan</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>Without sudo defaults to TCP pingscan</p></figcaption></figure>
 
 ### ICMP Timestamp Ping Scan&#x20;
 
