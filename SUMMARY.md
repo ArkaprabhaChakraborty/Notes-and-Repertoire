@@ -75,6 +75,7 @@
 * [Exploiting Weak File Permissions](linux-privilege-escalation/exploiting-weak-file-permissions.md)
 * [Exploiting Sudo](linux-privilege-escalation/exploiting-sudo.md)
 * [Using files with SUID permission set](linux-privilege-escalation/using-files-with-suid-permission-set.md)
+* [Cron Jobs](linux-privilege-escalation/cron-jobs.md)
 
 ## windows privilege escalation
 
