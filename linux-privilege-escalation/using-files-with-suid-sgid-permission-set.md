@@ -1,8 +1,12 @@
-# Using files with SUID permission set
+---
+description: Most common type of privilege escalation techniqu
+---
+
+# Using files with SUID/SGID permission set
 
 ## What is SUID?
 
-Set owner User ID, also known as Set user ID or setuid is a special flag in linux permission set.
+Set owner User ID, also known as Set user ID or setuid is a special flag in Linux permission set.
 
 ## Find files with SUID set
 
@@ -12,6 +16,10 @@ find / -user root -perm -4000 -exec ls -ldb {} \;
 
 ```
 find / -perm -u=s -type f 2>/dev/null
+```
+
+```
+find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 ```
 
 ## systemctl
@@ -46,4 +54,10 @@ new:<hash>:0:0:root:/root:/bin/bash
 ```bash
 su new   
 ```
+
+
+
+
+
+
 

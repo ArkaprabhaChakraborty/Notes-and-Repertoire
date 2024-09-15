@@ -70,11 +70,11 @@
 
 * [Permissions in Linux](linux-privilege-escalation/permissions-in-linux.md)
 * [Enumeration](linux-privilege-escalation/enumeration.md)
+* [Using files with SUID/SGID permission set](linux-privilege-escalation/using-files-with-suid-sgid-permission-set.md)
 * [Using Kernel Exploits](linux-privilege-escalation/using-kernel-exploits.md)
 * [Using Service Exploits](linux-privilege-escalation/using-service-exploits.md)
 * [Exploiting Weak File Permissions](linux-privilege-escalation/exploiting-weak-file-permissions.md)
 * [Exploiting Sudo](linux-privilege-escalation/exploiting-sudo.md)
-* [Using files with SUID permission set](linux-privilege-escalation/using-files-with-suid-permission-set.md)
 * [Cron Jobs](linux-privilege-escalation/cron-jobs.md)
 
 ## windows privilege escalation
