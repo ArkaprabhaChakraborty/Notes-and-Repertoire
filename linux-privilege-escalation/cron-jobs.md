@@ -12,6 +12,31 @@ The system-wide crontab is located at `/etc/crontab`.
 
 Cron jobs run with security level of user who owns them. by default cron jobs run with `/bin/sh` shell with limited environment variables.
 
+## Format of a Cron job
+
+Cron jobs exist in a certain format, being able to read that format is important if you want to exploit a cron job.&#x20;
+
+```
+# = ID
+m = Minute
+h = Hour
+dom = Day of the month
+mon = Month
+dow = Day of the week
+user = What user the command will run as
+
+command = What command should be run
+
+Format:
+#  m   h dom mon dow user  command
+
+Eg:
+17 *   1  *   *   *  root  cd / && run-parts --report /etc/cron.hourly
+```
+
+\
+
+
 ## Exploiting File Permission Misconfigurations
 
 Misconfiguration of file permissions associated with cron jobs can be utilized for privilege escalation.
