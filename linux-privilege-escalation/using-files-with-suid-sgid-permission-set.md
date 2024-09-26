@@ -79,7 +79,7 @@ The `strings` command can also be used to find the shared object names being use
 strings /path/to/file
 ```
 
-The ltrace command is a Linux debugging tool that displays calls made to shared libraries and system calls.
+The `ltrace` command is a Linux debugging tool that displays calls made to shared libraries and system calls.
 
 ```
 ltrace <command>
@@ -91,7 +91,13 @@ Compiling a new shared object syntax
 gcc -shared -fPIC -o /path/to/original/file.so /path/to/code.c
 ```
 
+## Abusing PATH environment variable
 
+The `PATH` environment variable contains a list of directories where a shell should find programs.&#x20;
+
+In case a program tries to execute another program but only specifies the name of the latter instead of the full path, the shell looks for it in the PATH directories until it's found.
+
+Since the PATH variable is under user's control it can be modified so that the shell makes the program call the new malicious binary in a usser specified directory.
 
 
 
