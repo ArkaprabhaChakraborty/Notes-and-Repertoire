@@ -99,9 +99,17 @@ In case a program tries to execute another program but only specifies the name o
 
 Since the PATH variable is under user's control it can be modified so that the shell makes the program call the new malicious binary in a usser specified directory.
 
+### Find Vulnerable Programs
 
+```
+strace -v -f -e execve <command> 2>&1 | grep exec
+strings /path/to/file
+ltrace <command>
+```
 
-&#x20;
+## Abusing shell features
+
+In Bash versions <4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used instead of any actual executable at that file path.
 
 
 
