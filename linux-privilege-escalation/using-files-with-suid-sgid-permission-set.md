@@ -107,9 +107,44 @@ strings /path/to/file
 ltrace <command>
 ```
 
+After fining the program being called with relative path instead of the full path value, we can create prepend the directory in which we have our vulnerable executable to the `PATH` variable and call the program.
+
+For Eg: let's say a program `/usr/bin/start` is a SUID file and has a line `service apache2 start` which we find by running strings on it. Since the `service` command is being called directly instead of it's full path (eg: `/usr/bin/service`). We can create a new vulnerable service command in a writeable directory, prepend the current directory to the `PATH` variable and call the `start` binary to get a root shell.
+
+```
+user@kali$ PATH=.:$PATH /usr/bin/start
+```
+
 ## Abusing shell features
 
-In Bash versions <4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used instead of any actual executable at that file path.
+In Bash versions < 4.2-048 it is possible to define shell functions with names that resemble file paths, then export those functions so that they are used instead of any actual executable at that file path.
+
+Shell features can useful in cases where `PATH` environment variable cannot be exploited. In situations where a binary using absolute path for calling a command/service/binary, shell features can be useful.
+
+For Eg:  let's say a program `/usr/bin/start` is a SUID file and has a line `/usr/bin/service apache2 start` which we find by running strings on it.  We can create a Bash function with the name "`/usr/bin/service`" that executes a new Bash shell (using `-p` so permissions are preserved) and export the function:
+
+```
+function /usr/bin/service { /bin/bash -p; }
+export -f /usr/bin/service
+```
+
+Now when `/usr/bin/start` is called we get a root shell.
+
+In Bash versions < 4.4, when in debugging mode, Bash uses the environment variable `PS4` to display an extra prompt for debugging statements.
+
+For Eg:  let's say a program `/usr/bin/start` is a SUID file and has a line `/usr/bin/service apache2 start` which we find by running strings on it. We can run the `/usr/bin/start` executable with bash debugging enabled and the `PS4` variable set to an embedded command which creates an SUID version of /bin/bash:
+
+{% code overflow="wrap" %}
+```
+user@kali$ env -i SHELLOPTS=xtrace PS4='$(cp /bin/bash /tmp/rootbash; chmod +xs /tmp/rootbash)' /usr/bin/start
+```
+{% endcode %}
+
+Run the /tmp/rootbash executable with -p to gain a shell running with root privileges:
+
+```
+user@kali$ /tmp/rootbash -p
+```
 
 
 
