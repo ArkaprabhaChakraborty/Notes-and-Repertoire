@@ -40,28 +40,28 @@ unxz frida-server.xz        # Change the filename
 Use the following commands to push the frida server to the AVD.
 
 ```
-adb root # might be required
-adb push frida-server /data/local/tmp/                # Change the filename
-adb shell "chmod 755 /data/local/tmp/frida-server"    # Change the filename
+adb root                                                   # might be required
+adb push frida-server /data/local/tmp/                     # Change the filename
+adb shell "chmod 755 /data/local/tmp/frida-server"         # Change the filename
 ```
 
 Start  Frida Server using the command:
 
 ```
-adb shell "/data/local/tmp/frida-server &"            # Change the filename 
+adb shell "/data/local/tmp/frida-server &"                 # Change the filename 
 ```
 
 #### On production emulator (AVD with google-apis)
 
 ```
-adb push frida-server /data/local/tmp/                # Change the filename
+adb push frida-server /data/local/tmp/                     # Change the filename
 adb shell "su -c chmod 755 /data/local/tmp/frida-server"   # Change the filename
 ```
 
 Start  Frida Server using the command:
 
 ```
-adb shell "su -c /data/local/tmp/frida-server -D &"      # Change the filename
+adb shell "su -c /data/local/tmp/frida-server -D &"        # Change the filename
 ```
 
 The flag `-D` is used to run the server in background (Daemon mode).
