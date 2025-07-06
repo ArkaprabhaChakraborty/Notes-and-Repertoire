@@ -104,3 +104,7 @@
 ## Preparation Notes
 
 * [CEH Practical Prep Notes](preparation-notes/ceh-practical-prep-notes.md)
+
+## Red Teaming Notes
+
+* [Introduction](red-teaming-notes/introduction.md)
