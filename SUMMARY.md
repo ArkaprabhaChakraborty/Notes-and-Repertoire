@@ -82,6 +82,7 @@
 
 * [Windows Basics](windows-privilege-escalation/windows-basics.md)
 * [PsTools Primer](windows-privilege-escalation/pstools-primer.md)
+* [WinPEAS](windows-privilege-escalation/winpeas.md)
 * [Service Exploits](windows-privilege-escalation/service-exploits.md)
 * [Persistence Techniques](windows-privilege-escalation/persistence-techniques.md)
 
