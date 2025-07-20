@@ -1,16 +1,5 @@
 ---
 description: Installing avd, adb and necessary sdk tools
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Setting it Up
