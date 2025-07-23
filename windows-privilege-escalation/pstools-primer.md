@@ -4,7 +4,7 @@ PsExec - executes processes remotely&#x20;
 
 PsFile - shows files opened remotely&#x20;
 
-PsGetSid-displays the SID of a computer or user&#x20;
+PsGetSid - displays the SID of a computer or user&#x20;
 
 PsKill - kills processes by name or process ID&#x20;
 
