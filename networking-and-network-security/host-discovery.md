@@ -26,6 +26,12 @@ nmap 198.162.56.0/24
 nmap -A 192.189.19.0/24
 ```
 
+## Using fping
+
+```
+fping -agq 10.211.11.0/24
+```
+
 ## Using Hping
 
 ### ICMP Ping
